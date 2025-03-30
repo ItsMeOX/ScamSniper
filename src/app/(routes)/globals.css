@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-robotoMono: 'Roboto Mono', monospace;
 }
 
 @theme inline {
@@ -24,3 +25,5 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
