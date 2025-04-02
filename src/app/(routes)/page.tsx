@@ -1,12 +1,43 @@
 'use client'
 import NavBar from '@/components/base/Navbar';
+import { useRouter } from "next/navigation"; 
+import { useState } from "react";
 import Image from 'next/image';
 import { Roboto_Mono } from 'next/font/google';
 import Link from 'next/link';
+import { motion } from "framer-motion";
+import HoverImageWithTransition from '@/components/hoverImgTransition';
 
 const robotoMono = Roboto_Mono({ subsets: ['latin'] });
 
 export default function Home() {
+  const router = useRouter();
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
+
+  const handleMouseEnter = () => {
+    // Set a delay before triggering the transition
+    const timeout = setTimeout(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        router.push("/forum"); // Redirect after animation
+      }, 1200); 
+    }, 1000); // 1-second delay before activation
+
+    setHoverTimeout(timeout);
+  };
+
+  const handleMouseLeave = () => {
+    // Cancel the transition if the user leaves early
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+  };
+
+  
+  
   return (
     <div className="relative w-full h-screen bg-white">
       {/* Background Image */}
@@ -30,9 +61,9 @@ export default function Home() {
         <Image
         src="/landingcomputer.svg"
         alt="Computer"
-        width="800"
+        width="750"
         height="800"
-        className="absolute bottom-0 right-0 object-cover"
+        className="absolute bottom-0 right-10 object-cover"
         />
       </div>
 
@@ -62,7 +93,7 @@ export default function Home() {
       </div>
 
       {/* Tagline */}
-      <h4 className={`absolute left-50 top-80 text-5xl font-bold ${robotoMono.className}`} style={{}}>
+      <h4 className={`absolute left-40 top-80 text-5xl font-bold ${robotoMono.className}`} style={{}}>
       <span style={{
         background: "linear-gradient(to top, #0A2F79, #0453F0)",
         WebkitBackgroundClip: "text",
@@ -79,12 +110,12 @@ export default function Home() {
       {/* Typewriter Text Animation */}
       <div className="relative">
       {/* First Paragraph */}
-      <p className={`absolute left-50 top-80 text-lg font-regular ${robotoMono.className} typing-text` }>
+      <p className={`absolute left-40 top-80 text-lg font-regular ${robotoMono.className} typing-text` }>
         Love Scams, Fake Jobs, and Phishing Emails,
       </p>
 
       {/* Second Paragraph */}
-      <p className={`absolute left-50 top-90 text-lg font-regular ${robotoMono.className} typing-text`}>
+      <p className={`absolute left-40 top-90 text-lg font-regular ${robotoMono.className} typing-text border-black`}>
         Think You Can Tell What's Real?
       </p>
     </div>
@@ -122,6 +153,35 @@ export default function Home() {
       border-right: transparent
     }
   `}</style>
+  
+  <HoverImageWithTransition
+  src="/sim_love.svg"
+  width={200}
+  height={200}
+  alt="Love Sim"
+  targetRoute="/forum"
+  left={850}  // Use pixels for better accuracy in positioning
+  top={20}  // Adjust top positioning as needed
+  />
+  <HoverImageWithTransition
+  src="/sim_call.svg"
+  width={200}
+  height={200}
+  alt="Love Sim"
+  targetRoute="/forum"
+  left={600}  // Use pixels for better accuracy in positioning
+  top={370}  // Adjust top positioning as needed
+  />
+  <HoverImageWithTransition
+  src="/sim_phishing.svg"
+  width={200}
+  height={200}
+  alt="Love Sim"
+  targetRoute="/forum"
+  left={1270}  // Use pixels for better accuracy in positioning
+  top={10}  // Adjust top positioning as needed
+    />
+
 
     </div>
   );
