@@ -131,7 +131,7 @@ export default function Home() {
         {/* Second Paragraph */}
         <p
           className={`absolute left-40 top-90 text-lg font-regular ${robotoMono.className} typing-text border-black`}>
-          Think You Can Tell What{`&apos`}s Real?
+          Think You Can Tell What&apos;s Real?
         </p>
       </div>
 
