@@ -1,12 +1,28 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-const HoverImageWithTransition = ({ src, width, height, alt, targetRoute, left, top }) => {
+const HoverImageWithTransition = ({
+  src,
+  width,
+  height,
+  alt,
+  targetRoute,
+  left,
+  top,
+}: {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  targetRoute: string;
+  left: number;
+  top: number;
+}) => {
   const router = useRouter();
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = () => {
     // Prevent retriggering if the transition is already in progress
@@ -39,21 +55,17 @@ const HoverImageWithTransition = ({ src, width, height, alt, targetRoute, left, 
     <div className="relative">
       <motion.div
         className="absolute fade_mask"
-        animate={isTransitioning ? { scale: 50, opacity: 0 } : { scale: 1, opacity: 1 }}
-        transition={{ duration: isTransitioning ? 1.5 : 0, ease: "easeInOut" }} // 0 duration on early leave
+        animate={
+          isTransitioning ? { scale: 50, opacity: 0 } : { scale: 1, opacity: 1 }
+        }
+        transition={{ duration: isTransitioning ? 1.5 : 0, ease: 'easeInOut' }} // 0 duration on early leave
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         style={{
           left: `${left}px`,
           top: `${top}px`,
-        }}
-      >
-        <Image
-          src={src}
-          width={width}
-          height={height}
-          alt={alt}
-        />
+        }}>
+        <Image src={src} width={width} height={height} alt={alt} />
       </motion.div>
 
       {/* Overlay to simulate page transition (optional visual effect) */}
