@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-inline: 20px;
+}
+
+.comment_input_container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user_box > label {
+  font-weight: 600;
+  color: rgb(95, 94, 94);
+}
+
+.comment_input_box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 40px;
+}
+
+.comment_input_box > input {
+  background-color: rgb(248, 248, 248);
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+
+.comment_input_box > button {
+  color: white;
+  padding-inline: 14px;
+  padding-block: 7px;
+  border-radius: 6px;
+  background-color: var(--button-primary);
+  align-self: flex-end;
+}
+
+.comment_input_box > button:hover {
+  background-color: var(--button-primary-focus);
+}
+
+.comment_display_box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment_display_text {
+}
+
+.comment_display_footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment_content_box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-left: 40px;
+}
+
+.vote_button {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  background-color: #f1f2f3;
+  border: 1px solid rgb(207, 206, 206);
+  border-radius: 2px;
+}
+
+.vote_button > img {
+  margin: auto;
+}
+
+.comment_time {
+  font-size: 0.7rem;
+  color: gray;
+  font-weight: bold;
+}

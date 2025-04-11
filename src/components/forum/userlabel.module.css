@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  margin-block: 10px;
+  gap: 8px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.title {
+  line-height: 1rem;
+}
+
+.name_label {
+  font-weight: 600;
+  color: rgb(95, 94, 94);
+}
+
+.time_label {
+  font-size: 0.8rem;
+  color: gray;
+}
