@@ -1,0 +1,39 @@
+.container {
+  background-color: #f1f2f7;
+}
+
+.box {
+  padding-top: 50px;
+  margin-inline: auto;
+  max-width: 1200px;
+  display: flex;
+  gap: 50px;
+}
+
+.main_content_container {
+  flex: 1;
+  /* border: 1px solid red; */
+}
+
+.category_container {
+  /* border: 1px solid blue; */
+}
+
+.create_forum_button {
+  color: white;
+  background-color: var(--button-primary);
+  padding-inline: 40px;
+  padding-block: 8px;
+  border-radius: 30px;
+}
+
+.create_forum_button:hover {
+  background-color: #125ffa;
+}
+
+.create_forum_button::before {
+  content: '\FF0B';
+  color: white;
+  font-weight: 600;
+  margin-right: 10px;
+}
