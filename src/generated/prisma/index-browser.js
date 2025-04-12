@@ -166,6 +166,12 @@ exports.Prisma.ForumCommentScalarFieldEnum = {
   created_at: 'created_at'
 };
 
+exports.Prisma.ImageScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -188,7 +194,8 @@ exports.Prisma.ModelName = {
   ChatMessage: 'ChatMessage',
   Forum: 'Forum',
   ForumTag: 'ForumTag',
-  ForumComment: 'ForumComment'
+  ForumComment: 'ForumComment',
+  Image: 'Image'
 };
 
 /**

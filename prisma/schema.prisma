@@ -6,7 +6,6 @@
 
 generator client {
     provider = "prisma-client-js"
-    output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -49,12 +48,13 @@ model Forum {
     user_id     Int
     title       String
     description String
-    image       String?
+    image_id    String?
     created_at  DateTime @default(now())
 
     User         User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
     ForumTag     ForumTag[]
     ForumComment ForumComment[]
+    Image        Image?         @relation(fields: [image_id], references: [id], onDelete: Cascade)
 }
 
 model ForumTag {
@@ -76,6 +76,13 @@ model ForumComment {
 
     Forum Forum @relation(fields: [forum_id], references: [id], onDelete: Cascade)
     User  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Image {
+    id        String   @id @default(cuid())
+    url       String
+    createdAt DateTime @default(now())
+    Forum     Forum[]
 }
 
 // npx prisma migrate dev --name xx

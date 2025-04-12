@@ -78,4 +78,10 @@ model ForumComment {
   User  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  createdAt DateTime @default(now())
+}
+
 // npx prisma migrate dev --name xx

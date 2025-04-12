@@ -1,7 +1,12 @@
+'use client';
+
 import Image from 'next/image';
 import styles from './navbar.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function NavBar() {
+  const router = useRouter();
+
   return (
     <header className={styles.container}>
       <div className={styles.box}>
@@ -16,7 +21,9 @@ export default function NavBar() {
           <p className={styles.title}>ScamSniper</p>
         </div>
         <div className={styles.middle_box}>
-          <button className={styles.button}>Home</button>
+          <button className={styles.button} onClick={() => router.push('/')}>
+            Home
+          </button>
           <button className={styles.button}>Forum</button>
           <button className={styles.button}>VerifyAI</button>
         </div>
