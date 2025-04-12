@@ -44,7 +44,7 @@
 
 .separation_line {
   margin-block: 10px;
-  border-color: rgb(190, 190, 190);
+  border-color: var(--hr-gray);
 }
 
 .comment_section_box {

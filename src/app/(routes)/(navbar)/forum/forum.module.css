@@ -18,22 +18,3 @@
 .category_container {
   /* border: 1px solid blue; */
 }
-
-.create_forum_button {
-  color: white;
-  background-color: var(--button-primary);
-  padding-inline: 40px;
-  padding-block: 8px;
-  border-radius: 30px;
-}
-
-.create_forum_button:hover {
-  background-color: #125ffa;
-}
-
-.create_forum_button::before {
-  content: '\FF0B';
-  color: white;
-  font-weight: 600;
-  margin-right: 10px;
-}

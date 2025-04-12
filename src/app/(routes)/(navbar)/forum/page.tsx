@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styles from './forum.module.css';
 import SearchBar from '@/components/forum/SearchBar';
 import Forum from '@/components/forum/Forum';
+import Category from '@/components/forum/Category';
 
 export default function ForumPage() {
   return (
@@ -18,7 +19,7 @@ export default function ForumPage() {
           </div>
         </div>
         <div className={styles.category_container}>
-          <button className={styles.create_forum_button}>Create forum</button>
+          <Category />
         </div>
       </div>
     </main>

@@ -1,0 +1,20 @@
+.container {
+}
+
+.box {
+  box-sizing: border-box;
+  padding-inline: 5px;
+  display: flex;
+  gap: 15px;
+  color: #615d5d;
+}
+
+.container > img {
+  fill: red;
+}
+
+.container > label {
+}
+
+.container > span {
+}
