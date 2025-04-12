@@ -38,11 +38,21 @@ model ChatSession {
 }
 
 model ChatMessage {
-    id          Int         @id @default(autoincrement())
+    id          Int          @id @default(autoincrement())
     session_id  Int
     text        String
-    created_at  DateTime    @default(now())
-    ChatSession ChatSession @relation(fields: [session_id], references: [id], onDelete: Cascade)
+    created_at  DateTime     @default(now())
+    ChatSession ChatSession  @relation(fields: [session_id], references: [id], onDelete: Cascade)
+    ChatImages  ChatImages[]
+}
+
+model ChatImages {
+    id        String   @id @default(cuid())
+    chat_id   Int
+    url       String
+    createdAt DateTime @default(now())
+
+    ChatMessage ChatMessage @relation(fields: [chat_id], references: [id], onDelete: Cascade)
 }
 
 model Forum {
