@@ -1,0 +1,92 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #d4d6ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  width: 800px;
+  position: relative;
+  display: flex;
+  background-color: white;
+  box-sizing: border-box;
+}
+
+.art_section {
+  width: 55%;
+  background-color: rgb(19, 5, 146);
+}
+
+.input_section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 40px;
+  width: 45%;
+}
+
+/* .logo {
+  } */
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  color: gray;
+}
+
+.inputs_box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.input_box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 50px;
+}
+
+.input_box > input {
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 5px;
+}
+
+.input_box > label {
+  font-weight: 600;
+}
+
+.submit_button {
+  margin-top: 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding-inline: 20px;
+  padding-block: 10px;
+  background-color: var(--button-primary);
+  color: white;
+}
+
+.submit_button:hover {
+  background-color: var(--button-primary-focus);
+}
+
+.no_account {
+  margin-inline: auto;
+  font-size: 0.8rem;
+  color: rgb(190, 190, 190);
+}
+
+.no_account > button {
+  color: rgb(22, 22, 231);
+  text-decoration: underline;
+}
