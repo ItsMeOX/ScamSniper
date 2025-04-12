@@ -10,6 +10,9 @@ export default async function fetchForum() {
         include: {
           User: true,
         },
+        orderBy: {
+          created_at: 'desc',
+        },
       },
       ForumImage: true,
       ForumTag: true,

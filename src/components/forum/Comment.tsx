@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import styles from './comment.module.css';
 import { Prisma } from '@prisma/client';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import createForumComment from '@/app/lib/requests/forum/createForumComment';
 
 export default function Comment({
