@@ -58,7 +58,6 @@ export default function Report({ params }: { params: ReportParamsType }) {
   return (
     <div className={styles.container}>
         <div className={styles.otherInfo_container}>
-            {/* make the low be green, medium be yellow, and high be red */}
             <div className={styles.colorInfo_container}>
                 <div className="text-2xl font-bold text-center">Chances:</div>
                 <div className={`${styles.chancesCircle} ${getCircleColor(3)}`}>Low</div>
@@ -69,7 +68,7 @@ export default function Report({ params }: { params: ReportParamsType }) {
             <button className={styles.shareButton}>Share to Forum</button>
         </div>
      <div className={styles.title}>
-        <h1 className="text-2xl font-bold ">Report</h1>
+        <h1 className="text-3xl font-bold ">Report</h1>
       </div>
         <div className={styles.image_container}>
             {params.images.map((image, index) => (
