@@ -60,3 +60,9 @@
   padding-block: 10px;
   border-radius: 50px;
 }
+
+.user_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
