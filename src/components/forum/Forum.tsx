@@ -7,8 +7,9 @@ import Category from '@/components/forum/Category';
 import { useState } from 'react';
 import ForumCreatePopup from '@/components/forum/ForumCreatePopup';
 import ForumCreateButton from '@/components/forum/ForumCreateButton';
+import { ForumWithRelations } from '@/app/lib/requests/forum/fetchForum';
 
-export default function Forum() {
+export default function Forum({ forums }: { forums: ForumWithRelations }) {
   const [showCreatePopup, setShowCreatePopup] = useState(false);
 
   return (
@@ -20,9 +21,9 @@ export default function Forum() {
         <div className={styles.main_content_container}>
           <SearchBar />
           <div className={styles.main_content_box}>
-            <ForumBox />
-            <ForumBox />
-            <ForumBox />
+            {forums.map((forum, idx) => (
+              <ForumBox key={`forum-${idx}`} forum={forum} />
+            ))}
           </div>
         </div>
         <div className={styles.right_container}>

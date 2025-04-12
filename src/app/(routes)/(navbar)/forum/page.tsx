@@ -1,5 +1,8 @@
+import queryForum from '@/app/lib/requests/forum/fetchForum';
 import Forum from '@/components/forum/Forum';
 
 export default async function ForumPage() {
-  return <Forum />;
+  const forums = await queryForum();
+
+  return <Forum forums={forums} />;
 }

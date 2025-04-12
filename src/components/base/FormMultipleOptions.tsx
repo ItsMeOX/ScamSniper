@@ -33,8 +33,8 @@ export default function FormMultipleOptions({
           key={`category_tag-${index}`}
           style={
             {
-              '--border-color': tag.secondaryColor,
-              '--text-color': tag.primaryColor,
+              '--border-color': tag.primaryColor,
+              '--text-color': tag.secondaryColor,
             } as React.CSSProperties
           }>
           <label>

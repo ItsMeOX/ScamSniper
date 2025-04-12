@@ -3,38 +3,43 @@ import Label from '../base/Label';
 import styles from './forumbox.module.css';
 import UserLabel from './UserLabel';
 import Comment from './Comment';
+import { ForumWithRelations } from '@/app/lib/requests/forum/fetchForum';
 
-export default function Forum() {
+export default function Forum({
+  forum,
+}: {
+  forum: ForumWithRelations[number];
+}) {
   return (
     <div className={styles.container}>
       <div className={styles.header_box}>
-        <h2 className={styles.title}>Impersonating LadyBoy</h2>
-        <Label />
+        <h2 className={styles.title}>{forum.title}</h2>
+        {forum.ForumTag.map((tag) => (
+          <Label tag={tag} key={`label-${tag.tag_id}`} />
+        ))}
       </div>
       <div className={styles.user_box}>
-        <UserLabel />
+        <UserLabel user={forum.User} />
       </div>
-      <div className={styles.image_box}>
-        <div className={styles.image_holder}>
-          <Image
-            src="/forum/nengyi.png"
-            alt="nengyi"
-            layout="fill"
-            objectFit="contain"
-          />
+      {forum.ForumImage.length > 0 && (
+        <div className={styles.image_box}>
+          <div className={styles.image_holder}>
+            <Image
+              src={forum.ForumImage[0].url}
+              alt="forum image"
+              layout="fill"
+              objectFit="contain"
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className={styles.description_box}>
-        <p>
-          I never thought Id be the type to fall for an online love scam. I
-          mean, Ive read all the warnings—dont send money, dont trust people too
-          quickly
-        </p>
+        <p>{forum.description}</p>
       </div>
       <hr className={styles.separation_line} />
       <div className={styles.comment_section_box}>
         <label className={styles.comment_section_title}>Comment Section</label>
-        <Comment />
+        <Comment forumId={forum.id} comments={forum.ForumComment} />
       </div>
     </div>
   );
