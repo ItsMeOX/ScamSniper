@@ -13,9 +13,14 @@ const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
 ];
 eslintConfig.push({
+  files: ['src/**/*.{ts,tsx}'],
   rules: {
     'no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-unused-expressions': 'warn',
+    '@typescript-eslint/no-this-alias': 'warn',
+    '@typescript-eslint/no-require-imports': 'warn',
   },
 });
 
