@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Inter } from 'next/font/google';
+import ClientSessionProvider from '../context/ClientSessionProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -29,7 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} antialiased`}>
+        <ClientSessionProvider>{children}</ClientSessionProvider>
+      </body>
     </html>
   );
 }

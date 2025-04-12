@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import '../globals.css';
 import NavBar from '@/components/base/Navbar';
 import { Inter } from 'next/font/google';
+import ClientSessionProvider from '@/app/context/ClientSessionProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,8 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className={`${inter.variable}  antialiased`}>
-        <NavBar />
-        {children}
+        <ClientSessionProvider>
+          <NavBar />
+          {children}
+        </ClientSessionProvider>
       </body>
     </html>
   );
