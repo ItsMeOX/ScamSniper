@@ -4,7 +4,6 @@ import CategoryLabel from './CategoryLabel';
 export default function Category() {
   return (
     <div className={styles.container}>
-      <button className={styles.create_forum_button}>Create forum</button>
       <div className={styles.category_picker_box}>
         <span className={styles.category_picker_title}>Choose a category</span>
         <hr />

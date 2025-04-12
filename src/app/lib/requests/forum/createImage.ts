@@ -1,24 +1,22 @@
 'use server';
 
 import { Prisma } from '@prisma/client';
-import prisma from '../prisma/db';
+import prisma from '../../prisma/db';
 
 export default async function createImage(
   url: string,
+  forumId: number,
   tx?: Prisma.TransactionClient
 ) {
   if (!tx) {
     tx = prisma;
   }
 
-  let createdImage;
-
-  await prisma.$transaction(async (tx) => {
-    createdImage = await tx.image.create({
-      data: {
-        url,
-      },
-    });
+  const createdImage = await tx.forumImage.create({
+    data: {
+      forum_id: forumId,
+      url,
+    },
   });
 
   return createdImage;

@@ -1,7 +1,7 @@
 'use client';
 
-import createImage from '@/app/lib/requests/createImage';
-import { uploadImage } from '@/app/utils/uploadImage';
+import createImage from '@/app/lib/requests/forum/createImage';
+import { uploadImage } from '@/app/lib/requests/image/uploadImage';
 import { useState } from 'react';
 
 export default function ImageUploader() {
@@ -12,8 +12,9 @@ export default function ImageUploader() {
     if (!file) return;
 
     try {
-      const url = await uploadImage(file);
-      setPreview(url);
+      //   const url = await uploadImage(file);
+      //   await createImage()
+      //   setPreview(url);
     } catch (err) {
       console.error('Upload failed', err);
     }

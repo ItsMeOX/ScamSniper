@@ -1,5 +1,4 @@
-import createImage from '../lib/requests/createImage';
-import { supabase } from '../lib/supabase/db';
+import { supabase } from '../../supabase/db';
 
 export async function uploadImage(file: File, pathPrefix = '') {
   const fileExt = file.name.split('.').pop();
@@ -8,15 +7,13 @@ export async function uploadImage(file: File, pathPrefix = '') {
 
   console.log(filePath);
   const { error } = await supabase.storage
-    .from('images') // your bucket name
+    .from('images') // bucket name
     .upload(filePath, file);
 
   console.log(error);
   if (error) throw error;
 
   const { data } = supabase.storage.from('images').getPublicUrl(filePath);
-
-  await createImage(data.publicUrl);
 
   return data.publicUrl;
 }

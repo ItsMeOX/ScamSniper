@@ -1,0 +1,58 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.outline {
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  border: 1px solid rgb(182, 182, 182);
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+.form {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: transparent;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.form_dragging {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.select_files {
+  cursor: pointer;
+  color: rgb(17, 140, 255);
+}
+
+.select_files:hover {
+  color: rgb(5, 96, 182);
+}
+
+.image_box {
+  height: fit-content;
+}
+
+.image_box > img {
+  margin-inline: auto;
+}

@@ -48,13 +48,12 @@ model Forum {
     user_id     Int
     title       String
     description String
-    image_id    String?
     created_at  DateTime @default(now())
 
     User         User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
     ForumTag     ForumTag[]
     ForumComment ForumComment[]
-    Image        Image?         @relation(fields: [image_id], references: [id], onDelete: Cascade)
+    ForumImage   ForumImage[]
 }
 
 model ForumTag {
@@ -78,11 +77,13 @@ model ForumComment {
     User  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
-model Image {
+model ForumImage {
     id        String   @id @default(cuid())
+    forum_id  Int
     url       String
     createdAt DateTime @default(now())
-    Forum     Forum[]
+
+    Forum Forum @relation(fields: [forum_id], references: [id], onDelete: Cascade)
 }
 
 // npx prisma migrate dev --name xx
