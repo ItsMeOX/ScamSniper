@@ -25,6 +25,16 @@ model User {
     ChatSession  ChatSession[]
     Forum        Forum[]
     ForumComment ForumComment[]
+    Session      Session[]
+}
+
+model Session {
+    id            String   @id @default(cuid())
+    session_token String   @unique
+    user_id       Int
+    expires       DateTime
+
+    User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model ChatSession {
