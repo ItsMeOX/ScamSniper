@@ -1,10 +1,26 @@
 import styles from './userinputcontainer.module.css';
+import { useState } from 'react';
 
-export default function UserInputContainer() {
+export default function UserInputContainer({onSendMessage} : {onSendMessage: (userInput: string) => Promise<string>}) {
+    const [userInput, setUserInput] = useState<string>('');
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            onSendMessage(userInput);
+            setUserInput("");
+        }
+    }
+    const handleSendMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
+        onSendMessage(userInput);
+        setUserInput("");
+    }
+
   return <div className={styles.chatContainer}>
             <div className={styles.chatBox}>
                 <input 
                     type="text"
+                    value={userInput}
+                    onChange={(e) => setUserInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
                     placeholder="Message VerifyAI"
                     className={`${styles.placeholderText} ${styles.chatInput}`}
                 />
@@ -25,7 +41,7 @@ export default function UserInputContainer() {
                         <div className={styles.micIcon}></div>
                     </button>
                     <div className={`${styles.circle_box}`}>
-                        <button className={styles.sendButton}/>
+                        <button className={styles.sendButton} onClick={handleSendMessage}/>
                     </div> 
                 </div>
             </div>

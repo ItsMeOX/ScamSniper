@@ -5,6 +5,7 @@
     justify-content: space-between;
     border-right: #2E73FF solid 1px;
     padding-right: 1rem;
+    overflow: scroll;
   }
   .logoContainer {
     display: flex;
