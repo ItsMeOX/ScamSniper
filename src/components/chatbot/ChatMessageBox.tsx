@@ -1,10 +1,6 @@
 import styles from './chatmessagebox.module.css';
 
-export default function ChatMessageBox() {
-  const messages: {
-    role: string;
-    content: string;
-  }[] = [];
+export default function ChatMessageBox({messages}: {messages: {role: string; content: string}[]}) {
   return (
     <div className={styles.container}>
       {messages.length === 0 ? (

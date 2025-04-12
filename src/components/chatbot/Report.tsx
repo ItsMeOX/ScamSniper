@@ -7,7 +7,7 @@ interface EvidenceSection {
 }
 
 interface ReportParamsType {
-  images: string[];
+  images?: string[];
   sign: {
     emotioanalAppeal: EvidenceSection;
     monetaryAppeal: EvidenceSection;
@@ -52,7 +52,7 @@ const EvidenceBox = ({ title, section }: { title: string; section: EvidenceSecti
   );
 };
 
-export default function Report({ params }: { params: ReportParamsType }) {
+export default function Report({ params, toggleShowReport }: { params: ReportParamsType, toggleShowReport: () => void }) {
   const { sign, validation } = params;
 
   return (
@@ -65,15 +65,18 @@ export default function Report({ params }: { params: ReportParamsType }) {
                 <div className={`${styles.chancesCircle} ${getCircleColor(10)}`}>High</div>
 
             </div> 
-            <button className={styles.shareButton}>Share to Forum</button>
+            <div>
+              <button className={styles.shareButton}>Share to Forum</button>
+              <button className={styles.returnButton} onClick={toggleShowReport}>Back to Chat</button>
+            </div>
         </div>
      <div className={styles.title}>
         <h1 className="text-3xl font-bold ">Report</h1>
       </div>
         <div className={styles.image_container}>
-            {params.images.map((image, index) => (
+            {/* {params.images.map((image, index) => (
             <img key={index} src={image} alt={`Evidence ${index}`} className={styles.image} />
-            ))}
+            ))} */}
         </div>
       <div className={styles.section_container}>
         <h2 className={styles.sectionTitle}>Telltale Signs</h2>
