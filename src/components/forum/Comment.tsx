@@ -7,9 +7,11 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import createForumComment from '@/app/lib/requests/forum/createForumComment';
 
 export default function Comment({
+  setRefetch,
   forumId,
   comments,
 }: {
+  setRefetch: Dispatch<SetStateAction<boolean>>;
   forumId: number;
   comments: Prisma.ForumCommentGetPayload<{
     include: {
@@ -28,6 +30,7 @@ export default function Comment({
         userId: 1,
       });
       setCommentText('');
+      setRefetch((prev) => !prev);
     } catch (err) {
       console.error(err);
     }

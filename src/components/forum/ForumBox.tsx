@@ -4,11 +4,14 @@ import styles from './forumbox.module.css';
 import UserLabel from './UserLabel';
 import Comment from './Comment';
 import { ForumWithRelations } from '@/app/lib/requests/forum/fetchForum';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function Forum({
   forum,
+  setRefetch,
 }: {
   forum: ForumWithRelations[number];
+  setRefetch: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <div className={styles.container}>
@@ -39,7 +42,11 @@ export default function Forum({
       <hr className={styles.separation_line} />
       <div className={styles.comment_section_box}>
         <label className={styles.comment_section_title}>Comment Section</label>
-        <Comment forumId={forum.id} comments={forum.ForumComment} />
+        <Comment
+          setRefetch={setRefetch}
+          forumId={forum.id}
+          comments={forum.ForumComment}
+        />
       </div>
     </div>
   );

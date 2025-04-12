@@ -4,5 +4,5 @@ import Forum from '@/components/forum/Forum';
 export default async function ForumPage() {
   const forums = await queryForum();
 
-  return <Forum forums={forums} />;
+  return <Forum initialForums={forums} />;
 }

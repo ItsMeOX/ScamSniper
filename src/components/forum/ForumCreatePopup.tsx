@@ -7,13 +7,14 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import FormImageInput from '../base/FormImageInput';
 import FormMultipleOptions from '../base/FormMultipleOptions';
 import { COLORED_FORUM_TAGS } from '@/app/constants/forumTags';
-import createForumWithImage from '@/app/lib/requests/forum/createForumWithImage';
 import createFullForum from '@/app/lib/requests/forum/createForumWithImage';
 
 export default function ForumCreatePopup({
   setShowCreatePopup,
+  setRefetch,
 }: {
   setShowCreatePopup: Dispatch<SetStateAction<boolean>>;
+  setRefetch: Dispatch<SetStateAction<boolean>>;
 }) {
   const [image, setImage] = useState<File | null>(null);
   const [title, setTitle] = useState('');
@@ -30,6 +31,7 @@ export default function ForumCreatePopup({
         tagIds: selectedTagIds,
       });
       setShowCreatePopup(false);
+      setRefetch((prev) => !prev);
     } catch (err) {
       console.log(err);
     }

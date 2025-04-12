@@ -2,11 +2,16 @@
 }
 
 .box {
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
   padding-inline: 5px;
   display: flex;
   gap: 15px;
   color: #615d5d;
+}
+
+.arrow {
 }
 
 .container > img {
