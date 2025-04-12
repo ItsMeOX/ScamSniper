@@ -14,16 +14,17 @@ datasource db {
 }
 
 model User {
-    id            Int            @id @default(autoincrement())
-    user_name     String         @db.VarChar(256)
-    user_password String         @db.VarChar(256)
-    user_email    String         @db.VarChar(256)
-    user_role     String         @db.VarChar(256)
-    created_at    DateTime       @default(now())
-    ChatSession   ChatSession[]
-    Forum         Forum[]
-    ForumComment  ForumComment[]
-    UserImage     UserImage[]
+    id             Int      @id @default(autoincrement())
+    user_image_url String
+    user_name      String   @db.VarChar(256)
+    user_password  String   @db.VarChar(256)
+    user_email     String   @db.VarChar(256)
+    user_role      String   @db.VarChar(256)
+    created_at     DateTime @default(now())
+
+    ChatSession  ChatSession[]
+    Forum        Forum[]
+    ForumComment ForumComment[]
 }
 
 model ChatSession {
@@ -85,14 +86,6 @@ model ForumImage {
     createdAt DateTime @default(now())
 
     Forum Forum @relation(fields: [forum_id], references: [id], onDelete: Cascade)
-}
-
-model UserImage {
-    id      Int    @id @default(autoincrement())
-    user_id Int
-    url     String
-
-    User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 // npx prisma migrate dev --name xx
