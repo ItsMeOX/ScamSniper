@@ -1,8 +1,13 @@
+import { Message } from "openai/resources/beta/threads/messages.mjs";
 import styles from "./chatmessagebox.module.css";
 
-export default function ChatMessageBox() {
-    const messages = [
-    ];
+
+type MessageType = {
+  role: string;
+  content: string;
+};
+
+export default function ChatMessageBox({messages}: { messages: MessageType[] }) {
   return (
     <div className={styles.container}>
       {messages.length === 0 ? (
