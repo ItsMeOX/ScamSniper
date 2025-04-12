@@ -8,7 +8,7 @@ export default function LoveScam() {
   const sceneRef = useRef(null);
 
   useEffect(() => {
-    // gsap.fromTo()
+    // gsap.fromTo();
   });
 
   return (

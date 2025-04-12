@@ -14,6 +14,7 @@ const eslintConfig = [
 ];
 eslintConfig.push({
   files: ['src/**/*.{ts,tsx}'],
+  ignores: ['**/*.d.ts'],
   rules: {
     'no-unused-vars': 'warn',
     '@typescript-eslint/no-explicit-any': 'warn',
