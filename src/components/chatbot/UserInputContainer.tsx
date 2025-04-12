@@ -1,7 +1,7 @@
 import styles from './userinputcontainer.module.css';
 import { useState } from 'react';
 
-export default function UserInputContainer({onSendMessage} : {onSendMessage: (userInput: string) => Promise<string>}) {
+export default function UserInputContainer({onSendMessage, toggleShowReport} : {onSendMessage: (userInput: string) => Promise<string>, toggleShowReport: () => void}) {
     const [userInput, setUserInput] = useState<string>('');
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
@@ -34,7 +34,7 @@ export default function UserInputContainer({onSendMessage} : {onSendMessage: (us
                             multiple
                         />
                     </div> 
-                    <button className={styles.reportButton}>Report</button>
+                    <button className={styles.reportButton} onClick={toggleShowReport}>Report</button>
                 </div>
                 <div className={styles.button_group}>
                     <button className={styles.iconButton}>
