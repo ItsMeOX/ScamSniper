@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import styles from './userlabel.module.css';
-import { Prisma, User } from '@prisma/client';
+import { User } from '@prisma/client';
 
 export default function UserLabel({ user }: { user: User }) {
   return (
     <div className={styles.container}>
       <Image
-        src={user.user_image_url}
+        src={user.user_image_url ?? '/default_profile_picture.png'}
         alt="profile pic"
         width={30}
         height={30}

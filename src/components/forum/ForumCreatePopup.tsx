@@ -8,6 +8,7 @@ import FormImageInput from '../base/FormImageInput';
 import FormMultipleOptions from '../base/FormMultipleOptions';
 import { COLORED_FORUM_TAGS } from '@/app/constants/forumTags';
 import createFullForum from '@/app/lib/requests/forum/createForumWithImage';
+import { useSession } from 'next-auth/react';
 
 export default function ForumCreatePopup({
   setShowCreatePopup,
@@ -20,6 +21,7 @@ export default function ForumCreatePopup({
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
+  const session = useSession();
 
   async function onSubmit() {
     try {
@@ -27,7 +29,7 @@ export default function ForumCreatePopup({
         title,
         description,
         image,
-        userId: 1,
+        userId: parseInt(session.data?.user.id || '0'),
         tagIds: selectedTagIds,
       });
       setShowCreatePopup(false);

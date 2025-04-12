@@ -5,6 +5,7 @@ import styles from './comment.module.css';
 import { Prisma } from '@prisma/client';
 import { Dispatch, SetStateAction, useState } from 'react';
 import createForumComment from '@/app/lib/requests/forum/createForumComment';
+import { useSession } from 'next-auth/react';
 
 export default function Comment({
   setRefetch,
@@ -20,6 +21,9 @@ export default function Comment({
   }>[];
 }) {
   const [commentText, setCommentText] = useState('');
+  const session = useSession();
+  const userImageUrl = session.data?.user.image_url;
+  const username = session.data?.user.name;
 
   async function handleSubmitComment() {
     try {
@@ -27,7 +31,7 @@ export default function Comment({
       await createForumComment({
         forumId,
         commentText,
-        userId: 1,
+        userId: parseInt(session.data?.user.id || '0'),
       });
       setCommentText('');
       setRefetch((prev) => !prev);
@@ -41,12 +45,12 @@ export default function Comment({
       <div className={styles.comment_input_container}>
         <div className={styles.user_box}>
           <Image
-            src="/forum/user_profile_pic.png"
+            src={userImageUrl ?? '/default_profile_picture.png'}
             alt="profile pic"
             width={30}
             height={30}
           />
-          <label>ItsMeZH</label>
+          <label>{username}</label>
         </div>
         <div className={styles.comment_input_box}>
           <input
@@ -66,7 +70,9 @@ export default function Comment({
           <div key={`comment-${comment.id}`}>
             <div className={styles.user_box}>
               <Image
-                src={comment.User.user_image_url}
+                src={
+                  comment.User.user_image_url ?? '/default_profile_picture.png'
+                }
                 alt="comment profile pic"
                 width={30}
                 height={30}
