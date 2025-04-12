@@ -1,13 +1,6 @@
 import styles from "./historytab.module.css";
 
-export default function HistoryTab() {
-  const historyChats = [
-    "New Chat",
-    "Job Scam",
-    "Femboy",
-    "Job Scam",
-    "Femboy",
-  ];
+export default function HistoryTab({historyChats} : {historyChats: string[]}) {
 
   return (
     <div className={styles.container}>
