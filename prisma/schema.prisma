@@ -23,6 +23,7 @@ model User {
     ChatSession   ChatSession[]
     Forum         Forum[]
     ForumComment  ForumComment[]
+    UserImage     UserImage[]
 }
 
 model ChatSession {
@@ -84,6 +85,14 @@ model ForumImage {
     createdAt DateTime @default(now())
 
     Forum Forum @relation(fields: [forum_id], references: [id], onDelete: Cascade)
+}
+
+model UserImage {
+    id      Int    @id @default(autoincrement())
+    user_id Int
+    url     String
+
+    User User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 // npx prisma migrate dev --name xx
