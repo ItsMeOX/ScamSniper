@@ -2,9 +2,9 @@
 import UserInputContainer from "@/components/chatbot/UserInputContainer";
 import HistoryTab from "@/components/chatbot/HistoryTab";
 import ChatMessageBox from "@/components/chatbot/ChatMessageBox";
+import Report from "@/components/chatbot/Report";
 import styles from "./chatbot.module.css";
 import { useState } from "react";
-import Report from "@/components/chatbot/Report";
 
 type MessageType = {
     role: string;
@@ -35,29 +35,30 @@ const sendText = async (userInput : string) => {
 
   return (
     <div className={styles.container}>
-      <HistoryTab historyChats={historyChats}/>
+      {/* <HistoryTab historyChats={historyChats}/>
       <div className={styles.chat_container}>
         <ChatMessageBox messages={messages} />
         <UserInputContainer onSendMessage={sendText}/>
-      </div>
+      </div> */}
+      <Report params={{
+        images: ["https://picsum.photos/200/300"],
+        sign: {
+          emotioanalAppeal: { evidence: ["lol"], chances: 8 },
+          monetaryAppeal: { evidence: ["lololo", "hehe"], chances: 9 },
+          urgencyAppeal: { evidence: [], chances: 1 },
+          unsolicitedAppeal: { evidence: [], chances: 2 },
+          sensitiveInformation: { evidence: [], chances: 3 },
+        },
+        validation: {
+          timestamp: { evidence: [], chances: 4 },
+          number: { evidence: [], chances: 5 },
+          email: { evidence: [], chances: 6 },
+          location: { evidence: [], chances: 7 },
+        },
+        summary:
+          'This is a summary of the report. It provides an overview of the findings and conclusions drawn from the analysis.',
+      }}/>
     </div>
   );
 }
-{/* <Report params={{
-  images: ["https://picsum.photos/200/300"],
-  sign: {
-    emotioanalAppeal: { evidence: ["lol"], chances: 8 },
-    monetaryAppeal: { evidence: ["lololo", "hehe"], chances: 9 },
-    urgencyAppeal: { evidence: [], chances: 1 },
-    unsolicitedAppeal: { evidence: [], chances: 2 },
-    sensitiveInformation: { evidence: [], chances: 3 },
-  },
-  validation: {
-    timestamp: { evidence: [], chances: 4 },
-    number: { evidence: [], chances: 5 },
-    email: { evidence: [], chances: 6 },
-    location: { evidence: [], chances: 7 },
-  },
-  summary:
-    'This is a summary of the report. It provides an overview of the findings and conclusions drawn from the analysis.',
-}}/> */}
+

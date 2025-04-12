@@ -21,7 +21,19 @@
     flex-direction: row;
     justify-content: space-between;
   }
-
+  .shareButton {
+    color: white;
+    background-color: var(--button-primary);
+    padding-inline: 40px;
+    padding-block: 8px;
+    border-radius: 30px;
+  }
+  
+  .shareButton:hover {
+    background-color: #125ffa;
+  }
+  
+  
   .title {
     display:flex;
     justify-content: center;
