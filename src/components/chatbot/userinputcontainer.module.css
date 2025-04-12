@@ -1,0 +1,139 @@
+.circle_box {
+    border-radius: 50%;
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid #ededed;
+    background-color: #ededed;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle_box:hover {
+    background:  #d1d5db;
+}
+  
+.file_uploader_box::after {
+    content: '+';
+    font-size: 30px;
+    font-weight: 100;
+    color: #5c6069;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+
+.file_uploader_box > input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.chatContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px;
+    border-radius: 1.8rem;
+    border: 1px solid #d9d9d9;
+    background-color: white;
+  }
+  
+  .chatBox {
+    width: 100%;
+    justify-content: left;
+  }
+
+  .chatInput {
+    width: 100%;
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #898989;
+    background: transparent;
+    padding: 8px;
+  }
+  
+
+  .button_container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .button_group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:8px
+  }
+
+  .iconButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    aspect-ratio: 1 / 1;
+    font-size: 18px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .iconButton:hover {
+    background: #e5e7eb;
+  }
+  
+  .reportButton {
+    padding: 3px 12px;
+    height: 30px;
+    border-radius: 8px;
+    background: #e5e7eb;
+    color: #5c6069;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .reportButton:hover {
+    background: #d1d5db;
+  }
+  
+  .micIcon {
+    width: 12px;
+    height: 18px;
+    background-color: black;
+    border-radius: 6px;
+    position: relative;
+  }
+  
+  .micIcon::after {
+    content: "";
+    width: 8px;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1px;
+  }
+
+  .sendButton::after {
+    content: '▲'; 
+    color: #5c6069;
+  }
