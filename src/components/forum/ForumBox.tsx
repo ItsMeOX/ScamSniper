@@ -1,10 +1,14 @@
-import Image from 'next/image';
+'use client';
+
 import Label from '../base/Label';
 import styles from './forumbox.module.css';
 import UserLabel from './UserLabel';
 import Comment from './Comment';
 import { ForumWithRelations } from '@/app/lib/requests/forum/fetchForum';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import Carousel from '../base/Carousel';
+import Report from '../chatbot/Report';
+import PopupWrapper from '../base/PopupWrapper';
 
 export default function Forum({
   forum,
@@ -13,8 +17,38 @@ export default function Forum({
   forum: ForumWithRelations[number];
   setRefetch: Dispatch<SetStateAction<boolean>>;
 }) {
+  const reportData = forum.ChatSession?.report_data;
+  const jsonReportData = reportData ? JSON.parse(reportData) : null;
+  const [reportDataRaw, setReportDataRaw] = useState('');
+  const [reportDataJson, setReportDataJson] = useState(null);
+
+  useEffect(() => {
+    if (reportDataRaw) {
+      setReportDataJson(JSON.parse(reportDataRaw));
+    }
+  }, [reportDataRaw]);
+
   return (
     <div className={styles.container}>
+      {reportDataJson && (
+        <PopupWrapper>
+          <div className={styles.report_popup_container}>
+            <button
+              className={styles.report_popup_close_button}
+              onClick={() => {
+                setReportDataRaw('');
+                setReportDataJson(null);
+              }}></button>
+            <div className={styles.report_popup_box}>
+              <Report
+                params={jsonReportData}
+                chatId={-1}
+                toggleShowReport={() => {}}
+              />
+            </div>
+          </div>
+        </PopupWrapper>
+      )}
       <div className={styles.header_box}>
         <h2 className={styles.title}>{forum.title}</h2>
         {forum.ForumTag.map((tag) => (
@@ -27,14 +61,17 @@ export default function Forum({
       {forum.ForumImage.length > 0 && (
         <div className={styles.image_box}>
           <div className={styles.image_holder}>
-            <Image
-              src={forum.ForumImage[0].url}
-              alt="forum image"
-              layout="fill"
-              objectFit="contain"
-            />
+            <Carousel images={forum.ForumImage.map((forum) => forum.url)} />
           </div>
         </div>
+      )}
+
+      {forum.ChatSession && (
+        <button
+          className={styles.show_report_button}
+          onClick={() => setReportDataRaw(forum.ChatSession!.report_data!)}>
+          Show report
+        </button>
       )}
       <div className={styles.description_box}>
         <p>{forum.description}</p>

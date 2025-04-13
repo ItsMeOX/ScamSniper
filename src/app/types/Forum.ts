@@ -4,4 +4,5 @@ export type Forum = {
   description: string;
   image?: File | null;
   tagIds?: number[];
+  chatSessionId?: number;
 };

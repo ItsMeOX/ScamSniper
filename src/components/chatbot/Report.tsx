@@ -1,6 +1,12 @@
-import React from "react";
-import styles from "./report.module.css";
-import Carousel from "../base/Carousel"; // Adjust the path as needed
+'use client';
+
+import React, { useState } from 'react';
+import styles from './report.module.css';
+import Carousel from '../base/Carousel'; // Adjust the path as needed
+import createFullForum from '@/app/lib/requests/forum/createForumWithImage';
+import { useRouter } from 'next/navigation';
+import ForumCreatePopup from '../forum/ForumCreatePopup';
+import ReportForumCreatePopup from '../forum/ReportForumCreatePopup';
 
 interface EvidenceSection {
   evidence: string[];
@@ -31,59 +37,105 @@ const getCircleColor = (chances: number) => {
   return styles.red;
 };
 
-const EvidenceBox = ({ title, section }: { title: string; section: EvidenceSection }) => {
+const EvidenceBox = ({
+  title,
+  section,
+}: {
+  title: string;
+  section: EvidenceSection;
+}) => {
   return (
     <div className={styles.card}>
-        <h3 className={styles.cardTitle}>{title}</h3>
-        <div className={styles.evidenceBox}>
-          {section.evidence.length > 0 ? (
-            section.evidence.map((item, index) => (
-              <span key={index} className={styles.evidenceTag}>
-                {item}
-              </span>
-            ))
-          ) : (
-            <span className={styles.noEvidence}>No evidence</span>
-          )}
-        </div>
-      <div className={`${styles.chancesCircle} ${getCircleColor(section.chances)}`}>
+      <h3 className={styles.cardTitle}>{title}</h3>
+      <div className={styles.evidenceBox}>
+        {section.evidence.length > 0 ? (
+          section.evidence.map((item, index) => (
+            <span key={index} className={styles.evidenceTag}>
+              {item}
+            </span>
+          ))
+        ) : (
+          <span className={styles.noEvidence}>No evidence</span>
+        )}
+      </div>
+      <div
+        className={`${styles.chancesCircle} ${getCircleColor(
+          section.chances
+        )}`}>
         {section.chances}
       </div>
     </div>
   );
 };
 
-export default function Report({ params, toggleShowReport }: { params: ReportParamsType, toggleShowReport: () => void }) {
+export default function Report({
+  params,
+  toggleShowReport,
+  chatId,
+}: {
+  params: ReportParamsType;
+  toggleShowReport: () => void;
+  chatId: number;
+}) {
   const { sign, validation } = params;
+  const [showPopup, setShowPopup] = useState(false);
+  const router = useRouter();
 
   return (
     <div className={styles.container}>
-        <div className={styles.otherInfo_container}>
-            <div className={styles.colorInfo_container}>
-                <div className="text-2xl font-bold text-center">Chances:</div>
-                <div className={`${styles.chancesCircle} ${getCircleColor(3)}`}>Low</div>
-                <div className={`${styles.chancesCircle} ${getCircleColor(6)}`}>Mid</div>
-                <div className={`${styles.chancesCircle} ${getCircleColor(10)}`}>High</div>
-
-            </div> 
-            <div>
-              <button className={styles.shareButton}>Share to Forum</button>
-              <button className={styles.returnButton} onClick={toggleShowReport}>Back to Chat</button>
-            </div>
+      {showPopup && (
+        <ReportForumCreatePopup
+          callback={() => {
+            router.push('/forum');
+          }}
+          setShowCreatePopup={setShowPopup}
+          images={params.images ?? []}
+          chatId={chatId}
+        />
+      )}
+      <div className={styles.otherInfo_container}>
+        <div className={styles.colorInfo_container}>
+          <div className="text-2xl font-bold text-center">Chances:</div>
+          <div className={`${styles.chancesCircle} ${getCircleColor(3)}`}>
+            Low
+          </div>
+          <div className={`${styles.chancesCircle} ${getCircleColor(6)}`}>
+            Mid
+          </div>
+          <div className={`${styles.chancesCircle} ${getCircleColor(10)}`}>
+            High
+          </div>
         </div>
-     <div className={styles.title}>
+        <div>
+          <button
+            className={styles.shareButton}
+            onClick={() => setShowPopup(true)}>
+            Share to Forum
+          </button>
+          <button className={styles.returnButton} onClick={toggleShowReport}>
+            Back to Chat
+          </button>
+        </div>
+      </div>
+      <div className={styles.title}>
         <h1 className="text-3xl font-bold ">Report</h1>
       </div>
-        <div className={styles.image_container}>
-          {params.images ? <Carousel images={params.images}/> : <></>}
-        </div>
+      <div className={styles.image_container}>
+        {params.images ? <Carousel images={params.images} /> : <></>}
+      </div>
       <div className={styles.section_container}>
         <h2 className={styles.sectionTitle}>Telltale Signs</h2>
         <EvidenceBox title="Emotional Appeal" section={sign.emotioanalAppeal} />
         <EvidenceBox title="Monetary Appeal" section={sign.monetaryAppeal} />
         <EvidenceBox title="Urgency Appeal" section={sign.urgencyAppeal} />
-        <EvidenceBox title="Unsolicited Appeal" section={sign.unsolicitedAppeal} />
-        <EvidenceBox title="Sensitive Information" section={sign.sensitiveInformation} />
+        <EvidenceBox
+          title="Unsolicited Appeal"
+          section={sign.unsolicitedAppeal}
+        />
+        <EvidenceBox
+          title="Sensitive Information"
+          section={sign.sensitiveInformation}
+        />
       </div>
 
       <div className={styles.section_container}>

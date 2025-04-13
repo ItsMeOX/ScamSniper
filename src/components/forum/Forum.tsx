@@ -31,7 +31,7 @@ export default function Forum({
     <main className={styles.container}>
       {showCreatePopup && (
         <ForumCreatePopup
-          setRefetch={setRefetch}
+          callback={() => setRefetch((prev) => !prev)}
           setShowCreatePopup={setShowCreatePopup}
         />
       )}

@@ -42,11 +42,12 @@ model ChatSession {
     user_id         Int
     monetary_appeal String?
     urgency         String?
-    report_data      String?
+    report_data     String?
     User            User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
     created_at      DateTime      @default(now())
     ChatMessage     ChatMessage[]
-    ChatImages  ChatImages[]
+    ChatImages      ChatImages[]
+    Forum           Forum[]
 }
 
 model ChatImages {
@@ -59,21 +60,22 @@ model ChatImages {
 }
 
 model ChatMessage {
-    id          Int          @id @default(autoincrement())
+    id          Int         @id @default(autoincrement())
     session_id  Int
     text        String
-    created_at  DateTime     @default(now())
-    ChatSession ChatSession  @relation(fields: [session_id], references: [id], onDelete: Cascade)
+    created_at  DateTime    @default(now())
+    ChatSession ChatSession @relation(fields: [session_id], references: [id], onDelete: Cascade)
 }
 
-
 model Forum {
-    id          Int      @id @default(autoincrement())
-    user_id     Int
-    title       String
-    description String
-    created_at  DateTime @default(now())
+    id              Int      @id @default(autoincrement())
+    user_id         Int
+    title           String
+    description     String
+    created_at      DateTime @default(now())
+    chat_session_id Int?
 
+    ChatSession  ChatSession?   @relation(fields: [chat_session_id], references: [id], onDelete: SetNull)
     User         User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
     ForumTag     ForumTag[]
     ForumComment ForumComment[]

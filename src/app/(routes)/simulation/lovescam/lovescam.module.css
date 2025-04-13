@@ -63,15 +63,36 @@
   box-sizing: border-box;
 }
 
+.scene2_girl1_profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 53%;
+  transform: translateX(-50%);
+}
+
 .scene2_girl1 {
   background-color: rgb(245, 200, 200);
   border-radius: 10px;
   box-sizing: border-box;
   padding: 20px;
-  position: absolute;
-  top: 10%;
-  left: 25%;
-  width: 50%;
+}
+
+.scene2_girl2 {
+  background-color: rgb(245, 200, 200);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.scene2_girl3 {
+  background-color: rgb(245, 200, 200);
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 .app_girl_name {
@@ -80,11 +101,34 @@
 }
 
 .scene2_girl_name {
+}
+
+.scene2_button {
   position: absolute;
-  top: 43%;
-  left: 50%;
-  transform: translateX(-50%);
+  color: white;
+  width: 8vh;
+  height: 8vh;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .scene2_next_button {
+  bottom: 5vh;
+  left: 10vh;
+  background-color: red;
+}
+
+.scene2_accept_button {
+  bottom: 5vh;
+  right: 10vh;
+  background-color: green;
+}
+
+.scene3 {
+  border: 1px solid red;
+  color: white;
+  width: 100vw;
+  height: 100vh;
 }

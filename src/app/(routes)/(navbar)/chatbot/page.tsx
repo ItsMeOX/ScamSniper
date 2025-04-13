@@ -14,7 +14,6 @@ import HistoryTab from '@/components/chatbot/HistoryTab';
 
 import fetchAllImageChatSession from '@/app/lib/requests/chatbot/fetchAllImageChatSession';
 
-
 type MessageType = {
   role: string;
   content: (
@@ -120,7 +119,7 @@ export default function ChatBot() {
     setSelectedChat(chatId);
   };
 
-  const sendRequest = async (userInput: string, fileUrls : string[]) => {
+  const sendRequest = async (userInput: string, fileUrls: string[]) => {
     const currentMessage = {
       role: 'user',
       content: [
@@ -146,29 +145,29 @@ export default function ChatBot() {
           ...messages,
           {
             role: 'user',
-            content:
-              [ {type: 'text', text: " You are an AI scam detector called VerifyAI, base on all the chat messages and analyse the images given(if any), help me answer this:" + userInput},
-                ...fileUrls.map(url => ({
-                  type: 'image_url',
-                  image_url: {url}
-                  
-                }))
-              ]
+            content: [
+              {
+                type: 'text',
+                text:
+                  ' You are an AI scam detector called VerifyAI, base on all the chat messages and analyse the images given(if any), help me answer this:' +
+                  userInput,
+              },
+              ...fileUrls.map((url) => ({
+                type: 'image_url',
+                image_url: { url },
+              })),
+            ],
           },
-        ]
+        ],
       }),
     });
 
     const data = await res.json();
     const response = {
       role: 'assistant',
-      content: [{ type: 'text', text: data.response.content }]
-    }
-    setMessages([
-      ...messages,
-      currentMessage ,
-      response,
-    ]);
+      content: [{ type: 'text', text: data.response.content }],
+    };
+    setMessages([...messages, currentMessage, response]);
     await updateChat({
       userId: parseInt(user_id || '0'),
       message: JSON.stringify(response),
@@ -192,7 +191,7 @@ export default function ChatBot() {
               content:
                 'You are a scam ai detector, generate a scam detection report base on all the chat messages above and return a string json object in this format interface ReportParamsType {sign: {emotioanalAppeal: {evidence: string[];    chances: number;  };      monetaryAppeal: {evidence: string[];    chances: number;  };      urgencyAppeal: {evidence: string[];    chances: number;  };      unsolicitedAppeal: {evidence: string[];    chances: number;  };      sensitiveInformation: {evidence: string[];    chances: number;  };    };    validation: {timestamp: {evidence: string[];    chances: number;  };      number: {evidence: string[];chances: number;};email: {evidence: string[];chances: number;};location: {evidence: string[];chances: number;};};summary: string;}, the chances is number between 0 and 10 inclusive, try to fill as much evidence as possible, and leave the chances as 0 and evidence as empty array if no evidence found, ONLY RETURN THE STRING OF THIS JSON OBJECT',
             },
-          ]
+          ],
         }),
       });
 
@@ -202,7 +201,11 @@ export default function ChatBot() {
         .replace(/```/, '');
       const jsonContent = JSON.parse(content);
       const allChatImages = await fetchAllImageChatSession(selectedChat);
-      setReportParams({ ...reportParams,...jsonContent, images: allChatImages });
+      setReportParams({
+        ...reportParams,
+        ...jsonContent,
+        images: allChatImages,
+      });
     }
     setShowReport(!showReport);
   };
@@ -225,6 +228,7 @@ export default function ChatBot() {
         <Report
           params={reportParams}
           toggleShowReport={handleToggleShowReport}
+          chatId={selectedChat}
         />
       ) : (
         <>
@@ -237,12 +241,15 @@ export default function ChatBot() {
             />
           )}
           <div className={styles.chat_container}>
-            <ChatMessageBox messages={messages} username={username}/>
-            {username === undefined ? <></>:
-            <UserInputContainer
-              onSendMessage={sendRequest}
-              toggleShowReport={handleToggleShowReport}
-            />}
+            <ChatMessageBox messages={messages as any} username={username} />
+            {username === undefined ? (
+              <></>
+            ) : (
+              <UserInputContainer
+                onSendMessage={sendRequest}
+                toggleShowReport={handleToggleShowReport}
+              />
+            )}
           </div>
         </>
       )}

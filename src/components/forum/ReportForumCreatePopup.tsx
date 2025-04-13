@@ -9,15 +9,21 @@ import FormMultipleOptions from '../base/FormMultipleOptions';
 import { COLORED_FORUM_TAGS } from '@/app/constants/forumTags';
 import createFullForum from '@/app/lib/requests/forum/createForumWithImage';
 import { useSession } from 'next-auth/react';
+import Carousel from '../base/Carousel';
+import createFullForumWithImages from '@/app/lib/requests/forum/createForumWithImages';
 
-export default function ForumCreatePopup({
+export default function ReportForumCreatePopup({
   setShowCreatePopup,
   callback,
+  images,
+  chatId,
 }: {
   setShowCreatePopup: Dispatch<SetStateAction<boolean>>;
   callback: () => void;
+  images: string[];
+  chatId: number;
 }) {
-  const [image, setImage] = useState<File | null>(null);
+  const [imageUrls, setImageUrls] = useState<string[]>(images ?? []);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedTagIds, setSelectedTagIds] = useState<number[]>([]);
@@ -25,12 +31,13 @@ export default function ForumCreatePopup({
 
   async function onSubmit() {
     try {
-      await createFullForum({
+      await createFullForumWithImages({
         title,
         description,
-        image,
-        userId: parseInt(session.data?.user.id || '0'),
+        imageUrls,
+        userId: parseInt(session.data?.user.id ?? '0'),
         tagIds: selectedTagIds,
+        chatSessionId: chatId,
       });
       setShowCreatePopup(false);
       callback();
@@ -61,7 +68,7 @@ export default function ForumCreatePopup({
             input={description}
             setInput={setDescription}
           />
-          <FormImageInput input={image} setInput={setImage} />
+          <Carousel images={imageUrls} />
           <FormMultipleOptions
             options={COLORED_FORUM_TAGS}
             selectedTagIds={selectedTagIds}

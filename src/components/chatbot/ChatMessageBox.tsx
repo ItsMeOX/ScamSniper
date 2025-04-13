@@ -41,19 +41,20 @@ export default function ChatMessageBox({
             key={index}
             className={`${styles.message} ${
               msg.role === 'user' ? styles.user : styles.ai
-            }`}
-          >
+            }`}>
             <div className={styles.icon}>
               {msg.role === 'user' ? <span>🧑</span> : <span>🤖</span>}
             </div>
             <div className={styles.content}>
-              {msg.content.map((content, idx) =>
-                content.type === 'text' && (
-                  <div key={idx}>{content.text}</div>
-                ) 
+              {msg.content.map(
+                (content, idx) =>
+                  content.type === 'text' && <div key={idx}>{content.text}</div>
               )}
-              <Carousel images={msg.content.filter((item) => item.type === 'image_url')
-        .map((item) => (item as any).image_url.url)}/>
+              <Carousel
+                images={msg.content
+                  .filter((item) => item.type === 'image_url')
+                  .map((item) => (item as any).image_url.url)}
+              />
             </div>
           </div>
         ))

@@ -18,6 +18,7 @@ export default async function createForum(
       user_id: forum.userId,
       title: forum.title,
       description: forum.description,
+      chat_session_id: forum.chatSessionId,
     },
   });
 

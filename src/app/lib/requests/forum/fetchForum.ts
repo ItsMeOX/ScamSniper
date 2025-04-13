@@ -17,6 +17,7 @@ export default async function fetchForum() {
       ForumImage: true,
       ForumTag: true,
       User: true,
+      ChatSession: true,
     },
     orderBy: {
       created_at: 'desc',
