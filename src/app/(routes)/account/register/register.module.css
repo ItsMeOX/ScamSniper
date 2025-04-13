@@ -87,14 +87,3 @@
 .error_box {
   width: 100%;
 }
-
-.no_account {
-  margin-inline: auto;
-  font-size: 0.8rem;
-  color: rgb(190, 190, 190);
-}
-
-.no_account > button {
-  color: rgb(22, 22, 231);
-  text-decoration: underline;
-}

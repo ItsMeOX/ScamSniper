@@ -40,8 +40,8 @@ export default function Login() {
         <div className={styles.input_section}>
           <Image
             className={styles.logo}
-            src="/scamsniper.svg"
-            alt="logo"
+            src='/scamsniper.svg'
+            alt='logo'
             width={40}
             height={40}
           />
@@ -52,20 +52,27 @@ export default function Login() {
           <div className={styles.inputs_box}>
             <div className={styles.input_box}>
               <label>Email</label>
-              <input type="email" name="email" />
+              <input type='email' name='email' />
             </div>
             <div className={styles.input_box}>
               <label>Password</label>
-              <input type="password" name="password" />
+              <input type='password' name='password' />
             </div>
           </div>
           <button
             disabled={loading}
             className={styles.submit_button}
-            type="submit">
+            type='submit'
+          >
             Login
           </button>
           <div>{error && <ErrorBox errorText={error} />}</div>
+          <span className={styles.no_account}>
+            Don&apos;t have an account?{' '}
+            <button onClick={() => router.push('/account/register')}>
+              Register here
+            </button>
+          </span>
         </div>
         <div className={styles.art_section}></div>
       </form>
