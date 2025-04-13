@@ -42,6 +42,7 @@ model ChatSession {
     user_id         Int
     monetary_appeal String?
     urgency         String?
+    report_data      String?
     User            User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
     created_at      DateTime      @default(now())
     ChatMessage     ChatMessage[]

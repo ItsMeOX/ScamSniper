@@ -104,7 +104,9 @@
     font-size: 0.875rem;
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    display: flex;  
+    flex-wrap: wrap;
   }
   
   .noEvidence {

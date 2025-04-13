@@ -3,8 +3,12 @@ import UserInputContainer from '@/components/chatbot/UserInputContainer';
 import ChatMessageBox from '@/components/chatbot/ChatMessageBox';
 import Report from '@/components/chatbot/Report';
 import styles from './chatbot.module.css';
-import { useState } from 'react';
-import HistoryTab from '@/components/chatbot/HIstoryTab';
+import { useEffect, useState } from 'react';
+import HistoryTab from '@/components/chatbot/HistoryTab';
+import { useSession } from 'next-auth/react';
+import fetchHistoryChat, {ChatSessionsType} from '@/app/lib/requests/chatbot/fetchHistoryChat';
+import updateChat from '@/app/lib/requests/chatbot/updateChat';
+import updateChatSessionReport from '@/app/lib/requests/chatbot/updateChatSessionReport';
 
 type MessageType = {
   role: string;
@@ -34,33 +38,81 @@ interface ReportParamsType {
   };
   summary: string;
 }
+const defaultReportParams = {
+  sign: {
+    emotioanalAppeal: { evidence: [], chances: 0 },
+    monetaryAppeal: { evidence: [], chances: 0 },
+    urgencyAppeal: { evidence: [], chances: 0 },
+    unsolicitedAppeal: { evidence: [], chances: 0 },
+    sensitiveInformation: { evidence: [], chances: 0 },
+  },
+  validation: {
+    timestamp: { evidence: [], chances: 0 },
+    number: { evidence: [], chances: 0 },
+    email: { evidence: [], chances: 0 },
+    location: { evidence: [], chances: 0 },
+  },
+  summary: '',
+}
+
 export default function ChatBot() {
-  const [historyChats, setHistoryChats] = useState<string[]>([
-    'New Chat',
-    'Chat 1',
-    'Chat 2',
+  const session = useSession();
+  const username = session.data?.user.name;
+  const user_id = session.data?.user.id;
+  const [historyChats, setHistoryChats] = useState<{chat_name:string, chat_id:number}[]>([
+    {chat_name:'New Chat', chat_id:-1},
   ]);
+  const [historyChatData, setHistoryChatData] = useState<ChatSessionsType>([]);
   const [messages, setMessages] = useState<MessageType[]>([]);
+  const [selectedChat, setSelectedChat] = useState<number>(-1);
   const [showReport, setShowReport] = useState(false);
-  const [reportParams, setReportParams] = useState<ReportParamsType>({
-    sign: {
-      emotioanalAppeal: { evidence: [], chances: 0 },
-      monetaryAppeal: { evidence: [], chances: 0 },
-      urgencyAppeal: { evidence: [], chances: 0 },
-      unsolicitedAppeal: { evidence: [], chances: 0 },
-      sensitiveInformation: { evidence: [], chances: 0 },
-    },
-    validation: {
-      timestamp: { evidence: [], chances: 0 },
-      number: { evidence: [], chances: 0 },
-      email: { evidence: [], chances: 0 },
-      location: { evidence: [], chances: 0 },
-    },
-    summary: '',
-  });
+  const [reportParams, setReportParams] = useState<ReportParamsType>(defaultReportParams);
+  useEffect(() => {
+    if (!user_id) return;
+    async function fetchChat() {
+      await fetchHistoryChat(parseInt(user_id || '0'))
+        .then((data) => {
+          setHistoryChatData(data);
+          setHistoryChats([{ chat_name: 'New Chat', chat_id: -1 }]);
+          for (let i = data.length - 1; i >= 0; i--) {
+            setHistoryChats((prev) => [
+              ...prev,
+              { chat_name: "chat" + i, chat_id: data[data.length - 1 - i].id },
+            ]);
+          }
+        });
+      }
+    fetchChat();
+  }, [user_id, messages]);
+
+  const handleSelectChat = async (chatId: number) => {
+    setSelectedChat(chatId);
+    if (chatId === -1 && messages.length > 0) {
+      setMessages([]);
+      setReportParams(defaultReportParams);
+      return;
+    }
+    const chat = historyChatData.find((chat) => chat.id === chatId);
+    if (chat) {
+      setMessages(chat.ChatMessage.map((message) => (
+        JSON.parse(message.text)
+      )));
+      if (chat.report_data){
+        setReportParams(JSON.parse(chat.report_data));
+      } else {
+        setReportParams(defaultReportParams);
+      }
+    }
+    setSelectedChat(chatId);
+  };
 
   const sendText = async (userInput: string) => {
     setMessages([...messages, { role: 'user', content: userInput }]);
+    const chat_selected = await updateChat({
+      userId: parseInt(user_id || '0'),
+      message: JSON.stringify({ role: 'user', content: userInput }),
+      chatId: selectedChat,
+    });
     const res = await fetch('/api/openai', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -85,6 +137,13 @@ export default function ChatBot() {
       { role: 'user', content: userInput },
       { role: 'assistant', content: data.response.content },
     ]);
+    await updateChat({
+      userId: parseInt(user_id || '0'),
+      message: JSON.stringify( { role: 'assistant', content: data.response.content}),
+      chatId: chat_selected,
+    });
+    
+    setSelectedChat(chat_selected);
     return data.response.content;
   };
 
@@ -118,6 +177,18 @@ export default function ChatBot() {
     setShowReport(!showReport);
   };
 
+  useEffect(() => {
+    if (reportParams.summary !== '') {
+      const reportData = JSON.stringify(reportParams);
+      const chatId = selectedChat;
+      updateChatSessionReport({
+        userId: parseInt(user_id || '0'),
+        reportData: reportData,
+        chatId: chatId,
+      });
+    }
+  }, [reportParams, selectedChat, user_id]);
+
   return (
     <div className={styles.container}>
       {showReport ? (
@@ -127,13 +198,15 @@ export default function ChatBot() {
         />
       ) : (
         <>
-          <HistoryTab historyChats={historyChats} />
+          {username === undefined ? <></>:
+            <HistoryTab historyChats={historyChats} onSelectChat={handleSelectChat}/>}
           <div className={styles.chat_container}>
-            <ChatMessageBox messages={messages} />
+            <ChatMessageBox messages={messages} username={username}/>
+            {username === undefined ? <></>:
             <UserInputContainer
               onSendMessage={sendText}
               toggleShowReport={handleToggleShowReport}
-            />
+            />}
           </div>
         </>
       )}
