@@ -4,12 +4,13 @@ import { useState } from 'react';
 export default function UserInputContainer({onSendMessage, toggleShowReport} : {onSendMessage: (userInput: string) => Promise<string>, toggleShowReport: () => void}) {
     const [userInput, setUserInput] = useState<string>('');
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && userInput.trim() !== '') {
             onSendMessage(userInput);
             setUserInput("");
         }
     }
     const handleSendMessage = (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (userInput.trim() === '') return;
         onSendMessage(userInput);
         setUserInput("");
     }

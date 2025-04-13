@@ -1,11 +1,11 @@
 import styles from './chatmessagebox.module.css';
 
-export default function ChatMessageBox({messages}: {messages: {role: string; content: string}[]}) {
+export default function ChatMessageBox({messages, username}: {messages: {role: string; content: string}[], username : string} ) {
   return (
     <div className={styles.container}>
       {messages.length === 0 ? (
         <div className={styles.empty}>
-          <div>What can I help with?</div>
+          <div>{username === undefined ? "Please login to proceed" : "Hi " + username + ", What can I help with?"}</div>
         </div>
       ) : (
         messages.map((msg, index) => (
