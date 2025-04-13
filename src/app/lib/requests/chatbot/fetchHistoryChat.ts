@@ -1,3 +1,4 @@
+import { ChatMessage } from './../../../../../node_modules/.prisma/client/index.d';
 'use server';
 
 import { Prisma } from '@prisma/client';
@@ -15,9 +16,6 @@ export default async function fetchHistoryChat(user_id : number) {
       ChatMessage: {
         orderBy: {
           created_at: 'asc',
-        },
-        include: {
-            ChatImages: true,
         }
       },
     },

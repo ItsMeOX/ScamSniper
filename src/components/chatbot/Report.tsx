@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./report.module.css";
+import Carousel from "../base/Carousel"; // Adjust the path as needed
 
 interface EvidenceSection {
   evidence: string[];
@@ -74,9 +75,7 @@ export default function Report({ params, toggleShowReport }: { params: ReportPar
         <h1 className="text-3xl font-bold ">Report</h1>
       </div>
         <div className={styles.image_container}>
-            {/* {params.images.map((image, index) => (
-            <img key={index} src={image} alt={`Evidence ${index}`} className={styles.image} />
-            ))} */}
+          {params.images ? <Carousel images={params.images}/> : <></>}
         </div>
       <div className={styles.section_container}>
         <h2 className={styles.sectionTitle}>Telltale Signs</h2>

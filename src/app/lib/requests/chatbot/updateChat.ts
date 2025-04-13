@@ -13,13 +13,13 @@ export default async function updateChat({
   chatId,
   userId,
   message,
-  images,
+  image_urls,
   tx,
 }: {
   chatId: number;
   userId: number;
   message: string;
-  images?: File[];
+  image_urls?: string[];
   tx?: Prisma.TransactionClient;
 }) {
   if (!tx) {
@@ -39,10 +39,9 @@ export default async function updateChat({
     });
 
     // Create Images
-    if (images && images.length > 0) {
-        images.forEach(async (file) => {
-            const url = await uploadImage(file);
-            await createImage(url, createdMessage.id, tx);
+    if (image_urls && image_urls.length > 0) {
+        image_urls.forEach(async (url) => {
+            await createImage(url, chatId, tx);
         });
     }
     return chatId;

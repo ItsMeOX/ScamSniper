@@ -9,7 +9,7 @@ const openai = new OpenAI({
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { messages, model = 'gpt-4', temperature = 0.7 } = body;
+    const { messages, model = 'gpt-4-turbo', temperature = 0.7 } = body;
 
     if (!Array.isArray(messages)) {
       return new Response(

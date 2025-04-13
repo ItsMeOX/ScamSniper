@@ -12,10 +12,23 @@ import updateChat from '@/app/lib/requests/chatbot/updateChat';
 import updateChatSessionReport from '@/app/lib/requests/chatbot/updateChatSessionReport';
 import HistoryTab from '@/components/chatbot/HistoryTab';
 
+import fetchAllImageChatSession from '@/app/lib/requests/chatbot/fetchAllImageChatSession';
+
+
 type MessageType = {
   role: string;
-  content: string;
-  image?: string;
+  content: (
+    | {
+        type: string;
+        text: string;
+      }
+    | {
+        type: string;
+        image_url: {
+          url: string;
+        };
+      }
+  )[];
 };
 
 interface EvidenceSection {
@@ -24,7 +37,7 @@ interface EvidenceSection {
 }
 
 interface ReportParamsType {
-  images?: string[];
+  images: string[];
   sign: {
     emotioanalAppeal: EvidenceSection;
     monetaryAppeal: EvidenceSection;
@@ -41,6 +54,7 @@ interface ReportParamsType {
   summary: string;
 }
 const defaultReportParams = {
+  images: [],
   sign: {
     emotioanalAppeal: { evidence: [], chances: 0 },
     monetaryAppeal: { evidence: [], chances: 0 },
@@ -106,12 +120,23 @@ export default function ChatBot() {
     setSelectedChat(chatId);
   };
 
-  const sendText = async (userInput: string) => {
-    setMessages([...messages, { role: 'user', content: userInput }]);
+  const sendRequest = async (userInput: string, fileUrls : string[]) => {
+    const currentMessage = {
+      role: 'user',
+      content: [
+        { type: 'text', text: userInput },
+        ...fileUrls.map((url) => ({
+          type: 'image_url',
+          image_url: { url },
+        })),
+      ],
+    };
+    setMessages([...messages, currentMessage]);
     const chat_selected = await updateChat({
       userId: parseInt(user_id || '0'),
-      message: JSON.stringify({ role: 'user', content: userInput }),
+      message: JSON.stringify(currentMessage),
       chatId: selectedChat,
+      image_urls: fileUrls,
     });
     const res = await fetch('/api/openai', {
       method: 'POST',
@@ -122,27 +147,31 @@ export default function ChatBot() {
           {
             role: 'user',
             content:
-              ' You are an AI scam detector called VerifyAI, base on all the chat messages, help me answer this:' +
-              userInput,
+              [ {type: 'text', text: " You are an AI scam detector called VerifyAI, base on all the chat messages and analyse the images given(if any), help me answer this:" + userInput},
+                ...fileUrls.map(url => ({
+                  type: 'image_url',
+                  image_url: {url}
+                  
+                }))
+              ]
           },
-        ],
-        model: 'gpt-4o',
-        temperature: 0.7,
+        ]
       }),
     });
 
     const data = await res.json();
+    const response = {
+      role: 'assistant',
+      content: [{ type: 'text', text: data.response.content }]
+    }
     setMessages([
       ...messages,
-      { role: 'user', content: userInput },
-      { role: 'assistant', content: data.response.content },
+      currentMessage ,
+      response,
     ]);
     await updateChat({
       userId: parseInt(user_id || '0'),
-      message: JSON.stringify({
-        role: 'assistant',
-        content: data.response.content,
-      }),
+      message: JSON.stringify(response),
       chatId: chat_selected,
     });
 
@@ -163,9 +192,7 @@ export default function ChatBot() {
               content:
                 'You are a scam ai detector, generate a scam detection report base on all the chat messages above and return a string json object in this format interface ReportParamsType {sign: {emotioanalAppeal: {evidence: string[];    chances: number;  };      monetaryAppeal: {evidence: string[];    chances: number;  };      urgencyAppeal: {evidence: string[];    chances: number;  };      unsolicitedAppeal: {evidence: string[];    chances: number;  };      sensitiveInformation: {evidence: string[];    chances: number;  };    };    validation: {timestamp: {evidence: string[];    chances: number;  };      number: {evidence: string[];chances: number;};email: {evidence: string[];chances: number;};location: {evidence: string[];chances: number;};};summary: string;}, the chances is number between 0 and 10 inclusive, try to fill as much evidence as possible, and leave the chances as 0 and evidence as empty array if no evidence found, ONLY RETURN THE STRING OF THIS JSON OBJECT',
             },
-          ],
-          model: 'gpt-4o',
-          temperature: 0.7,
+          ]
         }),
       });
 
@@ -173,9 +200,9 @@ export default function ChatBot() {
       const content = data.response.content
         .replace(/```json\n?/, '')
         .replace(/```/, '');
-      console.log(content);
       const jsonContent = JSON.parse(content);
-      setReportParams({ ...reportParams, ...jsonContent });
+      const allChatImages = await fetchAllImageChatSession(selectedChat);
+      setReportParams({ ...reportParams,...jsonContent, images: allChatImages });
     }
     setShowReport(!showReport);
   };
@@ -210,15 +237,12 @@ export default function ChatBot() {
             />
           )}
           <div className={styles.chat_container}>
-            <ChatMessageBox messages={messages} username={username!} />
-            {username === undefined ? (
-              <></>
-            ) : (
-              <UserInputContainer
-                onSendMessage={sendText}
-                toggleShowReport={handleToggleShowReport}
-              />
-            )}
+            <ChatMessageBox messages={messages} username={username}/>
+            {username === undefined ? <></>:
+            <UserInputContainer
+              onSendMessage={sendRequest}
+              toggleShowReport={handleToggleShowReport}
+            />}
           </div>
         </>
       )}

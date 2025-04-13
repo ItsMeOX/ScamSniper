@@ -1,0 +1,106 @@
+.carouselWrapper {
+    width: 100%;
+  }
+  
+  .embla {
+    overflow: hidden;
+  }
+  
+  .embla__container {
+    display: flex;
+  }
+  
+  .embla__slide {
+    flex: 0 0 100%;
+  }
+  
+  .embla__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+  
+  /* Thumbnails */
+  .emblaThumbs {
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+  
+  .embla__slideThumb {
+    flex: 0 0 auto;
+    width: 20%;
+    margin-right: 0.5rem;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+    border-radius: 0.3rem;
+  }
+  
+  .embla__slideThumb:hover {
+    opacity: 0.8;
+  }
+  
+  .embla__thumbnail {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.3rem;
+  }
+  
+  .selected {
+    opacity: 1 !important;
+    outline: 2px solid #0070f3;
+  }
+  .carouselWrapper {
+    width: 100%;
+    max-width: 800px; /* You can adjust max-width if needed */
+    margin: 0 auto;
+  }
+  
+  .embla {
+    width: 100%;
+    aspect-ratio: 2 / 1; /* Width : Height ratio = 2:1 (i.e. height = half of width) */
+    overflow: hidden;
+  }
+  
+  .embla__container {
+    display: flex;
+    height: 100%;
+  }
+  
+  .embla__slide {
+    flex: 0 0 100%;
+    position: relative;
+  }
+  
+  .embla__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  /* Thumbnail area */
+  .emblaThumbs {
+    margin-top: 1rem;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .embla__slideThumb {
+    flex: 0 0 auto;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  
+  .embla__slideThumb img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+  }
+  
+  .selected {
+    border-color: #0070f3; /* Highlight selected thumbnail */
+  }

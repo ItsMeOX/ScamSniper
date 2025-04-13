@@ -46,14 +46,6 @@ model ChatSession {
     User            User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
     created_at      DateTime      @default(now())
     ChatMessage     ChatMessage[]
-}
-
-model ChatMessage {
-    id          Int          @id @default(autoincrement())
-    session_id  Int
-    text        String
-    created_at  DateTime     @default(now())
-    ChatSession ChatSession  @relation(fields: [session_id], references: [id], onDelete: Cascade)
     ChatImages  ChatImages[]
 }
 
@@ -63,8 +55,17 @@ model ChatImages {
     url       String
     createdAt DateTime @default(now())
 
-    ChatMessage ChatMessage @relation(fields: [chat_id], references: [id], onDelete: Cascade)
+    ChatSession ChatSession @relation(fields: [chat_id], references: [id], onDelete: Cascade)
 }
+
+model ChatMessage {
+    id          Int          @id @default(autoincrement())
+    session_id  Int
+    text        String
+    created_at  DateTime     @default(now())
+    ChatSession ChatSession  @relation(fields: [session_id], references: [id], onDelete: Cascade)
+}
+
 
 model Forum {
     id          Int      @id @default(autoincrement())
