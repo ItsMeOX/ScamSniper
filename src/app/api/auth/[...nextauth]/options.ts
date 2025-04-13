@@ -51,6 +51,12 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token }) {
+      const rememberMe = (await cookies()).get('rememberme')?.value;
+      if (rememberMe === 'null') {
+        token.rememberMe = false;
+      } else {
+        token.rememberMe = true;
+      }
       const user = await prisma.user.findFirst({
         where: {
           user_email: token.email!,
@@ -66,6 +72,9 @@ export const options: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      //   if (token.rememberMe === false) {
+      //     session.maxAge = 24 * 60 * 60;
+      //   }
       return {
         ...session,
         user: { ...session.user, id: token.sub, image_url: token.picture },

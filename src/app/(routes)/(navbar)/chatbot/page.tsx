@@ -10,7 +10,7 @@ import fetchHistoryChat, {
 } from '@/app/lib/requests/chatbot/fetchHistoryChat';
 import updateChat from '@/app/lib/requests/chatbot/updateChat';
 import updateChatSessionReport from '@/app/lib/requests/chatbot/updateChatSessionReport';
-import HistoryTab from '@/components/chatbot/HIstoryTab';
+import HistoryTab from '@/components/chatbot/HistoryTab';
 
 type MessageType = {
   role: string;
