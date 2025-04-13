@@ -80,6 +80,10 @@
   background-color: var(--button-primary-focus);
 }
 
+.submit_button:disabled {
+  background-color: #838cee;
+}
+
 .no_account {
   margin-inline: auto;
   font-size: 0.8rem;

@@ -42,25 +42,31 @@ export default function LoveScam() {
         </p>
       </div>
       <div className={styles.scene2} ref={scene2Ref}>
-        <Image
-          className={styles.scene2_phone}
-          ref={scene2PhoneRef}
-          src="/simulation/lovescam/phone.png"
-          alt="phone"
-          width={1000}
-          height={700}
-          quality={100}
-          unoptimized={true}
-        />
-        <Image
-          className={styles.scene2_girl1}
-          src="/simulation/lovescam/girl1.png"
-          alt="girl1"
-          width={500}
-          height={500}
-          quality={100}
-          unoptimized={true}
-        />
+        <div className={styles.scene2_phone_wrapper} ref={scene2PhoneRef}>
+          <Image
+            className={styles.scene2_phone}
+            src="/simulation/lovescam/phone.png"
+            alt="phone"
+            width={1000}
+            height={700}
+            quality={100}
+            unoptimized={true}
+          />
+          <Image
+            className={styles.scene2_girl1}
+            src="/simulation/lovescam/girl1.png"
+            alt="girl1"
+            width={500}
+            height={500}
+            quality={100}
+            unoptimized={true}
+          />
+          <span
+            className={`${styles.scene2_girl_name} ${styles.app_girl_name}`}>
+            Emily
+          </span>
+          <button className={styles.scene2_next_button}></button>
+        </div>
       </div>
     </div>
   );

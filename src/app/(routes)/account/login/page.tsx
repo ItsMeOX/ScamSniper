@@ -4,11 +4,17 @@ import Image from 'next/image';
 import styles from './login.module.css';
 import { useRouter } from 'next/navigation';
 import crendentialLogin from '@/app/lib/requests/auth/credentialLogin';
+import { useState } from 'react';
+import ErrorBox from '@/components/auth/ErrorBox';
 
 export default function Login() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
+
   async function login(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
+    setLoading(true);
 
     const formData = new FormData(ev.currentTarget);
 
@@ -17,6 +23,14 @@ export default function Login() {
       router.push('/');
     } catch (err) {
       console.error(err);
+      if (err instanceof Error) {
+        setError(err.message);
+        console.error(error);
+      } else {
+        setError('Something went wrong, please try again.');
+      }
+      console.error(error);
+      setLoading(false);
     }
   }
 
@@ -45,9 +59,13 @@ export default function Login() {
               <input type="password" name="password" />
             </div>
           </div>
-          <button className={styles.submit_button} type="submit">
+          <button
+            disabled={loading}
+            className={styles.submit_button}
+            type="submit">
             Login
           </button>
+          <div>{error && <ErrorBox errorText={error} />}</div>
         </div>
         <div className={styles.art_section}></div>
       </form>

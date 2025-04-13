@@ -10,6 +10,9 @@ export default async function registerUser(
 ) {
   const email = formdata.get('email') as string;
   const plain_password = formdata.get('password') as string;
+  const name = formdata.get('name') as string;
+
+  if (!name) throw new Error('Name is empty.');
 
   if (!email) throw new Error('Email is empty.');
 
@@ -33,7 +36,7 @@ export default async function registerUser(
 
   const user = await tx.user.create({
     data: {
-      user_name: 'test user',
+      user_name: name,
       user_role: 'user',
       user_email: email,
       user_password: hashed_password,

@@ -1,0 +1,17 @@
+.error_box {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5em;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #dbb6ab;
+}
+
+.error_text {
+  font-size: 0.83rem;
+  color: #5e1e1a;
+}

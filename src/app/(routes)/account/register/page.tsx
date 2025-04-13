@@ -5,12 +5,16 @@ import styles from './register.module.css';
 import { useRouter } from 'next/navigation';
 import registerUser from '@/app/lib/requests/auth/createUser';
 import crendentialLogin from '@/app/lib/requests/auth/credentialLogin';
+import { useState } from 'react';
+import ErrorBox from '@/components/auth/ErrorBox';
 
 export default function Register() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
   async function register(ev: React.FormEvent<HTMLFormElement>) {
     ev.preventDefault();
-
+    setLoading(true);
     const formdata = new FormData(ev.currentTarget);
 
     try {
@@ -18,7 +22,13 @@ export default function Register() {
       await crendentialLogin(formdata);
       router.push('/');
     } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Something went wrong, please try again.');
+      }
       console.error(error);
+      setLoading(false);
     }
   }
 
@@ -39,6 +49,10 @@ export default function Register() {
           </div>
           <div className={styles.inputs_box}>
             <div className={styles.input_box}>
+              <label>Name</label>
+              <input type="text" name="name" />
+            </div>
+            <div className={styles.input_box}>
               <label>Email</label>
               <input type="email" name="email" />
             </div>
@@ -47,11 +61,20 @@ export default function Register() {
               <input type="password" name="password" />
             </div>
           </div>
-          <button className={styles.submit_button} type="submit">
+          <button
+            disabled={loading}
+            className={styles.submit_button}
+            type="submit">
             Register
           </button>
+          <div className={styles.error_box}>
+            {error && <ErrorBox errorText={error} />}
+          </div>
           <span className={styles.no_account}>
-            Don&apos;t have an account? <button>Register here</button>
+            Don&apos;t have an account?{' '}
+            <button onClick={() => router.push('/account/register')}>
+              Register here
+            </button>
           </span>
         </div>
         <div className={styles.art_section}></div>
