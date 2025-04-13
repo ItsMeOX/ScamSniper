@@ -59,11 +59,7 @@ export default function Forum({
         <UserLabel user={forum.User} />
       </div>
       {forum.ForumImage.length > 0 && (
-        <div className={styles.image_box}>
-          <div className={styles.image_holder}>
             <Carousel images={forum.ForumImage.map((forum) => forum.url)} />
-          </div>
-        </div>
       )}
 
       {forum.ChatSession && (
