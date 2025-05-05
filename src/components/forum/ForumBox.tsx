@@ -41,6 +41,7 @@ export default function Forum({
               }}></button>
             <div className={styles.report_popup_box}>
               <Report
+                loading={false}
                 params={jsonReportData}
                 chatId={-1}
                 toggleShowReport={() => {}}
