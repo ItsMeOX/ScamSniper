@@ -23,6 +23,9 @@ export default function HistoryTab({
                 : styles.chatButton
             }`}
             onClick={() => onSelectChat(label.chat_id)}>
+            {label.chat_name === 'New Chat' && (
+              <img src="/chatbot/icon.png" alt="New Chat" className={styles.icon}/>
+            )}
             {label.chat_name}
           </button>
         ))}
