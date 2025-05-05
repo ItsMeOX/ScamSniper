@@ -189,18 +189,7 @@ export default function ChatBot() {
             {
               role: 'user',
               content:
-                'You are a scam ai detector, generate a scam detection report base on all the chat messages above and \
-                return a string json object in this format interface ReportParamsType\
-                {sign: {emotioanalAppeal: {evidence: string[];    chances: number;  };\
-                monetaryAppeal: {evidence: string[];    chances: number;  };\
-                urgencyAppeal: {evidence: string[];    chances: number;  };\
-                unsolicitedAppeal: {evidence: string[];    chances: number;  };\
-                sensitiveInformation: {evidence: string[];    chances: number;  };    };\
-                validation: {timestamp: {evidence: string[];    chances: number;  };\
-                number: {evidence: string[];chances: number;};\
-                email: {evidence: string[];chances: number;};\
-                location: {evidence: string[];chances: number;};};summary: string;},\
-                the chances is number between 0 and 10 inclusive, try to fill as much evidence as possible, and leave the chances as 0 and evidence as empty array if no evidence found, ONLY RETURN THE STRING OF THIS JSON OBJECT',
+                'You are a scam ai detector, generate a scam detection report base on all the chat messages above and return a string json object in this format interface ReportParamsType {sign: {emotioanalAppeal: {evidence: string[];    chances: number;  };      monetaryAppeal: {evidence: string[];    chances: number;  };      urgencyAppeal: {evidence: string[];    chances: number;  };      unsolicitedAppeal: {evidence: string[];    chances: number;  };      sensitiveInformation: {evidence: string[];    chances: number;  };    };    validation: {timestamp: {evidence: string[];    chances: number;  };      number: {evidence: string[];chances: number;};email: {evidence: string[];chances: number;};location: {evidence: string[];chances: number;};};summary: string;}, the chances is number between 0 and 10 inclusive, try to fill as much evidence as possible, and leave the chances as 0 and evidence as empty array if no evidence found, ONLY RETURN THE STRING OF THIS JSON OBJECT',
             },
           ],
         }),
