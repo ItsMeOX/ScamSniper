@@ -58,7 +58,7 @@ export default function ChatMessageBox({
             <div className={styles.content}>
               {msg.content.map(
                 (content, idx) =>
-                  content.type === 'text' &&  content.text === "loading" ? <div ref={scroller} className={styles.txt_loader}/> : content.type === 'text' && <div key={idx}>{content.text}</div>
+                  content.type === 'text' &&  content.text === "loading" ? <div key={idx} ref={scroller} className={styles.txt_loader}/> : content.type === 'text' && <div key={idx}>{content.text}</div>
               )}
               <Carousel
                 images={msg.content
