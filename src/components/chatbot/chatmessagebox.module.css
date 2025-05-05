@@ -5,6 +5,7 @@
     padding: 1rem;
     height: 100%;
     overflow: scroll;
+    scrollbar-width: none;
   }
   
   .imageContainer {
@@ -22,6 +23,8 @@
     align-items: end;
     color: #585454; /* text-gray-400 */
     height: 100%;
+    text-align: center;
+    padding-bottom: 20rem;
   }
   
   .message {
