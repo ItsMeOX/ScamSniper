@@ -57,7 +57,7 @@
   transform: translateY(150%);
   width: 25px;
   height: 10px;
-  --g: radial-gradient(farthest-side,#0000 calc(95% - 3px),#585454 calc(100% - 3px) 98%,#0000 101%) no-repeat;
+  --g: radial-gradient(farthest-side,#585454 calc(95% - 3px),#585454 calc(100% - 3px) 98%,#0000 101%) no-repeat;
   background: var(--g), var(--g), var(--g);
   background-size: 7.5px 7.5px;
   animation: l9 1s infinite alternate;
