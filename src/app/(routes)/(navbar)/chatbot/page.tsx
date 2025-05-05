@@ -130,7 +130,16 @@ export default function ChatBot() {
         })),
       ],
     };
-    setMessages([...messages, currentMessage]);
+    const loader = {
+      role: 'assistant',
+      content: [
+        {
+          type: 'text',
+          text: 'loading',
+        },
+      ],
+    }
+    setMessages([...messages, currentMessage, loader]);
     const chat_selected = await updateChat({
       userId: parseInt(user_id || '0'),
       message: JSON.stringify(currentMessage),
@@ -167,6 +176,12 @@ export default function ChatBot() {
       role: 'assistant',
       content: [{ type: 'text', text: data.response.content }],
     };
+    // remove loader
+    setMessages((prev) => {
+      const newMessages = [...prev];
+      newMessages.pop();
+      return newMessages;
+    });
     setMessages([...messages, currentMessage, response]);
     await updateChat({
       userId: parseInt(user_id || '0'),
