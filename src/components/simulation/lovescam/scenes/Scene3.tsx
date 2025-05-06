@@ -18,21 +18,17 @@ type Scene3Props = {
   callback: () => void;
 };
 
-type Message = {
-  text: string;
-  time: string;
-  isMyMessage: boolean;
-};
-
 function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
   const [typingText, setTypingText] = useState('');
   const tlMain = useRef<gsap.core.Timeline | null>(null);
+  const tlEnd = useRef<gsap.core.Timeline | null>(null);
   const tlMessage3 = useRef<gsap.core.Timeline | null>(null);
   const scene3Ref = useRef(null);
   const message1Ref = useRef(null);
   const message2Ref = useRef(null);
   const message3Ref = useRef(null);
   const message4Ref = useRef(null);
+  const { callback } = props;
 
   useImperativeHandle(ref, () => ({
     tlScene3: tlMain.current,
@@ -48,6 +44,7 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
   useEffect(() => {
     tlMain.current = gsap.timeline();
     tlMessage3.current = gsap.timeline({ paused: true });
+    tlEnd.current = gsap.timeline({ paused: true });
     tlMain.current.fromTo(
       message1Ref.current,
       { opacity: 0 },
@@ -56,9 +53,11 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
         duration: 0.5,
         delay: 1,
         onComplete: () => {
-          setTypingText(
-            'Haha yeah, mechanical engineer. I build stuff that spins and moves 😅 What about you?'
-          );
+          setTimeout(() => {
+            setTypingText(
+              'Haha yeah, mechanical engineer. I build stuff that spins and moves 😅 What about you?'
+            );
+          }, 1000);
         },
       }
     );
@@ -71,13 +70,23 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
         duration: 0.5,
         delay: 2,
         onComplete: () => {
-          setTypingText(
-            'Deal. As long as you promise to make my future kitchen awesome.'
-          );
+          setTimeout(() => {
+            setTypingText(
+              'Deal. As long as you promise to make my future kitchen awesome.'
+            );
+          }, 1000);
         },
       }
     );
-  }, []);
+
+    tlEnd.current.to(scene3Ref.current, {
+      opacity: 0,
+      duration: 2,
+      onComplete: () => {
+        callback();
+      },
+    });
+  }, [callback]);
 
   return (
     <div className={styles.container} ref={scene3Ref}>
@@ -90,6 +99,9 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
               tlMessage3.current?.play();
               return { ...prev, message2: true, message3: true };
             } else {
+              setTimeout(() => {
+                tlEnd.current?.play();
+              }, 3000);
               return { ...prev, message4: true };
             }
           });

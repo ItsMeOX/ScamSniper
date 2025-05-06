@@ -16,6 +16,9 @@ import Scene3, {
   Scene3Ref,
 } from '@/components/simulation/lovescam/scenes/Scene3';
 import Polaroid from '@/components/simulation/lovescam/phone/Polaroid';
+import Scene4, {
+  Scene4Ref,
+} from '@/components/simulation/lovescam/scenes/Scene4';
 
 export default function LoveScam() {
   const tl = useRef<gsap.core.Timeline>(null);
@@ -23,12 +26,14 @@ export default function LoveScam() {
   const scene1Ref = useRef<Scene1Ref>(null);
   const scene2Ref = useRef<Scene2Ref>(null);
   const scene3Ref = useRef<Scene3Ref>(null);
+  const scene4Ref = useRef<Scene4Ref>(null);
 
   const [showScene, setShowScene] = useState({
     scene0: true,
     scene1: true,
     scene2: true,
     scene3: false,
+    scene4: false,
   });
 
   useEffect(() => {
@@ -70,6 +75,12 @@ export default function LoveScam() {
           scene3Ref.current.tlScene3?.play();
         }
         tl.current?.pause();
+      })
+      .call(() => {
+        if (scene4Ref.current) {
+          scene4Ref.current.tlScene4?.play();
+        }
+        tl.current?.pause();
       });
   }, []);
 
@@ -86,7 +97,24 @@ export default function LoveScam() {
           }}
         />
       )}
-      {showScene.scene3 && <Scene3 ref={scene3Ref} callback={() => {}} />}
+      {showScene.scene3 && (
+        <Scene3
+          ref={scene3Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene3: false, scene4: true }));
+          }}
+        />
+      )}
+      {showScene.scene4 && (
+        <Scene4
+          ref={scene4Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => prev);
+          }}
+        />
+      )}
     </div>
   );
 }

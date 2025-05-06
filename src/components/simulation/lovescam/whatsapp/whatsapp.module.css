@@ -39,6 +39,7 @@
 .profile_box_name {
   color: rgb(236, 236, 236);
 }
+
 .profile_box_status {
   color: gray;
 }
@@ -77,6 +78,7 @@
 
 .chat_input_box {
   flex: 1;
+  height: 48px;
   padding-block: 10px;
   padding-inline: 20px;
   border-radius: 30px;
