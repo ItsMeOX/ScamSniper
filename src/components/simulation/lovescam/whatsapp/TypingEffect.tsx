@@ -5,9 +5,10 @@ import React, { useEffect, useState } from 'react';
 interface TypingEffectProps {
   text: string;
   speed?: number; // Optional, milliseconds per character
+  typingDoneCallback: () => void;
 }
 
-const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 50 }) => {
+const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 50, typingDoneCallback }) => {
   const [displayedText, setDisplayedText] = useState('');
 
   useEffect(() => {
@@ -15,7 +16,10 @@ const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 50 }) => {
     const interval = setInterval(() => {
       setDisplayedText(prev => prev + text.charAt(index));
       index++;
-      if (index === text.length) clearInterval(interval);
+      if (index === text.length) {
+        clearInterval(interval);
+        typingDoneCallback()
+      }
     }, speed);
 
     return () => clearInterval(interval); // Cleanup on unmount
