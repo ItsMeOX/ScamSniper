@@ -1,8 +1,8 @@
 import { RefObject } from 'react';
-import styles from './scenereject.module.css';
+import styles from './scenematch.module.css';
 import Image from 'next/image';
 
-export default function SceneReject({
+export default function SceneMatch({
   ref,
   buttonCallback,
   profileImgSrc,
@@ -15,13 +15,13 @@ export default function SceneReject({
 }) {
   return (
     <div ref={ref} className={styles.container}>
-      <div className={styles.heartbroken_box}>
+      <div className={styles.heart_box}>
         <span className={styles.you_text}>You</span>
         <span className={styles.three_dots}>. . .</span>
         <Image
           className={styles.heart_image}
-          src="/simulation/lovescam/broken_heart.svg"
-          alt="broken_heart"
+          src="/simulation/lovescam/heart_red.svg"
+          alt="heart"
           width={100}
           height={100}
         />
@@ -38,11 +38,11 @@ export default function SceneReject({
         />
       </div>
       <div className={styles.text_box}>
-        <span className={styles.sorry_text}>We&apos;re sorry!</span>
-        <span className={styles.matchfail_text}>Match failed</span>
+        <span className={styles.sorry_text}>It&apos;s a match!</span>
+        <span className={styles.matchfail_text}>You both like each other!</span>
       </div>
       <button className={styles.button} onClick={buttonCallback}>
-        Continue
+        Chat
       </button>
     </div>
   );
