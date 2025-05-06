@@ -15,6 +15,7 @@ import Scene2, {
 import Scene3, {
   Scene3Ref,
 } from '@/components/simulation/lovescam/scenes/Scene3';
+import Polaroid from '@/components/simulation/lovescam/phone/Polaroid';
 
 export default function LoveScam() {
   const tl = useRef<gsap.core.Timeline>(null);
