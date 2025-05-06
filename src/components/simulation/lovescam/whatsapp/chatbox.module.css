@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  max-width: 46%;
+  box-sizing: border-box;
+  border-radius: 16px;
+  padding-block: 8px;
+  padding-inline: 20px;
+}
+
+.text {
+}
+
+.status_box {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  gap: 5px;
+}
+
+.status_box > span {
+  color: #a1a1a1;
+  font-size: 0.7rem;
+  margin-left: auto;
+}
+
+.read_icon {
+  width: 20px;
+}
