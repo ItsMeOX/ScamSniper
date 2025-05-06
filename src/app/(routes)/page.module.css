@@ -5,6 +5,7 @@
   background-color: #fbfcfd;
   background-image: url('/landingborder.svg');
   background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 .header {
@@ -85,6 +86,14 @@
 
 .title_top {
   margin-bottom: -15px;
+}
+
+.corner_box {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }
 
 @keyframes typing {

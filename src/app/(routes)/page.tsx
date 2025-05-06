@@ -1,12 +1,11 @@
 'use client';
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Image from 'next/image';
 import { Roboto_Mono } from 'next/font/google';
 import Link from 'next/link';
-import HoverImageWithTransition from '@/components/hoverImgTransition';
 import { signOut, useSession } from 'next-auth/react';
+import Bubble from '@/components/home/Bubble';
 
 const robotoMono = Roboto_Mono({ subsets: ['latin'] });
 
@@ -15,42 +14,21 @@ export default function Home() {
   const session = useSession();
   const userName = session.data?.user.name;
   const userImageUrl = session.data?.user.image_url;
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
 
-  const handleMouseEnter = () => {
-    // Set a delay before triggering the transition
-    const timeout = setTimeout(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        router.push('/forum'); // Redirect after animation
-      }, 1200);
-    }, 1000); // 1-second delay before activation
-
-    setHoverTimeout(timeout);
-  };
-
-  const handleMouseLeave = () => {
-    // Cancel the transition if the user leaves early
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
-    }
-  };
   async function handleSignout() {
     await signOut({ callbackUrl: '/' });
   }
 
   return (
     <div className={styles.container}>
-      <Image
-        src="/landingcorner.svg"
-        alt="corner"
-        width="800"
-        height="600"
-        className="absolute bottom-0 right-0 h-[60vh] max-w-none w-auto"
-      />
-      <div>
+      <div className={styles.corner_box}>
+        <Image
+          src="/landingcorner.svg"
+          alt="corner"
+          width="800"
+          height="600"
+          className="relative h-[60vh] max-w-none w-auto"
+        />
         <Image
           src="/landingcomputer.svg"
           alt="Computer"
@@ -58,33 +36,13 @@ export default function Home() {
           height="800"
           className="absolute bottom-0 right-0 h-[60vh] max-w-none w-auto"
         />
-        <HoverImageWithTransition
-          src="/sim_love.svg"
-          width={200}
-          height={200}
+        <Bubble
+          src="/home/sim_love.svg"
           alt="Love Sim"
-          targetRoute="/forum"
-          left={850} // Use pixels for better accuracy in positioning
-          top={120} // Adjust top positioning as needed
+          targetRoute="/simulation/lovescam"
+          left={50}
+          top={-60}
         />
-        {/* <HoverImageWithTransition
-        src="/sim_call.svg"
-        width={200}
-        height={200}
-        alt="Love Sim"
-        targetRoute="/forum"
-        left={600} // Use pixels for better accuracy in positioning
-        top={370} // Adjust top positioning as needed
-      />
-      <HoverImageWithTransition
-        src="/sim_phishing.svg"
-        width={200}
-        height={200}
-        alt="Love Sim"
-        targetRoute="/forum"
-        left={1270} // Use pixels for better accuracy in positioning
-        top={10} // Adjust top positioning as needed
-      /> */}
       </div>
 
       <header className={styles.header}>
