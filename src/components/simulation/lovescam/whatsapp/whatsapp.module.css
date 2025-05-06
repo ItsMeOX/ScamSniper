@@ -44,12 +44,19 @@
 }
 
 .main_box {
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   gap: 20px;
   flex: 1;
   box-sizing: border-box;
   padding: 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.main_box::-webkit-scrollbar {
+  display: none;
 }
 
 .bottom_box {

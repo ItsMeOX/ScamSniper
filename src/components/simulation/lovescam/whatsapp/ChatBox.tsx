@@ -1,7 +1,15 @@
 import Image from 'next/image';
 import styles from './chatbox.module.css';
 
-export default function ChatBox({ isMyMessage }: { isMyMessage: boolean }) {
+export default function ChatBox({
+  isMyMessage,
+  messageText,
+  timeText,
+}: {
+  isMyMessage: boolean;
+  messageText: string;
+  timeText: string;
+}) {
   return (
     <div className={styles.container}>
       <div
@@ -11,19 +19,18 @@ export default function ChatBox({ isMyMessage }: { isMyMessage: boolean }) {
           alignSelf: isMyMessage ? 'flex-end' : 'flex-start',
           backgroundColor: isMyMessage ? '#04403b' : '#222e35',
         }}>
-        <p className={styles.text}>
-          wad wadwa dwa wadwadwadwa aawdawda dwa dw dwad wa dwaa wad wadwa dwa
-          wadwadwadwa aawdawda dwa dw dwad wa dwaa
-        </p>
+        <p className={styles.text}>{messageText}</p>
         <div className={styles.status_box}>
-          <span>14:04</span>
-          <Image
-            className={styles.read_icon}
-            src="/simulation/lovescam/whatsapp_read.svg"
-            alt="read"
-            width={50}
-            height={50}
-          />
+          <span>{timeText}</span>
+          {isMyMessage && (
+            <Image
+              className={styles.read_icon}
+              src="/simulation/lovescam/whatsapp_read.svg"
+              alt="read"
+              width={50}
+              height={50}
+            />
+          )}
         </div>
       </div>
     </div>

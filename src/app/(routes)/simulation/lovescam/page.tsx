@@ -49,7 +49,15 @@ export default function LoveScam() {
         { opacity: 0 },
         { opacity: 1, duration: 1 }
       )
-      .to(scene1Ref.current!.container, { opacity: 0 }, 'scene_transition_1_2')
+      .to(
+        scene1Ref.current!.container,
+        {
+          opacity: 0,
+          onComplete: () =>
+            setShowScene((prev) => ({ ...prev, scene1: false, scene2: true })),
+        },
+        'scene_transition_1_2'
+      )
       .call(() => {
         if (scene2Ref.current?.tlScene2) {
           scene2Ref.current.tlScene2.play();

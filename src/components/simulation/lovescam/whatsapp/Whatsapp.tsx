@@ -1,8 +1,16 @@
 import Image from 'next/image';
 import styles from './whatsapp.module.css';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function Whatsapp({ children }: { children: React.ReactNode }) {
+  const mainBoxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (mainBoxRef.current) {
+      mainBoxRef.current.scrollTop = mainBoxRef.current.scrollHeight;
+    }
+  }, [children]);
+
   return (
     <div className={styles.container}>
       <div className={styles.top_box}>

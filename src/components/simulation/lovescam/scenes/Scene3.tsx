@@ -26,8 +26,26 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
   return (
     <div className={styles.container} ref={scene3Ref}>
       <Whatsapp>
-        <ChatBox isMyMessage={false} />
-        <ChatBox isMyMessage={true} />
+        <ChatBox
+          isMyMessage={false}
+          messageText="Hi Jimmy 👋 I saw your profile. You’re an engineer? That’s so cool!"
+          timeText="14:04"
+        />
+        <ChatBox
+          isMyMessage={true}
+          messageText="Haha yeah, mechanical engineer. I build stuff that spins and moves 😅 What about you?"
+          timeText="14:05"
+        />
+        <ChatBox
+          isMyMessage={false}
+          messageText="I’m an interior designer~ I love beautiful things. Maybe one day you’ll build a house and I’ll design it 😄"
+          timeText="14:05"
+        />
+        <ChatBox
+          isMyMessage={true}
+          messageText="Deal. As long as you promise to make my future kitchen awesome."
+          timeText="14:06"
+        />
       </Whatsapp>
     </div>
   );
