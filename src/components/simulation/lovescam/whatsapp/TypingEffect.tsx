@@ -8,24 +8,28 @@ interface TypingEffectProps {
   typingDoneCallback: () => void;
 }
 
-const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 50, typingDoneCallback }) => {
+const TypingEffect: React.FC<TypingEffectProps> = ({
+  text,
+  speed = 40,
+  typingDoneCallback,
+}) => {
   const [displayedText, setDisplayedText] = useState('');
 
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
-      setDisplayedText(prev => prev + text.charAt(index));
+      setDisplayedText((prev) => prev + text.charAt(index));
       index++;
       if (index === text.length) {
         clearInterval(interval);
-        typingDoneCallback()
+        typingDoneCallback();
       }
     }, speed);
 
-    return () => clearInterval(interval); // Cleanup on unmount
-  }, [text, speed]);
+    return () => clearInterval(interval);
+  }, [text, speed, typingDoneCallback]);
 
-  return <span>{displayedText}</span>;
+  return <span style={{ color: '#cfcece' }}>{displayedText}</span>;
 };
 
 export default TypingEffect;

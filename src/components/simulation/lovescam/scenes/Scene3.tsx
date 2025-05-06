@@ -25,29 +25,7 @@ type Message = {
 };
 
 function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
-  const messages: Message[] = [
-    {
-      text: 'Hi Jimmy 👋 I saw your profile. You’re an engineer? That’s so cool!',
-      time: '14:04',
-      isMyMessage: false,
-    },
-    {
-      text: 'Haha yeah, mechanical engineer. I build stuff that spins and moves 😅 What about you?',
-      time: '14:05',
-      isMyMessage: true,
-    },
-    {
-      text: 'I’m an interior designer~ I love beautiful things. Maybe one day you’ll build a house and I’ll design it 😄',
-      time: '14:05',
-      isMyMessage: false,
-    },
-    {
-      text: 'Deal. As long as you promise to make my future kitchen awesome.',
-      time: '14:06',
-      isMyMessage: true,
-    },
-  ];
-
+  const [typingText, setTypingText] = useState('');
   const tlMain = useRef<gsap.core.Timeline | null>(null);
   const tlMessage3 = useRef<gsap.core.Timeline | null>(null);
   const scene3Ref = useRef(null);
@@ -77,6 +55,11 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
         opacity: 1,
         duration: 0.5,
         delay: 1,
+        onComplete: () => {
+          setTypingText(
+            'Haha yeah, mechanical engineer. I build stuff that spins and moves 😅 What about you?'
+          );
+        },
       }
     );
 
@@ -87,6 +70,11 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
         opacity: 1,
         duration: 0.5,
         delay: 2,
+        onComplete: () => {
+          setTypingText(
+            'Deal. As long as you promise to make my future kitchen awesome.'
+          );
+        },
       }
     );
   }, []);
@@ -94,8 +82,10 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
   return (
     <div className={styles.container} ref={scene3Ref}>
       <Whatsapp
+        typingText={typingText}
         sendButtonCallback={() => {
           setShowMessage((prev) => {
+            setTypingText('');
             if (!prev.message2) {
               tlMessage3.current?.play();
               return { ...prev, message2: true, message3: true };
