@@ -1,0 +1,140 @@
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fbfcfd;
+  background-image: url('/landingborder.svg');
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.header {
+  box-sizing: border-box;
+  padding-block: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 50px;
+}
+
+.logo_box {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.logo_box > span {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0a61cb;
+}
+
+.navigator_box {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.navigator_box > a {
+  cursor: pointer;
+  color: #021668;
+  font-size: 1.1rem;
+}
+
+.account_box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button {
+  color: var(--dark-blue);
+  cursor: pointer;
+}
+
+.register_button {
+  height: 50px;
+  color: white;
+  box-sizing: border-box;
+  background-color: #393e43;
+  padding-inline: 20px;
+  padding-block: 10px;
+  border-radius: 50px;
+}
+
+.register_button:hover {
+  background-color: #272a2e;
+}
+
+.user_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title_box {
+  margin-top: 10%;
+  margin-left: 12%;
+}
+
+.title {
+  font-size: 3.3vw;
+  font-weight: 600;
+}
+
+.title_top {
+  margin-bottom: -15px;
+}
+
+.corner_box {
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+@keyframes typing {
+  from {
+    border-right: 2px solid black;
+    width: 0;
+  }
+  to {
+    border-right: 0px;
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+.typing_paragraph_box {
+  margin-top: 10px;
+}
+
+.typing_text {
+  font-size: 1.2vw;
+  color: #000000;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
+  width: 0;
+  max-width: max-content;
+  animation: typing 5s steps(60) forwards, blink 0.75s step-end;
+}
+
+.typing_text:nth-of-type(1) {
+  animation-delay: 1s;
+}
+
+.typing_text:nth-of-type(2) {
+  animation-delay: 3.5s;
+}

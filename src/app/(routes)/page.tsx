@@ -1,99 +1,64 @@
 'use client';
+import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Image from 'next/image';
 import { Roboto_Mono } from 'next/font/google';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import HoverImageWithTransition from '@/components/hoverImgTransition';
+import { signOut, useSession } from 'next-auth/react';
+import Bubble from '@/components/home/Bubble';
 
 const robotoMono = Roboto_Mono({ subsets: ['latin'] });
 
 export default function Home() {
   const router = useRouter();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
+  const session = useSession();
+  const userName = session.data?.user.name;
+  const userImageUrl = session.data?.user.image_url;
 
-  const handleMouseEnter = () => {
-    // Set a delay before triggering the transition
-    const timeout = setTimeout(() => {
-      setIsTransitioning(true);
-      setTimeout(() => {
-        router.push('/forum'); // Redirect after animation
-      }, 1200);
-    }, 1000); // 1-second delay before activation
-
-    setHoverTimeout(timeout);
-  };
-
-  const handleMouseLeave = () => {
-    // Cancel the transition if the user leaves early
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
-    }
-  };
+  async function handleSignout() {
+    await signOut({ callbackUrl: '/' });
+  }
 
   return (
-    <div className="relative w-full h-screen bg-white">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/landingborder.svg"
-          alt="Background"
-          fill
-          className="object-cover object-[center_5%]"
-        />
-
+    <div className={styles.container}>
+      <div className={styles.corner_box}>
         <Image
           src="/landingcorner.svg"
           alt="corner"
           width="800"
           height="600"
-          className="absolute bottom-0 right-0 object-cover"
+          className="relative h-[60vh] max-w-none w-auto"
         />
-
         <Image
           src="/landingcomputer.svg"
           alt="Computer"
           width="750"
           height="800"
-          className="absolute bottom-0 right-10 object-cover"
+          className="absolute bottom-0 right-0 h-[60vh] max-w-none w-auto"
+        />
+        <Bubble
+          src="/home/sim_love.svg"
+          alt="Love Sim"
+          targetRoute="/simulation/lovescam"
+          left={50}
+          top={-60}
         />
       </div>
 
-      {/* Navbar and Content Above the Background */}
-      <div className="relative z-10 flex justify-between items-center px-6 py-4">
-        {/* Logo and Text */}
-        <div className="flex items-center space-x-2 ml-11 mt-3">
-          <Image
-            src="/scamsniper.svg" // Your logo image
-            alt="Logo"
-            width={60}
-            height={60}
-          />
-          <h1 className="text-2xl font-bold" style={{ color: '#0A61CB' }}>
-            ScamSniper
-          </h1>
+      <header className={styles.header}>
+        <div className={styles.logo_box}>
+          <Image src="/scamsniper.svg" alt="Logo" width={60} height={60} />
+          <span>ScamSniper</span>
         </div>
-
-        {/* Navigation Links */}
-        <div className="flex justify-center items-center flex-grow space-x-20 mr-60 mt-4">
-          <Link
-            href="/"
-            className="text-lg font-bold "
-            style={{ color: '#021668' }}>
+        <div className={styles.navigator_box}>
+          <Link href="/" className="font-bold " style={{ color: '#021668' }}>
             Home
           </Link>
-          <Link
-            href="/forum"
-            className="text-lg font-bold"
-            style={{ color: '#021668' }}>
+          <Link href="/forum" style={{ color: '#021668' }}>
             Forum
           </Link>
           <Link
             href="/chatbot"
-            className="text-lg font-bold"
             style={{
               background: 'linear-gradient(to right, #1B4599, #51C2FF)',
               WebkitBackgroundClip: 'text',
@@ -102,108 +67,56 @@ export default function Home() {
             VerifyAI
           </Link>
         </div>
-      </div>
+        <div className={styles.account_box}>
+          {session.status !== 'authenticated' && (
+            <>
+              <button
+                className={styles.button}
+                onClick={() => router.push('/account/login')}>
+                Login
+              </button>
+              <button
+                className={`${styles.button} ${styles.register_button}`}
+                onClick={() => router.push('/account/register')}>
+                Register
+              </button>
+            </>
+          )}
+          {session.status === 'authenticated' && (
+            <div className={styles.user_box}>
+              <Image
+                src={userImageUrl ?? '/default_profile_picture.png'}
+                alt="profile picture"
+                width={40}
+                height={40}
+              />
+              <button onClick={handleSignout}>{userName}</button>
+            </div>
+          )}
+        </div>
+      </header>
 
-      {/* Tagline */}
-      <h4
-        className={`absolute left-40 top-80 text-5xl font-bold ${robotoMono.className}`}
-        style={{}}>
-        <span
+      <div className={styles.title_box}>
+        <h1
+          className={`${styles.title} ${styles.title_top}`}
           style={{
             background: 'linear-gradient(to top, #0A2F79, #0453F0)',
             WebkitBackgroundClip: 'text',
             color: 'transparent',
+            marginBottom: '-20px',
           }}>
           Defence
-        </span>
-        <br />
-        <span style={{ color: '#000000' }}>Against Deception</span>
-      </h4>
-
-      {/* Typewriter Text Animation */}
-      <div className="relative">
-        {/* First Paragraph */}
-        <p
-          className={`absolute left-40 top-80 text-lg font-regular ${robotoMono.className} typing-text`}>
-          Love Scams, Fake Jobs, and Phishing Emails,
-        </p>
-
-        {/* Second Paragraph */}
-        <p
-          className={`absolute left-40 top-90 text-lg font-regular ${robotoMono.className} typing-text border-black`}>
-          Think You Can Tell What&apos;s Real?
-        </p>
+        </h1>
+        <h1 className={`${styles.title}`}>Against Deception</h1>
+        <div className={styles.typing_paragraph_box}>
+          <span className={`${robotoMono.className} ${styles.typing_text}`}>
+            Love Scams, Fake Jobs, and Phishing Emails,
+          </span>
+          <span className={`${robotoMono.className} ${styles.typing_text}`}>
+            Think You Can Tell What&apos;s Real?
+          </span>
+        </div>
       </div>
-
-      <style jsx>{`
-        @keyframes typing {
-          from {
-            width: 0;
-          }
-          to {
-            width: 100%;
-          }
-        }
-
-        @keyframes blink {
-          50% {
-            border-color: transparent;
-          }
-          100% {
-            border-color: transparent;
-          }
-        }
-
-        .typing-text {
-          color: #000000;
-          overflow: hidden;
-          white-space: nowrap;
-          display: block;
-          width: 0; /* Start with width 0 */
-          max-width: 500px; /* Limit the width */
-          border-right: 2px solid black; /* Cursor */
-          animation: typing 5s steps(60) forwards, blink 0.75s step-end;
-        }
-
-        /* Sequential animation delay for each paragraph */
-        .typing-text:nth-of-type(1) {
-          animation-delay: 1s;
-          border-right: transparent;
-        }
-
-        .typing-text:nth-of-type(2) {
-          animation-delay: 3s; /* Starts after the first paragraph finishes */
-          border-right: transparent;
-        }
-      `}</style>
-
-      <HoverImageWithTransition
-        src="/sim_love.svg"
-        width={200}
-        height={200}
-        alt="Love Sim"
-        targetRoute="/forum"
-        left={850} // Use pixels for better accuracy in positioning
-        top={20} // Adjust top positioning as needed
-      />
-      <HoverImageWithTransition
-        src="/sim_call.svg"
-        width={200}
-        height={200}
-        alt="Love Sim"
-        targetRoute="/forum"
-        left={600} // Use pixels for better accuracy in positioning
-        top={370} // Adjust top positioning as needed
-      />
-      <HoverImageWithTransition
-        src="/sim_phishing.svg"
-        width={200}
-        height={200}
-        alt="Love Sim"
-        targetRoute="/forum"
-        left={1270} // Use pixels for better accuracy in positioning
-        top={10} // Adjust top positioning as needed
-      />
     </div>
   );
 }

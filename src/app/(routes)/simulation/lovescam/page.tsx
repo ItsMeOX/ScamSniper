@@ -5,6 +5,7 @@ import styles from './lovescam.module.css';
 import { gsap } from 'gsap';
 import Image from 'next/image';
 import Scene3 from '@/components/simulation/lovescam/Scene3';
+import Phone from '@/components/simulation/lovescam/phone/Phone';
 
 export default function LoveScam() {
   const tl = useRef<gsap.core.Timeline | null>(null);
@@ -18,95 +19,95 @@ export default function LoveScam() {
   const scene3Ref = useRef(null);
 
   useEffect(() => {
-    tl.current = gsap.timeline();
-
-    tl.current
-      .fromTo(scene0Ref.current, { opacity: 1 }, { opacity: 0, duration: 1 })
-      .fromTo(scene1Ref.current, { opacity: 0 }, { opacity: 1, duration: 1 })
-      .to(scene1Ref.current, { opacity: 0 }, 'scene_transition_1_2')
-      .fromTo(
-        scene2Ref.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        'scene_transition_1_2'
-      )
-      .fromTo(scene2PhoneRef.current, { y: '100vh' }, { y: 0, duration: 1 })
-      .addPause()
-      .fromTo(
-        scene2Girl1ProfileRef.current,
-        { y: '0vh' },
-        {
-          x: '-100px',
-          y: '0vh',
-          opacity: 0,
-          duration: 1.5,
-        },
-        'girl_transition_1'
-      )
-      .fromTo(
-        scene2Girl2ProfileRef.current,
-        {
-          opacity: 0,
-          x: '150px',
-          y: '0vh',
-        },
-        {
-          opacity: 1,
-          x: '0',
-          y: '0vh',
-          duration: 1.5,
-        },
-        'girl_transition_1'
-      )
-      .addPause()
-      .fromTo(
-        scene2Girl2ProfileRef.current,
-        { y: '0vh' },
-        {
-          x: '-100px',
-          y: '0vh',
-          opacity: 0,
-          duration: 1.5,
-        },
-        'girl_transition_2'
-      )
-      .fromTo(
-        scene2Girl3ProfileRef.current,
-        {
-          opacity: 0,
-          x: '150px',
-          y: '0vh',
-        },
-        {
-          opacity: 1,
-          x: '0',
-          y: '0vh',
-          duration: 1.5,
-        },
-        'girl_transition_2'
-      )
-      .addPause()
-      .fromTo(
-        scene2Girl3ProfileRef.current,
-        {
-          scale: 1,
-        },
-        {
-          y: '100px',
-          scale: 1.5,
-          duration: 1,
-        }
-      )
-      .to(scene2Ref.current, {
-        opacity: 0,
-      });
+    // tl.current = gsap.timeline();
+    // tl.current
+    //   .fromTo(scene0Ref.current, { opacity: 1 }, { opacity: 0, duration: 1 })
+    //   .fromTo(scene1Ref.current, { opacity: 0 }, { opacity: 1, duration: 1 })
+    //   .to(scene1Ref.current, { opacity: 0 }, 'scene_transition_1_2')
+    //   .fromTo(
+    //     scene2Ref.current,
+    //     { opacity: 0 },
+    //     { opacity: 1, duration: 0.5 },
+    //     'scene_transition_1_2'
+    //   )
+    //   .fromTo(scene2PhoneRef.current, { y: '100vh' }, { y: 0, duration: 1 })
+    //   .addPause()
+    //   .fromTo(
+    //     scene2Girl1ProfileRef.current,
+    //     { y: '0vh' },
+    //     {
+    //       x: '-100px',
+    //       y: '0vh',
+    //       opacity: 0,
+    //       duration: 1.5,
+    //     },
+    //     'girl_transition_1'
+    //   )
+    //   .fromTo(
+    //     scene2Girl2ProfileRef.current,
+    //     {
+    //       opacity: 0,
+    //       x: '150px',
+    //       y: '0vh',
+    //     },
+    //     {
+    //       opacity: 1,
+    //       x: '0',
+    //       y: '0vh',
+    //       duration: 1.5,
+    //     },
+    //     'girl_transition_1'
+    //   )
+    //   .addPause()
+    //   .fromTo(
+    //     scene2Girl2ProfileRef.current,
+    //     { y: '0vh' },
+    //     {
+    //       x: '-100px',
+    //       y: '0vh',
+    //       opacity: 0,
+    //       duration: 1.5,
+    //     },
+    //     'girl_transition_2'
+    //   )
+    //   .fromTo(
+    //     scene2Girl3ProfileRef.current,
+    //     {
+    //       opacity: 0,
+    //       x: '150px',
+    //       y: '0vh',
+    //     },
+    //     {
+    //       opacity: 1,
+    //       x: '0',
+    //       y: '0vh',
+    //       duration: 1.5,
+    //     },
+    //     'girl_transition_2'
+    //   )
+    //   .addPause()
+    //   .fromTo(
+    //     scene2Girl3ProfileRef.current,
+    //     {
+    //       scale: 1,
+    //     },
+    //     {
+    //       y: '100px',
+    //       scale: 1.5,
+    //       duration: 1,
+    //     }
+    //   )
+    //   .to(scene2Ref.current, {
+    //     opacity: 0,
+    //   });
   }, []);
 
   return (
     <div className={styles.container}>
-      <div className={styles.scene0} ref={scene0Ref} />
+      {/* <div className={styles.scene0} ref={scene0Ref} /> */}
       <div className={`${styles.scene1}`} ref={scene1Ref}>
-        <div className={styles.scene1_bgholder}>
+        <Phone>Phone</Phone>
+        {/* <div className={styles.scene1_bgholder}>
           <Image
             src="/simulation/lovescam/scene1.png"
             alt="scene1"
@@ -205,11 +206,11 @@ export default function LoveScam() {
               height={20}
             />
           </button>
-        </div>
+        </div> */}
       </div>
-      <div className={styles.scene3}>
+      {/* <div className={styles.scene3}>
         <Scene3 />
-      </div>
+      </div> */}
     </div>
   );
 }

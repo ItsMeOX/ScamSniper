@@ -61,6 +61,10 @@
   border-radius: 50px;
 }
 
+.register_button:hover {
+  background-color: #272a2e;
+}
+
 .user_box {
   display: flex;
   align-items: center;

@@ -30,13 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="antialiased">
-        <ClientSessionProvider>
-          <NavBar />
-          {children}
-        </ClientSessionProvider>
-      </body>
-    </html>
+    <ClientSessionProvider>
+      <NavBar />
+      {children}
+    </ClientSessionProvider>
   );
 }
