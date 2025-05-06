@@ -73,9 +73,6 @@ export default function UserInputContainer({onSendMessage, toggleShowReport} : {
                     <button className={styles.reportButton} onClick={toggleShowReport}>Report</button>
                 </div>
                 <div className={styles.button_group}>
-                    <button className={styles.iconButton}>
-                        <div className={styles.micIcon}></div>
-                    </button>
                     <div className={`${styles.circle_box}`}>
                         <button className={styles.sendButton} onClick={handleSendMessage}/>
                     </div> 

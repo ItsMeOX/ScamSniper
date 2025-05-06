@@ -80,6 +80,7 @@ export default function ChatBot() {
   const [historyChatData, setHistoryChatData] = useState<ChatSessionsType>([]);
   const [messages, setMessages] = useState<MessageType[]>([]);
   const [selectedChat, setSelectedChat] = useState<number>(-1);
+  const [loadingReport, setLoadingReport] = useState(false);
   const [showReport, setShowReport] = useState(false);
   const [reportParams, setReportParams] =
     useState<ReportParamsType>(defaultReportParams);
@@ -130,7 +131,16 @@ export default function ChatBot() {
         })),
       ],
     };
-    setMessages([...messages, currentMessage]);
+    const loader = {
+      role: 'assistant',
+      content: [
+        {
+          type: 'text',
+          text: 'loading',
+        },
+      ],
+    }
+    setMessages([...messages, currentMessage, loader]);
     const chat_selected = await updateChat({
       userId: parseInt(user_id || '0'),
       message: JSON.stringify(currentMessage),
@@ -167,6 +177,12 @@ export default function ChatBot() {
       role: 'assistant',
       content: [{ type: 'text', text: data.response.content }],
     };
+    // remove loader
+    setMessages((prev) => {
+      const newMessages = [...prev];
+      newMessages.pop();
+      return newMessages;
+    });
     setMessages([...messages, currentMessage, response]);
     await updateChat({
       userId: parseInt(user_id || '0'),
@@ -179,7 +195,9 @@ export default function ChatBot() {
   };
 
   const handleToggleShowReport = async () => {
+    setShowReport(!showReport);
     if (reportParams.summary === '') {
+      setLoadingReport(true);
       const res = await fetch('/api/openai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -201,13 +219,13 @@ export default function ChatBot() {
         .replace(/```/, '');
       const jsonContent = JSON.parse(content);
       const allChatImages = await fetchAllImageChatSession(selectedChat);
+      setLoadingReport(false);
       setReportParams({
         ...reportParams,
         ...jsonContent,
         images: allChatImages,
       });
     }
-    setShowReport(!showReport);
   };
 
   useEffect(() => {
@@ -226,6 +244,7 @@ export default function ChatBot() {
     <div className={styles.container}>
       {showReport ? (
         <Report
+          loading={loadingReport}
           params={reportParams}
           toggleShowReport={handleToggleShowReport}
           chatId={selectedChat}

@@ -1,6 +1,6 @@
 import Carousel from '../base/Carousel';
 import styles from './chatmessagebox.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,  useRef } from 'react';
 
 type MessageType = {
   role: string;
@@ -25,6 +25,16 @@ export default function ChatMessageBox({
   messages: MessageType[];
   username: string | null | undefined;
 }) {
+  const scroller = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const scrollToElement = () => {
+    if (scroller.current) {
+      scroller.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  scrollToElement();
+    }, [scroller, messages]); // Add messages as a dependency to trigger scroll on new messages
+
   return (
     <div className={styles.container}>
       {messages.length === 0 ? (
@@ -48,7 +58,7 @@ export default function ChatMessageBox({
             <div className={styles.content}>
               {msg.content.map(
                 (content, idx) =>
-                  content.type === 'text' && <div key={idx}>{content.text}</div>
+                  content.type === 'text' &&  content.text === "loading" ? <div key={idx} ref={scroller} className={styles.txt_loader}/> : content.type === 'text' && <div key={idx}>{content.text}</div>
               )}
               <Carousel
                 images={msg.content

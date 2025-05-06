@@ -69,10 +69,12 @@ const EvidenceBox = ({
 };
 
 export default function Report({
+  loading,
   params,
   toggleShowReport,
   chatId,
 }: {
+  loading: boolean;
   params: ReportParamsType;
   toggleShowReport: () => void;
   chatId: number;
@@ -120,6 +122,7 @@ export default function Report({
       <div className={styles.title}>
         <h1 className="text-3xl font-bold ">Report</h1>
       </div>
+      {loading ? <div className={styles.loader_container}><div className={styles.loader}/></div>:<>
       <div className={styles.image_container}>
         {params.images ? <Carousel images={params.images} /> : <></>}
       </div>
@@ -150,6 +153,7 @@ export default function Report({
         <h2 className={styles.sectionTitle}>Summary</h2>
         <p>{params.summary}</p>
       </div>
+      </>}
     </div>
   );
 }
