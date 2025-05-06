@@ -1,17 +1,20 @@
 import Image from 'next/image';
 import styles from './chatbox.module.css';
+import { RefObject } from 'react';
 
 export default function ChatBox({
   isMyMessage,
   messageText,
   timeText,
+  ref,
 }: {
   isMyMessage: boolean;
   messageText: string;
   timeText: string;
+  ref: RefObject<null>;
 }) {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} ref={ref}>
       <div
         className={styles.box}
         style={{
