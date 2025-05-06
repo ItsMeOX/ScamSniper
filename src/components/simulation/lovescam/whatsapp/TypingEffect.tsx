@@ -10,13 +10,13 @@ interface TypingEffectProps {
 
 const TypingEffect: React.FC<TypingEffectProps> = ({ text, speed = 50, typingDoneCallback }) => {
   const [displayedText, setDisplayedText] = useState('');
-
   useEffect(() => {
     let index = 0;
     const interval = setInterval(() => {
-      setDisplayedText(prev => prev + text.charAt(index));
+      setDisplayedText(text.substring(0, index));
+      console.log(index)
       index++;
-      if (index === text.length) {
+      if (index === text.length + 1) {
         clearInterval(interval);
         typingDoneCallback()
       }

@@ -37,7 +37,7 @@ export default function Whatsapp({ children }: { children: React.ReactNode }) {
           width={50}
           height={50}
         />
-        <div className={styles.chat_input_box}></div>
+        <div className={styles.chat_input_box}><TypingEffect text={"Lorem I"} typingDoneCallback={()=>{}}/></div>
         <Image
           src="/simulation/lovescam/whatsapp_send.svg"
           alt="send"
