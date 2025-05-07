@@ -89,8 +89,7 @@ function Scene6(props: Scene6Props, ref: Ref<Scene6Ref>) {
         {
           opacity: 1,
           duration: 0.5,
-          delay: 1,
-
+          delay: 5,
           onComplete: () => {
             setTimeout(() => setTypingText('Oh noo, what happened?'), 2700);
           },

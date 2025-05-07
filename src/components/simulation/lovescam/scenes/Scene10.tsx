@@ -1,4 +1,4 @@
-import styles from './scene9.module.css';
+import styles from './scene10.module.css';
 import {
   forwardRef,
   Ref,
@@ -24,6 +24,8 @@ function Scene10(props: Scene10Props, ref: Ref<Scene10Ref>) {
   const message2Ref = useRef(null);
   const message3Ref = useRef(null);
   const message4Ref = useRef(null);
+  const message5Ref = useRef(null);
+  const message6Ref = useRef(null);
   const { callback } = props;
 
   useImperativeHandle(ref, () => ({
@@ -68,7 +70,7 @@ function Scene10(props: Scene10Props, ref: Ref<Scene10Ref>) {
         {
           opacity: 1,
           duration: 0.5,
-          delay: 1,
+          delay: 2,
         }
       )
       .fromTo(
@@ -79,7 +81,7 @@ function Scene10(props: Scene10Props, ref: Ref<Scene10Ref>) {
         {
           opacity: 1,
           duration: 0.5,
-          delay: 1,
+          delay: 2,
         }
       )
       .fromTo(
@@ -90,7 +92,29 @@ function Scene10(props: Scene10Props, ref: Ref<Scene10Ref>) {
         {
           opacity: 1,
           duration: 0.5,
-          delay: 1,
+          delay: 2,
+        }
+      )
+      .fromTo(
+        message5Ref.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          delay: 2,
+        }
+      )
+      .fromTo(
+        message6Ref.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          delay: 2,
           onComplete: () => {
             setShowMessage((prev) => ({ ...prev, button: true }));
           },
@@ -113,17 +137,30 @@ function Scene10(props: Scene10Props, ref: Ref<Scene10Ref>) {
   return (
     <div className={styles.container} ref={scene10Ref}>
       <div className={styles.text_box}>
-        <span ref={message1Ref}>After receiving the money from Jimmy, </span>
-        <span ref={message2Ref}>Yuki became more distant from Jimmy. </span>
-        <span ref={message3Ref}>One day, Yuki stopped replying Jimmy. </span>
-        <span ref={message4Ref}>
-          Jimmy felt cheated as Yuki did not return him the $10,000 that she
-          borrowed.
+        <span ref={message1Ref} style={{ fontWeight: 600 }}>
+          Jimmy has been scammed!
         </span>
+        <span ref={message2Ref}>
+          Love blinded him. <br />
+          Trust cost him everything.
+        </span>
+        <span ref={message3Ref}>
+          Not all who say I love &apos;you&apos; mean it.
+        </span>
+        <span ref={message4Ref}>
+          Romance scammers often gain trust over weeks or months before asking
+          for money.
+        </span>
+        <div className={styles.message_56_box}>
+          <span ref={message5Ref}>If someone you met online asks for help</span>
+          <span ref={message6Ref} style={{ fontWeight: 600 }}>
+            pause and think before helping!
+          </span>
+        </div>
       </div>
       {showMessage.button && (
         <button onClick={() => tlEnd.current?.play()} className={styles.button}>
-          Continue
+          End simulation
         </button>
       )}
     </div>

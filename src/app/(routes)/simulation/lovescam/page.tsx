@@ -36,8 +36,10 @@ import Scene9, {
 import Scene10, {
   Scene10Ref,
 } from '@/components/simulation/lovescam/scenes/Scene10';
+import { useRouter } from 'next/navigation';
 
 export default function LoveScam() {
+  const router = useRouter();
   const tl = useRef<gsap.core.Timeline>(null);
   const scene0Ref = useRef<Scene0Ref>(null);
   const scene1Ref = useRef<Scene1Ref>(null);
@@ -52,9 +54,9 @@ export default function LoveScam() {
   const scene10Ref = useRef<Scene10Ref>(null);
 
   const [showScene, setShowScene] = useState({
-    scene0: true, // t
-    scene1: true, // t
-    scene2: true, // t
+    scene0: true,
+    scene1: false,
+    scene2: false,
     scene3: false,
     scene4: false,
     scene5: false,
@@ -78,21 +80,12 @@ export default function LoveScam() {
             setShowScene((prev) => ({ ...prev, scene0: false, scene1: true })),
         }
       )
-      // Scene 1 - trying out dating apps
-      .fromTo(
-        scene1Ref.current!.container,
-        { opacity: 0 },
-        { opacity: 1, duration: 1 }
-      )
-      .to(
-        scene1Ref.current!.container,
-        {
-          opacity: 0,
-          onComplete: () =>
-            setShowScene((prev) => ({ ...prev, scene1: false, scene2: true })),
-        },
-        'scene_transition_1_2'
-      )
+      .call(() => {
+        if (scene1Ref.current) {
+          scene1Ref.current.tlScene1?.play();
+        }
+        tl.current?.pause();
+      })
       .call(() => {
         if (scene2Ref.current?.tlScene2) {
           scene2Ref.current.tlScene2.play();
@@ -145,14 +138,21 @@ export default function LoveScam() {
         if (scene10Ref.current) {
           scene10Ref.current.tlScene10?.play();
         }
-        tl.current?.pause();
       });
   }, []);
 
   return (
     <div className={styles.container}>
       {showScene.scene0 && <Scene0 ref={scene0Ref} />}
-      {showScene.scene1 && <Scene1 ref={scene1Ref} />}
+      {showScene.scene1 && (
+        <Scene1
+          ref={scene1Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene1: false, scene2: true }));
+          }}
+        />
+      )}
       {showScene.scene2 && (
         <Scene2
           ref={scene2Ref}
@@ -229,8 +229,7 @@ export default function LoveScam() {
         <Scene10
           ref={scene10Ref}
           callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene10: false }));
+            router.push('/');
           }}
         />
       )}

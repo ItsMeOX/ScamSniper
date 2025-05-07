@@ -50,7 +50,7 @@ function Scene2(props: Scene2Props, ref: Ref<Scene2Ref>) {
   }));
 
   useEffect(() => {
-    tlMain.current = gsap.timeline({ paused: true });
+    tlMain.current = gsap.timeline();
     tlGirl1Reject.current = gsap.timeline({ paused: true });
     tlGirl2.current = gsap.timeline({ paused: true });
     tlGirl2Reject.current = gsap.timeline({ paused: true });
@@ -58,12 +58,7 @@ function Scene2(props: Scene2Props, ref: Ref<Scene2Ref>) {
     tlGirl3Match.current = gsap.timeline({ paused: true });
 
     tlMain.current
-      .fromTo(
-        scene2Ref.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        'scene_transition_1_2'
-      )
+      .fromTo(scene2Ref.current, { opacity: 0 }, { opacity: 1, duration: 0.5 })
       .fromTo(phoneRef.current, { y: '100vh' }, { y: 0, duration: 1 })
       .addPause();
 
