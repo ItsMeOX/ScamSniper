@@ -34,6 +34,7 @@
   height: 3.5%;
   border-radius: 0px 0px 8px 8px;
   background-color: black;
+  z-index: 1;
 }
 
 .camera_compo1 {

@@ -13,9 +13,16 @@ const Polaroid: React.FC<PolaroidProps> = ({ imageUrl, caption }) => {
   return (
     <div className={styles.polaroid}>
       <div className={styles.imageWrapper}>
-        <Image src={imageUrl} alt={caption} fill style={{ objectFit: 'cover' }} />
+        <Image
+          src={imageUrl}
+          alt={caption}
+          fill
+          style={{ objectFit: 'cover' }}
+        />
       </div>
-      <p className={styles.caption}>{caption}</p>
+      <div className={styles.caption}>
+        <span>{caption}</span>
+      </div>
     </div>
   );
 };
