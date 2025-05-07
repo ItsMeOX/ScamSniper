@@ -33,6 +33,9 @@ import Scene8, {
 import Scene9, {
   Scene9Ref,
 } from '@/components/simulation/lovescam/scenes/Scene9';
+import Scene10, {
+  Scene10Ref,
+} from '@/components/simulation/lovescam/scenes/Scene10';
 
 export default function LoveScam() {
   const tl = useRef<gsap.core.Timeline>(null);
@@ -46,7 +49,7 @@ export default function LoveScam() {
   const scene7Ref = useRef<Scene7Ref>(null);
   const scene8Ref = useRef<Scene8Ref>(null);
   const scene9Ref = useRef<Scene9Ref>(null);
-  //   const scene10Ref = useRef<Scene10Ref>(null);
+  const scene10Ref = useRef<Scene10Ref>(null);
 
   const [showScene, setShowScene] = useState({
     scene0: true, // t
@@ -137,6 +140,12 @@ export default function LoveScam() {
           scene9Ref.current.tlScene9?.play();
         }
         tl.current?.pause();
+      })
+      .call(() => {
+        if (scene10Ref.current) {
+          scene10Ref.current.tlScene10?.play();
+        }
+        tl.current?.pause();
       });
   }, []);
 
@@ -213,6 +222,15 @@ export default function LoveScam() {
           callback={() => {
             tl.current?.play();
             setShowScene((prev) => ({ ...prev, scene9: false, scene10: true }));
+          }}
+        />
+      )}
+      {showScene.scene10 && (
+        <Scene10
+          ref={scene10Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene10: false }));
           }}
         />
       )}

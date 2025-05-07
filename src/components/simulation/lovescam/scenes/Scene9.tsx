@@ -31,15 +31,72 @@ function Scene9(props: Scene9Props, ref: Ref<Scene9Ref>) {
   }));
 
   const [showMessage, setShowMessage] = useState({
-    message1: true,
-    message2: true,
-    message3: false,
-    message4: false,
+    button: false,
   });
 
   useEffect(() => {
     tlMain.current = gsap.timeline();
     tlEnd.current = gsap.timeline({ paused: true });
+
+    tlMain.current
+      .fromTo(
+        scene9Ref.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 1,
+        }
+      )
+      .fromTo(
+        message1Ref.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          delay: 1,
+        }
+      )
+      .fromTo(
+        message2Ref.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          delay: 1,
+        }
+      )
+      .fromTo(
+        message3Ref.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          delay: 1,
+        }
+      )
+      .fromTo(
+        message4Ref.current,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.5,
+          delay: 1,
+          onComplete: () => {
+            setShowMessage((prev) => ({ ...prev, button: true }));
+          },
+        }
+      );
+
     tlEnd.current.fromTo(
       scene9Ref.current,
       {
@@ -47,14 +104,30 @@ function Scene9(props: Scene9Props, ref: Ref<Scene9Ref>) {
       },
       {
         opacity: 0,
-        duration: 0.5,
-        delay: 1,
+        duration: 1,
         onComplete: callback,
       }
     );
   }, [callback]);
 
-  return <div>Scene9</div>;
+  return (
+    <div className={styles.container} ref={scene9Ref}>
+      <div className={styles.text_box}>
+        <span ref={message1Ref}>After receiving the money from Jimmy, </span>
+        <span ref={message2Ref}>Yuki became more distant from Jimmy. </span>
+        <span ref={message3Ref}>One day, Yuki stopped replying Jimmy. </span>
+        <span ref={message4Ref}>
+          Jimmy felt cheated as Yuki did not return him the $10,000 that she
+          borrowed.
+        </span>
+      </div>
+      {showMessage.button && (
+        <button onClick={() => tlEnd.current?.play()} className={styles.button}>
+          Continue
+        </button>
+      )}
+    </div>
+  );
 }
 
 export default forwardRef(Scene9);
