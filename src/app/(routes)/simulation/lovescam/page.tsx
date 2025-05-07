@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './lovescam.module.css';
 import { gsap } from 'gsap';
 import Scene0, {
@@ -15,10 +15,12 @@ import Scene2, {
 import Scene3, {
   Scene3Ref,
 } from '@/components/simulation/lovescam/scenes/Scene3';
-import Polaroid from '@/components/simulation/lovescam/phone/Polaroid';
 import Scene4, {
   Scene4Ref,
 } from '@/components/simulation/lovescam/scenes/Scene4';
+import Scene5, {
+  Scene5Ref,
+} from '@/components/simulation/lovescam/scenes/Scene5';
 
 export default function LoveScam() {
   const tl = useRef<gsap.core.Timeline>(null);
@@ -27,13 +29,15 @@ export default function LoveScam() {
   const scene2Ref = useRef<Scene2Ref>(null);
   const scene3Ref = useRef<Scene3Ref>(null);
   const scene4Ref = useRef<Scene4Ref>(null);
+  const scene5Ref = useRef<Scene5Ref>(null);
 
   const [showScene, setShowScene] = useState({
-    scene0: true,
-    scene1: true,
-    scene2: true,
+    scene0: true, // t
+    scene1: true, // t
+    scene2: true, // t
     scene3: false,
     scene4: false,
+    scene5: false,
   });
 
   useEffect(() => {
@@ -81,6 +85,12 @@ export default function LoveScam() {
           scene4Ref.current.tlScene4?.play();
         }
         tl.current?.pause();
+      })
+      .call(() => {
+        if (scene5Ref.current) {
+          scene5Ref.current.tlScene5?.play();
+        }
+        tl.current?.pause();
       });
   }, []);
 
@@ -109,6 +119,15 @@ export default function LoveScam() {
       {showScene.scene4 && (
         <Scene4
           ref={scene4Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene4: false, scene5: true }));
+          }}
+        />
+      )}
+      {showScene.scene5 && (
+        <Scene5
+          ref={scene5Ref}
           callback={() => {
             tl.current?.play();
             setShowScene((prev) => prev);
