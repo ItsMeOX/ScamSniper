@@ -7,7 +7,6 @@ import {
   useState,
 } from 'react';
 import styles from './scene1.module.css';
-import Image from 'next/image';
 import gsap from 'gsap';
 
 export type Scene1Ref = {

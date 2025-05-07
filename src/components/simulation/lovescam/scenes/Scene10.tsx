@@ -145,7 +145,7 @@ function Scene10(props: Scene10Props, ref: Ref<Scene10Ref>) {
           Trust cost him everything.
         </span>
         <span ref={message3Ref}>
-          Not all who say I love &apos;you&apos; mean it.
+          Not all who say &apos;I love you&apos; mean it.
         </span>
         <span ref={message4Ref}>
           Romance scammers often gain trust over weeks or months before asking

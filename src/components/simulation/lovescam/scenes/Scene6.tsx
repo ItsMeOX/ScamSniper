@@ -75,7 +75,7 @@ function Scene6(props: Scene6Props, ref: Ref<Scene6Ref>) {
         },
         {
           opacity: 0,
-          delay: 1,
+          delay: 5,
           onComplete: () => {
             setShowComponent((prev) => ({ ...prev, intro: false }));
           },
@@ -89,7 +89,7 @@ function Scene6(props: Scene6Props, ref: Ref<Scene6Ref>) {
         {
           opacity: 1,
           duration: 0.5,
-          delay: 5,
+          delay: 3,
           onComplete: () => {
             setTimeout(() => setTypingText('Oh noo, what happened?'), 2700);
           },
