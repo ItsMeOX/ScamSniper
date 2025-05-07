@@ -6,11 +6,13 @@ export default function ChatBox({
   isMyMessage,
   messageText,
   timeText,
+  hasError = false,
   ref,
 }: {
   isMyMessage: boolean;
   messageText: string;
   timeText: string;
+  hasError?: boolean;
   ref: RefObject<null>;
 }) {
   return (
@@ -22,6 +24,13 @@ export default function ChatBox({
           alignSelf: isMyMessage ? 'flex-end' : 'flex-start',
           backgroundColor: isMyMessage ? '#04403b' : '#222e35',
         }}>
+        {hasError && (
+          <div
+            className={styles.error_icon}
+            style={isMyMessage ? { left: '-40px' } : { right: '-40px' }}>
+            !
+          </div>
+        )}
         <p className={styles.text}>{messageText}</p>
         <div className={styles.status_box}>
           <span>{timeText}</span>

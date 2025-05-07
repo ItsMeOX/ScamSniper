@@ -22,8 +22,7 @@ function Scene8(props: Scene8Props, ref: Ref<Scene8Ref>) {
   const [typingText, setTypingText] = useState('');
   const tlMain = useRef<gsap.core.Timeline | null>(null);
   const tlEnd = useRef<gsap.core.Timeline | null>(null);
-  const tlMessage3 = useRef<gsap.core.Timeline | null>(null);
-  const scene3Ref = useRef(null);
+  const scene8Ref = useRef(null);
   const message1Ref = useRef(null);
   const message2Ref = useRef(null);
   const message3Ref = useRef(null);
@@ -36,57 +35,80 @@ function Scene8(props: Scene8Props, ref: Ref<Scene8Ref>) {
 
   const [showMessage, setShowMessage] = useState({
     message1: true,
-    message2: false,
+    message2: true,
     message3: false,
     message4: false,
   });
 
   useEffect(() => {
+    setTimeout(() => {
+      setTypingText('Have u received?');
+    }, 1000);
+
     tlMain.current = gsap.timeline();
-    tlMessage3.current = gsap.timeline({ paused: true });
     tlEnd.current = gsap.timeline({ paused: true });
-    tlMain.current.fromTo(
-      message1Ref.current,
-      { opacity: 0 },
+    tlEnd.current.fromTo(
+      scene8Ref.current,
       {
         opacity: 1,
+      },
+      {
+        opacity: 0,
         duration: 0.5,
         delay: 1,
-        onComplete: () => {
-          setTimeout(() => {
-            setTypingText(
-              'Haha yeah, mechanical engineer. I build stuff that spins and moves 😅 What about you?'
-            );
-          }, 1000);
-        },
+        onComplete: callback,
       }
     );
   }, [callback]);
 
   return (
-    <div className={styles.container} ref={scene3Ref}>
+    <div className={styles.container} ref={scene8Ref}>
       <Whatsapp
         typingText={typingText}
         sendButtonCallback={() => {
           setShowMessage((prev) => {
             setTypingText('');
-            if (!prev.message2) {
-              tlMessage3.current?.play();
-              return { ...prev, message2: true, message3: true };
+            if (!prev.message3) {
+              setTimeout(() => {
+                setTypingText(':(');
+              }, 1000);
+              return { ...prev, message3: true };
             } else {
               setTimeout(() => {
                 tlEnd.current?.play();
-              }, 3000);
+              }, 2000);
               return { ...prev, message4: true };
             }
           });
         }}>
-        {showMessage.message1 && (
+        <ChatBox
+          ref={message1Ref}
+          isMyMessage={true}
+          messageText="Sure, your health matters more. Let me transfer you the money."
+          timeText="14:06"
+        />
+        <ChatBox
+          ref={message2Ref}
+          isMyMessage={false}
+          messageText="I promise to pay you back soon. 🥺💖"
+          timeText="14:06"
+        />
+        {showMessage.message3 && (
           <ChatBox
-            ref={message1Ref}
-            isMyMessage={false}
-            messageText="Hi Jimmy 👋 I saw your profile. You’re an engineer? That’s so cool!"
-            timeText="14:04"
+            ref={message3Ref}
+            isMyMessage={true}
+            messageText="Have u received?"
+            timeText="14:15"
+            hasError={true}
+          />
+        )}
+        {showMessage.message4 && (
+          <ChatBox
+            ref={message4Ref}
+            isMyMessage={true}
+            messageText=":("
+            timeText="14:15"
+            hasError={true}
           />
         )}
       </Whatsapp>

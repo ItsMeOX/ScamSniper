@@ -206,7 +206,7 @@ $10,000 for my medical bill... "
           <ChatBox
             ref={message5Ref}
             isMyMessage={false}
-            messageText="I promise to pay you back soon."
+            messageText="I promise to pay you back soon. 🥺💖"
             timeText="20:06"
           />
         </Whatsapp>
