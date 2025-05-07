@@ -1,0 +1,100 @@
+.container {
+  position: relative;
+  border-radius: 35px;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 15%;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.container_hide {
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  user-select: none;
+}
+
+.phonenumber_box {
+  color: #707070;
+
+  font-size: 2.1vh;
+}
+
+.section_title {
+  padding-inline: 3%;
+}
+
+.phonenumber_input_box {
+  background-color: white;
+  box-sizing: border-box;
+  padding-inline: 3%;
+  padding-top: 2%;
+  padding-bottom: 4%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.input_box_title {
+  margin-bottom: 5px;
+}
+
+.inputbox {
+  color: black;
+  font-size: 2.9vh;
+}
+
+.keypad {
+  height: 40%;
+  font-size: 2.2vh;
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 1px;
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.keypad_hide {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.keypad button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  outline: 1px solid rgb(102, 102, 102);
+}
+
+.keypad button img {
+  width: 30%;
+}
+
+.keypad button:hover {
+  background-color: #dbdbdb;
+}
+
+.transfer_button {
+  margin-top: auto;
+  margin-bottom: 15%;
+  margin-inline: auto;
+  width: 90%;
+  background-color: #ff6260;
+  padding-block: 3%;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 5px;
+}
+
+.transfer_button:hover {
+  background-color: #ff3531;
+}
