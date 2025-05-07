@@ -1,216 +1,238 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './lovescam.module.css';
 import { gsap } from 'gsap';
-import Image from 'next/image';
-import Scene3 from '@/components/simulation/lovescam/Scene3';
-import Phone from '@/components/simulation/lovescam/phone/Phone';
+import Scene0, {
+  Scene0Ref,
+} from '@/components/simulation/lovescam/scenes/Scene0';
+import Scene1, {
+  Scene1Ref,
+} from '@/components/simulation/lovescam/scenes/Scene1';
+import Scene2, {
+  Scene2Ref,
+} from '@/components/simulation/lovescam/scenes/Scene2';
+import Scene3, {
+  Scene3Ref,
+} from '@/components/simulation/lovescam/scenes/Scene3';
+import Scene4, {
+  Scene4Ref,
+} from '@/components/simulation/lovescam/scenes/Scene4';
+import Scene5, {
+  Scene5Ref,
+} from '@/components/simulation/lovescam/scenes/Scene5';
+import Scene6, {
+  Scene6Ref,
+} from '@/components/simulation/lovescam/scenes/Scene6';
+import Scene7, {
+  Scene7Ref,
+} from '@/components/simulation/lovescam/scenes/Scene7';
+import Scene8, {
+  Scene8Ref,
+} from '@/components/simulation/lovescam/scenes/Scene8';
+import Scene9, {
+  Scene9Ref,
+} from '@/components/simulation/lovescam/scenes/Scene9';
+import Scene10, {
+  Scene10Ref,
+} from '@/components/simulation/lovescam/scenes/Scene10';
+import { useRouter } from 'next/navigation';
 
 export default function LoveScam() {
-  const tl = useRef<gsap.core.Timeline | null>(null);
-  const scene0Ref = useRef(null);
-  const scene1Ref = useRef(null);
-  const scene2Ref = useRef(null);
-  const scene2PhoneRef = useRef(null);
-  const scene2Girl1ProfileRef = useRef(null);
-  const scene2Girl2ProfileRef = useRef(null);
-  const scene2Girl3ProfileRef = useRef(null);
-  const scene3Ref = useRef(null);
+  const router = useRouter();
+  const tl = useRef<gsap.core.Timeline>(null);
+  const scene0Ref = useRef<Scene0Ref>(null);
+  const scene1Ref = useRef<Scene1Ref>(null);
+  const scene2Ref = useRef<Scene2Ref>(null);
+  const scene3Ref = useRef<Scene3Ref>(null);
+  const scene4Ref = useRef<Scene4Ref>(null);
+  const scene5Ref = useRef<Scene5Ref>(null);
+  const scene6Ref = useRef<Scene6Ref>(null);
+  const scene7Ref = useRef<Scene7Ref>(null);
+  const scene8Ref = useRef<Scene8Ref>(null);
+  const scene9Ref = useRef<Scene9Ref>(null);
+  const scene10Ref = useRef<Scene10Ref>(null);
+
+  const [showScene, setShowScene] = useState({
+    scene0: true,
+    scene1: false,
+    scene2: false,
+    scene3: false,
+    scene4: false,
+    scene5: false,
+    scene6: false,
+    scene7: false,
+    scene8: false,
+    scene9: false,
+    scene10: false,
+  });
 
   useEffect(() => {
-    // tl.current = gsap.timeline();
-    // tl.current
-    //   .fromTo(scene0Ref.current, { opacity: 1 }, { opacity: 0, duration: 1 })
-    //   .fromTo(scene1Ref.current, { opacity: 0 }, { opacity: 1, duration: 1 })
-    //   .to(scene1Ref.current, { opacity: 0 }, 'scene_transition_1_2')
-    //   .fromTo(
-    //     scene2Ref.current,
-    //     { opacity: 0 },
-    //     { opacity: 1, duration: 0.5 },
-    //     'scene_transition_1_2'
-    //   )
-    //   .fromTo(scene2PhoneRef.current, { y: '100vh' }, { y: 0, duration: 1 })
-    //   .addPause()
-    //   .fromTo(
-    //     scene2Girl1ProfileRef.current,
-    //     { y: '0vh' },
-    //     {
-    //       x: '-100px',
-    //       y: '0vh',
-    //       opacity: 0,
-    //       duration: 1.5,
-    //     },
-    //     'girl_transition_1'
-    //   )
-    //   .fromTo(
-    //     scene2Girl2ProfileRef.current,
-    //     {
-    //       opacity: 0,
-    //       x: '150px',
-    //       y: '0vh',
-    //     },
-    //     {
-    //       opacity: 1,
-    //       x: '0',
-    //       y: '0vh',
-    //       duration: 1.5,
-    //     },
-    //     'girl_transition_1'
-    //   )
-    //   .addPause()
-    //   .fromTo(
-    //     scene2Girl2ProfileRef.current,
-    //     { y: '0vh' },
-    //     {
-    //       x: '-100px',
-    //       y: '0vh',
-    //       opacity: 0,
-    //       duration: 1.5,
-    //     },
-    //     'girl_transition_2'
-    //   )
-    //   .fromTo(
-    //     scene2Girl3ProfileRef.current,
-    //     {
-    //       opacity: 0,
-    //       x: '150px',
-    //       y: '0vh',
-    //     },
-    //     {
-    //       opacity: 1,
-    //       x: '0',
-    //       y: '0vh',
-    //       duration: 1.5,
-    //     },
-    //     'girl_transition_2'
-    //   )
-    //   .addPause()
-    //   .fromTo(
-    //     scene2Girl3ProfileRef.current,
-    //     {
-    //       scale: 1,
-    //     },
-    //     {
-    //       y: '100px',
-    //       scale: 1.5,
-    //       duration: 1,
-    //     }
-    //   )
-    //   .to(scene2Ref.current, {
-    //     opacity: 0,
-    //   });
+    tl.current = gsap.timeline();
+    tl.current
+      .fromTo(
+        scene0Ref.current!.container,
+        { opacity: 1 },
+        {
+          opacity: 0,
+          duration: 1,
+          onComplete: () =>
+            setShowScene((prev) => ({ ...prev, scene0: false, scene1: true })),
+        }
+      )
+      .call(() => {
+        if (scene1Ref.current) {
+          scene1Ref.current.tlScene1?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene2Ref.current?.tlScene2) {
+          scene2Ref.current.tlScene2.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene3Ref.current) {
+          scene3Ref.current.tlScene3?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene4Ref.current) {
+          scene4Ref.current.tlScene4?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene5Ref.current) {
+          scene5Ref.current.tlScene5?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene6Ref.current) {
+          scene6Ref.current.tlScene6?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene7Ref.current) {
+          scene7Ref.current.tlScene7?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene8Ref.current) {
+          scene8Ref.current.tlScene8?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene9Ref.current) {
+          scene9Ref.current.tlScene9?.play();
+        }
+        tl.current?.pause();
+      })
+      .call(() => {
+        if (scene10Ref.current) {
+          scene10Ref.current.tlScene10?.play();
+        }
+      });
   }, []);
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.scene0} ref={scene0Ref} /> */}
-      <div className={`${styles.scene1}`} ref={scene1Ref}>
-        <Phone>Phone</Phone>
-        {/* <div className={styles.scene1_bgholder}>
-          <Image
-            src="/simulation/lovescam/scene1.png"
-            alt="scene1"
-            width={1200}
-            height={1200}
-            quality={100}
-            unoptimized={true}
-          />
-        </div>
-        <p className={styles.scene1_text}>
-          Jimmy, a 23-year-old independent mechanical engineer, has been single
-          for years. Encouraged by his best friend, he decides to try online
-          dating. He joins an exclusive dating site for professionals, hoping to
-          find someone serious about love.
-        </p>
-      </div>
-      <div className={styles.scene2} ref={scene2Ref}>
-        <div className={styles.scene2_phone_wrapper} ref={scene2PhoneRef}>
-          <Image
-            className={styles.scene2_phone}
-            src="/simulation/lovescam/phone.png"
-            alt="phone"
-            width={1000}
-            height={700}
-            quality={100}
-            unoptimized={true}
-          />
-          <div
-            className={styles.scene2_girl1_profile}
-            ref={scene2Girl1ProfileRef}>
-            <Image
-              className={styles.scene2_girl1}
-              src="/simulation/lovescam/girl1.png"
-              alt="girl1"
-              width={500}
-              height={500}
-              quality={100}
-              unoptimized={true}
-            />
-            <span
-              className={`${styles.scene2_girl_name} ${styles.app_girl_name}`}>
-              Emily
-            </span>
-          </div>
-          <div
-            className={styles.scene2_girl1_profile}
-            ref={scene2Girl2ProfileRef}>
-            <Image
-              className={styles.scene2_girl2}
-              src="/simulation/lovescam/girl2.png"
-              alt="girl1"
-              width={500}
-              height={500}
-              quality={100}
-              unoptimized={true}
-            />
-            <span
-              className={`${styles.scene2_girl_name} ${styles.app_girl_name}`}>
-              Ada
-            </span>
-          </div>
-          <div
-            className={styles.scene2_girl1_profile}
-            ref={scene2Girl3ProfileRef}>
-            <Image
-              className={styles.scene2_girl3}
-              src="/simulation/lovescam/girl3.png"
-              alt="girl1"
-              width={500}
-              height={500}
-              quality={100}
-              unoptimized={true}
-            />
-            <span
-              className={`${styles.scene2_girl_name} ${styles.app_girl_name}`}>
-              Yuki
-            </span>
-          </div>
-          <button
-            onClick={() => tl.current?.play()}
-            className={`${styles.scene2_accept_button} ${styles.scene2_button}`}>
-            <Image
-              src="/simulation/lovescam/tick.svg"
-              alt="/"
-              width={20}
-              height={20}
-            />
-          </button>
-          <button
-            onClick={() => tl.current?.play()}
-            className={`${styles.scene2_next_button} ${styles.scene2_button}`}>
-            <Image
-              src="/simulation/lovescam/skip.svg"
-              alt="x"
-              width={20}
-              height={20}
-            />
-          </button>
-        </div> */}
-      </div>
-      {/* <div className={styles.scene3}>
-        <Scene3 />
-      </div> */}
+      {showScene.scene0 && <Scene0 ref={scene0Ref} />}
+      {showScene.scene1 && (
+        <Scene1
+          ref={scene1Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene1: false, scene2: true }));
+          }}
+        />
+      )}
+      {showScene.scene2 && (
+        <Scene2
+          ref={scene2Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene2: false, scene3: true }));
+          }}
+        />
+      )}
+      {showScene.scene3 && (
+        <Scene3
+          ref={scene3Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene3: false, scene4: true }));
+          }}
+        />
+      )}
+      {showScene.scene4 && (
+        <Scene4
+          ref={scene4Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene4: false, scene5: true }));
+          }}
+        />
+      )}
+      {showScene.scene5 && (
+        <Scene5
+          ref={scene5Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene5: false, scene6: true }));
+          }}
+        />
+      )}
+      {showScene.scene6 && (
+        <Scene6
+          ref={scene6Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene6: false, scene7: true }));
+          }}
+        />
+      )}
+      {showScene.scene7 && (
+        <Scene7
+          ref={scene7Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene7: false, scene8: true }));
+          }}
+        />
+      )}
+      {showScene.scene8 && (
+        <Scene8
+          ref={scene8Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene8: false, scene9: true }));
+          }}
+        />
+      )}
+      {showScene.scene9 && (
+        <Scene9
+          ref={scene9Ref}
+          callback={() => {
+            tl.current?.play();
+            setShowScene((prev) => ({ ...prev, scene9: false, scene10: true }));
+          }}
+        />
+      )}
+      {showScene.scene10 && (
+        <Scene10
+          ref={scene10Ref}
+          callback={() => {
+            router.push('/');
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Apricot';
+  src: url('/fonts/Apricot.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.note {
+  width: 200px;
+  height: 170px;
+  background-color: #fdff9f;
+  padding: 24px 16px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  font-family: 'Apricot', cursive;
+}
+
+.tape {
+  width: 100px;
+  height: 25px;
+  background-color: #e2b87f;
+  position: absolute;
+  top: -12.5px;
+  left: 50px;
+}
+
+.text {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.name {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.phone {
+  font-size: 1.4rem;
+  margin: 0;
+  margin-top: 4px;
+}

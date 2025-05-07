@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  position: relative;
+  max-width: 46%;
+  box-sizing: border-box;
+  border-radius: 16px;
+  padding-block: 12px 8px;
+  padding-inline: 20px;
+}
+
+.text {
+}
+
+.error_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ff453a;
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+.status_box {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  gap: 5px;
+}
+
+.status_box > span {
+  color: #a1a1a1;
+  font-size: 0.7rem;
+  margin-left: auto;
+}
+
+.read_icon {
+  width: 20px;
+}

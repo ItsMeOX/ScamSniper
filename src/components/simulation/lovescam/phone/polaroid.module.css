@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Apricot';
+  src: url('/fonts/Apricot.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.polaroid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 5px 5px 15px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 80%;
+  overflow: hidden;
+}
+
+.caption {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Apricot', cursive;
+  font-size: 1.3vw;
+  margin-top: 8px;
+  color: #333;
+}
+
+.caption span {
+  text-align: center;
+  margin-inline: auto;
+}

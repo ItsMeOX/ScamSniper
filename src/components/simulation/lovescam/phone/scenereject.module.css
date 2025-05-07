@@ -1,0 +1,99 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_picture {
+  width: 30%;
+  aspect-ratio: 1/1.1;
+  box-sizing: border-box;
+  padding: 15px 8px 0px 6px;
+}
+
+.heartbroken_box {
+  margin-top: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile_picture_girl {
+  border-radius: 10px;
+}
+
+.you_text {
+  font-weight: 600;
+  font-size: 160%;
+  width: 20%;
+  text-align: center;
+}
+
+.heart_image {
+  width: 20%;
+}
+
+.three_dots {
+  position: relative;
+  font-size: 140%;
+  font-weight: 700;
+  color: #a1a1a1;
+  box-sizing: border-box;
+  padding-bottom: 8px;
+}
+
+.three_dots:nth-of-type(3)::after {
+  content: url('/simulation/lovescam/red_cross.svg');
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -40%);
+  animation: pulse 1.5s infinite; /* slower */
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -40%) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate(-50%, -40%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -40%) scale(1);
+    opacity: 0.7;
+  }
+}
+
+.text_box {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sorry_text {
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 4.6vh;
+  font-weight: 800;
+}
+
+.matchfail_text {
+  font-family: 'Glacial Indifference', sans-serif;
+  font-size: 3.2vh;
+}
+
+.button {
+  margin-top: auto;
+  width: 100%;
+  background-color: #848b75;
+  padding-block: 3%;
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 30px;
+}
+
+.button:hover {
+  background-color: #4f5347;
+}
