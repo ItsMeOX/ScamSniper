@@ -94,7 +94,7 @@ export default function ChatBot() {
         for (let i = data.length - 1; i >= 0; i--) {
           setHistoryChats((prev) => [
             ...prev,
-            { chat_name: 'chat' + i, chat_id: data[data.length - 1 - i].id },
+            { chat_name: 'Chat ' + i, chat_id: data[data.length - 1 - i].id },
           ]);
         }
       });
