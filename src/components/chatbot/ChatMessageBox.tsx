@@ -40,14 +40,15 @@ export default function ChatMessageBox({
   return (
     <div className={styles.container}>
       {messages.length === 0 ? (
-        <div className={styles.empty}>
-          <div>
-            {username === undefined
-              ? 
-              <div style={{marginTop: '1rem'}}>Please login to proceed</div>
-              : 'Hi ' + username + ', What can I help with?'}
+        <div>
+        {username === undefined
+          ? 
+          <div className={styles.empty}>
+            <Lock size={48} color="#585454"/>
+            <div style={{ marginTop: '1rem' }}>Please login to proceed</div>
           </div>
-        </div>
+          : 'Hi ' + username + ', What can I help with?'}
+      </div>
       ) : (
         messages.map((msg, index) => (
           <div
