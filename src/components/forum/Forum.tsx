@@ -42,14 +42,24 @@ export default function Forum({
         <div className={styles.main_content_container}>
           <SearchBar onSearch={setSearchQuery} />
           <div className={styles.main_content_box}>
-            {forums &&
-              forums.map((forum, idx) => (
+            {filteredForums.length > 0 ? (
+              filteredForums.map((forum, idx) => (
                 <ForumBox
                   setRefetch={setRefetch}
                   key={`forum-${idx}`}
                   forum={forum}
                 />
-              ))}
+              ))
+            ) : (
+              <div className={styles.noResultContainer}>
+              <img
+                src="/forum/empty_state.svg" // 👉 replace with your image or emoji if needed
+                alt="no results"
+                className={styles.noResultIcon}
+              />
+              <p className={styles.noResultText}>No forums found matching your search.</p>
+            </div>
+            )}
           </div>
         </div>
         <div className={styles.right_container}>
