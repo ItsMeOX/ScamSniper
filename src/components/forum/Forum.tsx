@@ -19,6 +19,7 @@ export default function Forum({
   const [showCreatePopup, setShowCreatePopup] = useState(false);
   const [forums, setForums] = useState(initialForums);
   const [refetch, setRefetch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     async function refetchForum() {
@@ -26,6 +27,8 @@ export default function Forum({
     }
     refetchForum();
   }, [refetch]);
+
+  const filteredForums = forums.filter(forum => forum.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
     <main className={styles.container}>
@@ -37,7 +40,7 @@ export default function Forum({
       )}
       <div className={styles.box}>
         <div className={styles.main_content_container}>
-          <SearchBar />
+          <SearchBar onSearch={setSearchQuery} />
           <div className={styles.main_content_box}>
             {forums &&
               forums.map((forum, idx) => (
