@@ -20,6 +20,7 @@ export default function Forum({
   const [forums, setForums] = useState(initialForums);
   const [refetch, setRefetch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedLabelId, setSelectedLabelId] = useState(0);
 
   useEffect(() => {
     async function refetchForum() {
@@ -28,7 +29,12 @@ export default function Forum({
     refetchForum();
   }, [refetch]);
 
-  const filteredForums = forums.filter(forum => forum.title.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredForums = forums.filter(forum => {
+    const matchesSearch = forum.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedLabelId === 0 || forum.ForumTag.some(tag => tag.tag_id === selectedLabelId);
+    return matchesSearch && matchesCategory;
+  });
+  
 
   return (
     <main className={styles.container}>
@@ -64,7 +70,10 @@ export default function Forum({
         </div>
         <div className={styles.right_container}>
           <ForumCreateButton setShowCreatePopup={setShowCreatePopup} />
-          <Category />
+          <Category 
+            selectedLabelId = {selectedLabelId}
+            setSelectedLabelId = {setSelectedLabelId}
+          />
         </div>
       </div>
     </main>

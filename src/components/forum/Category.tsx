@@ -3,10 +3,17 @@
 import { COLORED_FORUM_TAGS } from '@/app/constants/forumTags';
 import styles from './category.module.css';
 import CategoryLabel from './CategoryLabel';
-import { useState } from 'react';
+import { Dispatch } from 'react';
+import { SetStateAction } from 'react';
 
-export default function Category() {
-  const [selectedLabelId, setSelectedLabelId] = useState(0);
+export default function Category({
+  selectedLabelId,
+  setSelectedLabelId,
+}: {
+  selectedLabelId: number;
+  setSelectedLabelId: Dispatch<SetStateAction<number>>;
+}) {
+  // const [selectedLabelId, setSelectedLabelId] = useState(0);
 
   return (
     <div className={styles.container}>
