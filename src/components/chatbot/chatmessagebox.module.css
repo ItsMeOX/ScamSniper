@@ -14,7 +14,7 @@
     max-height: 100%;
   }
 
-  .empty {
+  .empty_1 {
     font-size:2rem;
     display: flex;
     flex-direction: column;
@@ -28,6 +28,16 @@
     padding: 2rem;
     animation: fadeIn 1s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .empty_2{
+    font-size: 2rem;
+    display: flex;
+    margin-top: 2.5rem;
+    justify-content:  center;
+    align-items: end;
+    color: #585454;
+    height: 100%;
   }
   
   .message {

@@ -43,11 +43,14 @@ export default function ChatMessageBox({
         <div>
         {username === undefined
           ? 
-          <div className={styles.empty}>
+          <div className={styles.empty_1}>
             <Lock size={48} color="#585454"/>
             <div style={{ marginTop: '1rem' }}>Please login to proceed</div>
           </div>
-          : 'Hi ' + username + ', What can I help with?'}
+          : <div className={styles.empty_2}>
+            <div>Hi {username}, What can I help with?</div>
+            </div>
+            }
       </div>
       ) : (
         messages.map((msg, index) => (
