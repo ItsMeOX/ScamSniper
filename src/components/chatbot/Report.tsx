@@ -73,7 +73,7 @@ export default function Report({
   params,
   toggleShowReport,
   chatId,
-}: {
+} : {
   loading: boolean;
   params: ReportParamsType;
   toggleShowReport: () => void;
@@ -122,10 +122,10 @@ export default function Report({
       <div className={styles.title}>
         <h1 className="text-3xl font-bold ">Report</h1>
       </div>
-      {loading ? <div className={styles.loader_container}><div className={styles.loader}/></div>:<>
       <div className={styles.image_container}>
         {params.images ? <Carousel images={params.images} /> : <></>}
       </div>
+      {loading ? <div className={styles.loader_container}><div className={styles.loader}/></div>:<>
       <div className={styles.section_container}>
         <h2 className={styles.sectionTitle}>Telltale Signs</h2>
         <EvidenceBox title="Emotional Appeal" section={sign.emotioanalAppeal} />

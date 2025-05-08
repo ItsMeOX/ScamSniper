@@ -197,6 +197,11 @@ export default function ChatBot() {
 
   const handleToggleShowReport = async () => {
     setShowReport(!showReport);
+    const allChatImages = await fetchAllImageChatSession(selectedChat);
+    setReportParams({
+      ...reportParams,
+      images: allChatImages,
+    });
     if (reportParams.summary === '') {
       setLoadingReport(true);
       const res = await fetch('/api/openai', {
