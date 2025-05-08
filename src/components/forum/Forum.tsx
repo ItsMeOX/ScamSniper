@@ -19,6 +19,8 @@ export default function Forum({
   const [showCreatePopup, setShowCreatePopup] = useState(false);
   const [forums, setForums] = useState(initialForums);
   const [refetch, setRefetch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedLabelId, setSelectedLabelId] = useState(0);
 
   useEffect(() => {
     async function refetchForum() {
@@ -26,6 +28,13 @@ export default function Forum({
     }
     refetchForum();
   }, [refetch]);
+
+  const filteredForums = forums.filter(forum => {
+    const matchesSearch = forum.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedLabelId === 0 || forum.ForumTag.some(tag => tag.tag_id === selectedLabelId);
+    return matchesSearch && matchesCategory;
+  });
+  
 
   return (
     <main className={styles.container}>
@@ -37,21 +46,34 @@ export default function Forum({
       )}
       <div className={styles.box}>
         <div className={styles.main_content_container}>
-          <SearchBar />
+          <SearchBar onSearch={setSearchQuery} />
           <div className={styles.main_content_box}>
-            {forums &&
-              forums.map((forum, idx) => (
+            {filteredForums.length > 0 ? (
+              filteredForums.map((forum, idx) => (
                 <ForumBox
                   setRefetch={setRefetch}
                   key={`forum-${idx}`}
                   forum={forum}
                 />
-              ))}
+              ))
+            ) : (
+              <div className={styles.noResultContainer}>
+              <img
+                src="/forum/empty_state.svg"
+                alt="no results"
+                className={styles.noResultIcon}
+              />
+              <p className={styles.noResultText}>No forums found matching your search.</p>
+            </div>
+            )}
           </div>
         </div>
         <div className={styles.right_container}>
           <ForumCreateButton setShowCreatePopup={setShowCreatePopup} />
-          <Category />
+          <Category 
+            selectedLabelId = {selectedLabelId}
+            setSelectedLabelId = {setSelectedLabelId}
+          />
         </div>
       </div>
     </main>

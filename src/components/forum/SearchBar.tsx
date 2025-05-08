@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './searchbar.module.css';
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }: { onSearch: (value: string) => void}) {
   return (
     <div className={styles.container}>
       <Image
@@ -10,7 +10,11 @@ export default function SearchBar() {
         width={20}
         height={20}
       />
-      <input className={styles.search_box} placeholder="Search for forums" />
+      <input 
+        className={styles.search_box} 
+        placeholder="Search for forums" 
+        onChange={(e) => onSearch(e.target.value)}
+      />
     </div>
   );
 }
