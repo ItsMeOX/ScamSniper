@@ -48,7 +48,7 @@ export default function ChatMessageBox({
             <div style={{ marginTop: '1rem' }}>Please login to proceed</div>
           </div>
           : <div className={styles.empty_2}>
-            <div>Hi {username}, What can I help with?</div>
+            <div>Hi {username}, what can I help with?</div>
             </div>
             }
       </div>
