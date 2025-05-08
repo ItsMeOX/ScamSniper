@@ -36,7 +36,7 @@ export default function Register() {
   return (
     <>
     <Head>
-      <title>ScamSniper</title>
+      <title>ScamSniper - Register</title>
       <link rel="icon" href="./app_logo.ico"/>
     </Head>
     <div className={styles.container}>

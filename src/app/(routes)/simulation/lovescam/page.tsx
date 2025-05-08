@@ -145,7 +145,7 @@ export default function LoveScam() {
   return (
     <>
     <Head>
-      <title>ScamSniper</title>
+      <title>ScamSniper - Love Scam Simulation</title>
       <link rel="icon" href="./app_logo.ico"/>
     </Head>
     <div className={styles.container}>

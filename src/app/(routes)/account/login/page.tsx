@@ -38,7 +38,7 @@ export default function Login() {
   return (
     <>
     <Head>
-      <title>ScamSniper</title>
+      <title>ScamSniper - Login</title>
       <link rel="icon" href="./app_logo.ico"/>
     </Head>
     <div className={styles.container}>

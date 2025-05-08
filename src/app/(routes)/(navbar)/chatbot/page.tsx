@@ -244,8 +244,8 @@ export default function ChatBot() {
   return (
     <>
     <Head>
-      <title>ScamSniper</title>
-      <link rel="icon" href="./app_logo.ico"/>
+      <title>ScamSniper - Chatbot</title>
+      <link rel="icons" href="/app_logo.ico"/>
     </Head>
     <div className={styles.container}>
       {showReport ? (
