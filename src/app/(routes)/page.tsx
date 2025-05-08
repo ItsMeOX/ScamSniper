@@ -86,6 +86,7 @@ export default function Home() {
             {session.status === 'authenticated' && (
               <div className={styles.user_box}>
                 <Image
+                  className={styles.pfp_image}
                   src={userImageUrl ?? '/default_profile_picture.png'}
                   alt="profile picture"
                   width={40}

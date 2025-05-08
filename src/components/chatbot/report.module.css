@@ -1,6 +1,6 @@
 .container {
     padding: 1.5rem;
-    width: 900;
+    width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;

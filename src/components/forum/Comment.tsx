@@ -27,7 +27,6 @@ export default function Comment({
 
   async function handleSubmitComment() {
     try {
-      console.log(commentText);
       await createForumComment({
         forumId,
         commentText,
@@ -45,6 +44,7 @@ export default function Comment({
       <div className={styles.comment_input_container}>
         <div className={styles.user_box}>
           <Image
+            className={styles.pfp_image}
             src={userImageUrl ?? '/default_profile_picture.png'}
             alt="profile pic"
             width={30}

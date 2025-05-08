@@ -8,6 +8,10 @@
   overflow: hidden;
 }
 
+.pfp_image {
+  border-radius: 50%;
+}
+
 .header {
   box-sizing: border-box;
   padding-block: 20px;

@@ -3,6 +3,9 @@
   margin-block: 10px;
   gap: 8px;
 }
+.pfp_image {
+  border-radius: 50%;
+}
 
 .box {
   display: flex;

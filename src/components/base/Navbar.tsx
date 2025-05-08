@@ -11,9 +11,6 @@ export default function NavBar() {
   const session = useSession();
   const userName = session.data?.user.name;
   const userImageUrl = session.data?.user.image_url;
-  console.log(userName);
-  console.log(session);
-  console.log(userImageUrl);
 
   async function handleSignout() {
     await signOut({ callbackUrl: '/' });
@@ -65,6 +62,7 @@ export default function NavBar() {
           {session.status === 'authenticated' && (
             <div className={styles.user_box}>
               <Image
+                className={styles.pfp_image}
                 src={userImageUrl ?? '/default_profile_picture.png'}
                 alt="profile picture"
                 width={40}

@@ -197,7 +197,6 @@ function Scene2(props: Scene2Props, ref: Ref<Scene2Ref>) {
                 buttonCallback={() => {
                   setShowComponent((prev) => ({ ...prev, girl2: true }));
                   tlGirl2.current?.play();
-                  console.log(showComponent);
                 }}
               />
             )}

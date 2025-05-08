@@ -1,6 +1,7 @@
 import Carousel from '../base/Carousel';
 import styles from './chatmessagebox.module.css';
 import { useEffect, useState,  useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 type MessageType = {
   role: string;
@@ -58,7 +59,7 @@ export default function ChatMessageBox({
             <div className={styles.content}>
               {msg.content.map(
                 (content, idx) =>
-                  content.type === 'text' &&  content.text === "loading" ? <div key={idx} ref={scroller} className={styles.txt_loader}/> : content.type === 'text' && <div key={idx}>{content.text}</div>
+                  content.type === 'text' &&  content.text === "loading" ? <div key={idx} ref={scroller} className={styles.txt_loader}/> : content.type === 'text' && <div key={idx}><ReactMarkdown key={idx+"a"}>{content.text}</ReactMarkdown></div>
               )}
               <Carousel
                 images={msg.content

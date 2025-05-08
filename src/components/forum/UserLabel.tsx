@@ -6,6 +6,7 @@ export default function UserLabel({ user }: { user: User }) {
   return (
     <div className={styles.container}>
       <Image
+        className={styles.pfp_image}
         src={user.user_image_url ?? '/default_profile_picture.png'}
         alt="profile pic"
         width={30}
