@@ -1,12 +1,14 @@
 'use client';
 
 import Image from 'next/image';
+import Head from 'next/head';
+import Link from 'next/link';
 import styles from './login.module.css';
 import { useRouter } from 'next/navigation';
 import crendentialLogin from '@/app/lib/requests/auth/credentialLogin';
 import { useState } from 'react';
 import ErrorBox from '@/components/auth/ErrorBox';
-import Head from 'next/head';
+
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -44,13 +46,16 @@ export default function Login() {
     <div className={styles.container}>
       <form className={styles.box} onSubmit={login}>
         <div className={styles.input_section}>
-          <Image
-            className={styles.logo}
-            src='/scamsniper.svg'
-            alt='logo'
-            width={40}
-            height={40}
-          />
+          <Link href = '/'>
+            <Image
+              className={styles.logo}
+              src='/scamsniper.svg'
+              alt='logo'
+              width={40}
+              height={40}
+              priority
+            />
+          </Link>
           <div>
             <h1 className={styles.title}>Welcome back!</h1>
             <span className={styles.subtitle}>Glad to see you again at ScamSniper.</span>
