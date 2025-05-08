@@ -11,6 +11,7 @@ import fetchHistoryChat, {
 import updateChat from '@/app/lib/requests/chatbot/updateChat';
 import updateChatSessionReport from '@/app/lib/requests/chatbot/updateChatSessionReport';
 import HistoryTab from '@/components/chatbot/HistoryTab';
+import Head from 'next/head';
 
 import fetchAllImageChatSession from '@/app/lib/requests/chatbot/fetchAllImageChatSession';
 
@@ -241,6 +242,11 @@ export default function ChatBot() {
   }, [reportParams, selectedChat, user_id]);
 
   return (
+    <>
+    <Head>
+      <title>ScamSniper</title>
+      <link rel="icon" href="./app_logo.ico"/>
+    </Head>
     <div className={styles.container}>
       {showReport ? (
         <Report
@@ -273,5 +279,6 @@ export default function ChatBot() {
         </>
       )}
     </div>
+    </>
   );
 }

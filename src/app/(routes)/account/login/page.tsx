@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import crendentialLogin from '@/app/lib/requests/auth/credentialLogin';
 import { useState } from 'react';
 import ErrorBox from '@/components/auth/ErrorBox';
+import Head from 'next/head';
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -35,6 +36,11 @@ export default function Login() {
   }
 
   return (
+    <>
+    <Head>
+      <title>ScamSniper</title>
+      <link rel="icon" href="./app_logo.ico"/>
+    </Head>
     <div className={styles.container}>
       <form className={styles.box} onSubmit={login}>
         <div className={styles.input_section}>
@@ -77,5 +83,6 @@ export default function Login() {
         <div className={styles.art_section}></div>
       </form>
     </div>
+    </>
   );
 }

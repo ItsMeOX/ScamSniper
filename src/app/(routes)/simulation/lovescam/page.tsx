@@ -1,5 +1,6 @@
 'use client';
 
+import Head from 'next/head';
 import { useEffect, useRef, useState } from 'react';
 import styles from './lovescam.module.css';
 import { gsap } from 'gsap';
@@ -142,6 +143,11 @@ export default function LoveScam() {
   }, []);
 
   return (
+    <>
+    <Head>
+      <title>ScamSniper</title>
+      <link rel="icon" href="./app_logo.ico"/>
+    </Head>
     <div className={styles.container}>
       {showScene.scene0 && <Scene0 ref={scene0Ref} />}
       {showScene.scene1 && (
@@ -234,5 +240,6 @@ export default function LoveScam() {
         />
       )}
     </div>
+    </>
   );
 }
