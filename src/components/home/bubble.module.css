@@ -17,6 +17,15 @@
   width: 65%;
   height: 65%;
 }
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
 
 .fade_mask {
   position: absolute;
