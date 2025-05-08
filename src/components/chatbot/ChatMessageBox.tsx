@@ -2,6 +2,7 @@ import Carousel from '../base/Carousel';
 import styles from './chatmessagebox.module.css';
 import { useEffect, useState,  useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Lock } from 'lucide-react';
 
 type MessageType = {
   role: string;
@@ -42,7 +43,8 @@ export default function ChatMessageBox({
         <div className={styles.empty}>
           <div>
             {username === undefined
-              ? 'Please login to proceed'
+              ? 
+              <div style={{marginTop: '1rem'}}>Please login to proceed</div>
               : 'Hi ' + username + ', What can I help with?'}
           </div>
         </div>

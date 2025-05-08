@@ -6,7 +6,6 @@ import { Roboto_Mono } from 'next/font/google';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import Bubble from '@/components/home/Bubble';
-import Head from 'next/head';
 
 const robotoMono = Roboto_Mono({ subsets: ['latin'] });
 
