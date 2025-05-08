@@ -53,7 +53,7 @@ export default function Login() {
           />
           <div>
             <h1 className={styles.title}>Welcome back!</h1>
-            <span className={styles.subtitle}>welcome back to scamsniper!</span>
+            <span className={styles.subtitle}>Glad to see you again at ScamSniper.</span>
           </div>
           <div className={styles.inputs_box}>
             <div className={styles.input_box}>

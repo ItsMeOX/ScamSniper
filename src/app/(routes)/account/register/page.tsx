@@ -50,8 +50,8 @@ export default function Register() {
             height={40}
           />
           <div>
-            <h1 className={styles.title}>Welcome!</h1>
-            <span className={styles.subtitle}>glad we have a new member!</span>
+            <h1 className={styles.title}>Welcome aboard!</h1>
+            <span className={styles.subtitle}>We’re excited to have you join ScamSniper.</span>
           </div>
           <div className={styles.inputs_box}>
             <div className={styles.input_box}>
@@ -77,6 +77,12 @@ export default function Register() {
           <div className={styles.error_box}>
             {error && <ErrorBox errorText={error} />}
           </div>
+          <span className={styles.have_account}>
+            Already have an account?{' '}
+            <button onClick={() => router.push('/account/login')}>
+              Login here
+            </button>
+          </span>
         </div>
         <div className={styles.art_section}></div>
       </form>
