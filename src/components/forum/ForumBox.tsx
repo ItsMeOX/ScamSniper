@@ -57,7 +57,7 @@ export default function Forum({
         ))}
       </div>
       <div className={styles.user_box}>
-        <UserLabel user={forum.User} />
+        <UserLabel user={forum.User} createdAt={forum.created_at} />
       </div>
       {forum.ForumImage.length > 0 && (
             <Carousel images={forum.ForumImage.map((forum) => forum.url)} />

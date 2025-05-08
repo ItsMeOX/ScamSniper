@@ -53,7 +53,7 @@ export default function Forum({
             ) : (
               <div className={styles.noResultContainer}>
               <img
-                src="/forum/empty_state.svg" // 👉 replace with your image or emoji if needed
+                src="/forum/empty_state.svg"
                 alt="no results"
                 className={styles.noResultIcon}
               />

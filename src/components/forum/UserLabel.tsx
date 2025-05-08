@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import styles from './userlabel.module.css';
+import { formatDistanceToNow } from 'date-fns';
 import { User } from '@prisma/client';
 
-export default function UserLabel({ user }: { user: User }) {
+export default function UserLabel({ user, createdAt }: { user: User; createdAt: Date }) {
+  const timeAgo = formatDistanceToNow(new Date(createdAt), { addSuffix: true });
   return (
     <div className={styles.container}>
       <Image
@@ -17,7 +19,7 @@ export default function UserLabel({ user }: { user: User }) {
           {user.user_name}
         </span>
         <span className={`${styles.title} ${styles.time_label}`}>
-          a few seconds ago
+          {timeAgo}
         </span>
       </div>
     </div>
