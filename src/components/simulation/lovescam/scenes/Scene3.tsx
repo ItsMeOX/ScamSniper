@@ -23,11 +23,13 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
   const tlMain = useRef<gsap.core.Timeline | null>(null);
   const tlEnd = useRef<gsap.core.Timeline | null>(null);
   const tlMessage3 = useRef<gsap.core.Timeline | null>(null);
+  const tlMessage5 = useRef<gsap.core.Timeline | null>(null);
   const scene3Ref = useRef(null);
   const message1Ref = useRef(null);
   const message2Ref = useRef(null);
   const message3Ref = useRef(null);
   const message4Ref = useRef(null);
+  const message5Ref = useRef(null);
   const { callback } = props;
 
   useImperativeHandle(ref, () => ({
@@ -39,11 +41,13 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
     message2: false,
     message3: false,
     message4: false,
+    message5: false,
   });
 
   useEffect(() => {
     tlMain.current = gsap.timeline();
     tlMessage3.current = gsap.timeline({ paused: true });
+    tlMessage5.current = gsap.timeline({ paused: true });
     tlEnd.current = gsap.timeline({ paused: true });
     tlMain.current.fromTo(
       message1Ref.current,
@@ -78,6 +82,20 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
         },
       }
     );
+    tlMessage5.current.fromTo(
+      message5Ref.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.5,
+        delay: 2,
+        onComplete: () => {
+          setTimeout(() => {
+            tlEnd.current?.play();
+          }, 2000);
+        }
+      }
+    );
 
     tlEnd.current.to(scene3Ref.current, {
       opacity: 0,
@@ -98,10 +116,10 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
             if (!prev.message2) {
               tlMessage3.current?.play();
               return { ...prev, message2: true, message3: true };
+            } else if (!prev.message4) {
+              tlMessage5.current?.play();
+              return { ...prev, message4: true, message5: true };
             } else {
-              setTimeout(() => {
-                tlEnd.current?.play();
-              }, 3000);
               return { ...prev, message4: true };
             }
           });
@@ -136,6 +154,12 @@ function Scene3(props: Scene3Props, ref: Ref<Scene3Ref>) {
             timeText="14:06"
           />
         )}
+        <ChatBox
+          ref={message5Ref}
+          isMyMessage={false}
+          messageText="It’s a date ❤️"
+          timeText="14:07"
+        />
       </Whatsapp>
     </div>
   );
