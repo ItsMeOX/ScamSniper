@@ -22,18 +22,22 @@ type Scene5Props = {
 
 function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
   const tlMain = useRef<gsap.core.Timeline | null>(null);
+  const tlPhoto2 = useRef<gsap.core.Timeline | null>(null);
   const tlPhoto3 = useRef<gsap.core.Timeline | null>(null);
   const tlEnd = useRef<gsap.core.Timeline | null>(null);
+  const tlNext = useRef<gsap.core.Timeline | null>(null);
   const scene5Ref = useRef(null);
   const maskRef = useRef(null);
   const langkawi1Ref = useRef(null);
   const langkawi2Ref = useRef(null);
   const langkawi3Ref = useRef(null);
   const { callback } = props;
+  const [showButton, setShowButton] = useState(false);
 
   const [showComponent, setShowComponent] = useState({
     whiteMask: true,
     langkawi1: true,
+    langkawi1Photo: false,
     langkawi2: false,
     langkawi2Photo: false,
     langkawi3: false,
@@ -46,8 +50,10 @@ function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
 
   useEffect(() => {
     tlMain.current = gsap.timeline();
+    tlPhoto2.current = gsap.timeline({ paused: true });
     tlPhoto3.current = gsap.timeline({ paused: true });
     tlEnd.current = gsap.timeline({ paused: true });
+    tlNext.current = gsap.timeline({ paused: true });
 
     tlMain.current
       .fromTo(
@@ -60,34 +66,25 @@ function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
           duration: 1,
         }
       )
+
+    tlPhoto2.current
       .fromTo(
         maskRef.current,
-        {
-          opacity: 0,
-        },
+        { opacity: 0 },
         {
           opacity: 1,
-          duration: 0.5,
-          delay: 2,
-          onComplete: () =>
+          duration: 0.2,
+          onComplete: () => {
             setShowComponent((prev) => ({
               ...prev,
               langkawi1: false,
+              langkawi1Photo: true,
               langkawi2: true,
-            })),
+            }));
+          },
         }
       )
-      .fromTo(
-        maskRef.current,
-        {
-          opacity: 1,
-        },
-        {
-          opacity: 0,
-          duration: 0.5,
-          delay: 1,
-        }
-      );
+      .fromTo(maskRef.current, { opacity: 1 }, { opacity: 0, duration: 0.2 });
 
     tlPhoto3.current
       .fromTo(
@@ -123,46 +120,34 @@ function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
           },
         }
       )
-      .fromTo(maskRef.current, { opacity: 1 }, { opacity: 0, duration: 0.2 })
-      .to(
+      .fromTo(maskRef.current, { opacity: 1 }, { opacity: 0, duration: 0.2 , onComplete: () => {setShowButton(true);}})
+    tlNext.current.to(
         {},
         {
-          duration: 3,
           onComplete: () => {
             callback();
           },
         }
-      );
+      );  
   }, [callback]);
 
   return (
     <div className={styles.container} ref={scene5Ref}>
       {showComponent.whiteMask && (
         <div ref={maskRef} className={styles.white_mask} />
-      )}
-      {showComponent.langkawi1 && (
-        <div ref={langkawi1Ref} className={styles.box}>
-          <Image
-            className={styles.langkawi1_bg}
-            src="/simulation/lovescam/langkawi_1.png"
-            alt="langkawi1_bg"
-            width={1000}
-            height={1000}
-            quality={100}
-            unoptimized={true}
-          />
-          <Image
-            className={styles.langkawi1_couple}
-            src="/simulation/lovescam/langkawi_couple.svg"
-            alt="langkawi_couple"
-            width={800}
-            height={800}
-            quality={100}
-            unoptimized={true}
-          />
-        </div>
-      )}
+      )}  
       <div className={`${styles.box} ${styles.langkawi2_box}`}>
+        {showComponent.langkawi1 && (
+            <Image
+              ref={langkawi1Ref}
+              src="/simulation/lovescam/langkawi_1_blur.png"
+              alt="langkawi_1_blur"
+              width={1000}
+              height={1000}
+              quality={100}
+              unoptimized={true}
+            />
+          )}
         {showComponent.langkawi2 && (
           <Image
             ref={langkawi2Ref}
@@ -186,6 +171,23 @@ function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
           />
         )}
         <Phone>
+          {showComponent.langkawi1 && (
+            <SceneCamera
+              ref={langkawi1Ref}
+              buttonCallback={() => {
+                tlPhoto2.current?.play();
+              }}
+              photoImgSrc="/simulation/lovescam/langkawi_1.png"
+            />
+          )}
+          {showComponent.langkawi1Photo && (
+            <div className={styles.langkawi1_photo_box}>
+              <Polaroid
+                caption="The journey Begins!"
+                imageUrl="/simulation/lovescam/langkawi_1.png"
+              />
+            </div>
+          )}
           {showComponent.langkawi2 && (
             <SceneCamera
               ref={langkawi2Ref}
@@ -198,7 +200,7 @@ function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
           {showComponent.langkawi2Photo && (
             <div className={styles.langkawi2_photo_box}>
               <Polaroid
-                caption="Best dinner ever!"
+                caption="The warmest sunset"
                 imageUrl="/simulation/lovescam/langkawi_2.png"
               />
             </div>
@@ -222,6 +224,11 @@ function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
             </div>
           )}
         </Phone>
+        {showButton && (
+        <button onClick={() => tlNext.current?.play()} className={styles.button}>
+          Continue
+        </button>
+      )}
       </div>
     </div>
   );

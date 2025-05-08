@@ -31,21 +31,12 @@
   transform: translateX(-50%);
 }
 
-.langkawi1_couple {
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 90%;
-  width: auto;
-}
-
 .langkawi2_box {
   position: relative;
   overflow: hidden;
 }
 
-.langkawi2_photo_box {
+.langkawi1_photo_box {
   position: absolute;
   z-index: 1;
   top: -3%;
@@ -55,14 +46,24 @@
   transform: rotate(20deg);
 }
 
-.langkawi3_photo_box {
+.langkawi2_photo_box {
   position: absolute;
   z-index: 1;
   top: 25%;
-  right: -35%;
+  right: -40%;
   width: 50%;
   height: 40%;
   transform: rotate(-25deg);
+}
+
+.langkawi3_photo_box {
+  position: absolute;
+  z-index: 1;
+  top: 65%;
+  left: -40%;
+  width: 50%;
+  height: 40%;
+  transform: rotate(-15deg);
 }
 
 .langkawi2_box > img {
@@ -72,4 +73,21 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+
+.button {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  font-size: 1.5vw;
+  padding-inline: 1.2em;
+  padding-block: 0.5em;
+  border-radius: 100px;
+  background-color: #ff6260;
+  color: white;
+}
+
+.button:hover {
+  background-color: #f83430;
 }
