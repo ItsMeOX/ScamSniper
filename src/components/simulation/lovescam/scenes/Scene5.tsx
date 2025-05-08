@@ -28,9 +28,7 @@ function Scene5(props: Scene5Props, ref: Ref<Scene5Ref>) {
   const maskRef = useRef(null);
   const langkawi1Ref = useRef(null);
   const langkawi2Ref = useRef(null);
-  //   const langkawi2PhotoRef = useRef(null);
   const langkawi3Ref = useRef(null);
-  //   const langkawi3PhotoRef = useRef(null);
   const { callback } = props;
 
   const [showComponent, setShowComponent] = useState({
