@@ -159,9 +159,17 @@ function Scene10(props: Scene10Props, ref: Ref<Scene10Ref>) {
         </div>
       </div>
       {showMessage.button && (
-        <button onClick={() => tlEnd.current?.play()} className={styles.button}>
-          End simulation
-        </button>
+        <div className={styles.end_box}>
+          <span className={styles.thanks_text}>
+            Ft. Ong Xi
+            <br /> for the art!
+          </span>
+          <button
+            onClick={() => tlEnd.current?.play()}
+            className={`${styles.button} ${styles.end_button}`}>
+            End simulation
+          </button>
+        </div>
       )}
     </div>
   );

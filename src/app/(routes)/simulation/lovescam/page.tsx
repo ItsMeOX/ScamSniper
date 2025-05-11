@@ -144,102 +144,138 @@ export default function LoveScam() {
 
   return (
     <>
-    <Head>
-      <title>ScamSniper - Love Scam Simulation</title>
-      <link rel="icon" href="./app_logo.ico"/>
-    </Head>
-    <div className={styles.container}>
-      {showScene.scene0 && <Scene0 ref={scene0Ref} />}
-      {showScene.scene1 && (
-        <Scene1
-          ref={scene1Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene1: false, scene2: true }));
-          }}
-        />
-      )}
-      {showScene.scene2 && (
-        <Scene2
-          ref={scene2Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene2: false, scene3: true }));
-          }}
-        />
-      )}
-      {showScene.scene3 && (
-        <Scene3
-          ref={scene3Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene3: false, scene4: true }));
-          }}
-        />
-      )}
-      {showScene.scene4 && (
-        <Scene4
-          ref={scene4Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene4: false, scene5: true }));
-          }}
-        />
-      )}
-      {showScene.scene5 && (
-        <Scene5
-          ref={scene5Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene5: false, scene6: true }));
-          }}
-        />
-      )}
-      {showScene.scene6 && (
-        <Scene6
-          ref={scene6Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene6: false, scene7: true }));
-          }}
-        />
-      )}
-      {showScene.scene7 && (
-        <Scene7
-          ref={scene7Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene7: false, scene8: true }));
-          }}
-        />
-      )}
-      {showScene.scene8 && (
-        <Scene8
-          ref={scene8Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene8: false, scene9: true }));
-          }}
-        />
-      )}
-      {showScene.scene9 && (
-        <Scene9
-          ref={scene9Ref}
-          callback={() => {
-            tl.current?.play();
-            setShowScene((prev) => ({ ...prev, scene9: false, scene10: true }));
-          }}
-        />
-      )}
-      {showScene.scene10 && (
-        <Scene10
-          ref={scene10Ref}
-          callback={() => {
-            router.push('/');
-          }}
-        />
-      )}
-    </div>
+      <Head>
+        <title>ScamSniper - Love Scam Simulation</title>
+        <link rel="icon" href="./app_logo.ico" />
+      </Head>
+      <div className={styles.container}>
+        {showScene.scene0 && <Scene0 ref={scene0Ref} />}
+        {showScene.scene1 && (
+          <Scene1
+            ref={scene1Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene1: false,
+                scene2: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene2 && (
+          <Scene2
+            ref={scene2Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene2: false,
+                scene3: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene3 && (
+          <Scene3
+            ref={scene3Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene3: false,
+                scene4: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene4 && (
+          <Scene4
+            ref={scene4Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene4: false,
+                scene5: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene5 && (
+          <Scene5
+            ref={scene5Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene5: false,
+                scene6: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene6 && (
+          <Scene6
+            ref={scene6Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene6: false,
+                scene7: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene7 && (
+          <Scene7
+            ref={scene7Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene7: false,
+                scene8: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene8 && (
+          <Scene8
+            ref={scene8Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene8: false,
+                scene9: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene9 && (
+          <Scene9
+            ref={scene9Ref}
+            callback={() => {
+              tl.current?.play();
+              setShowScene((prev) => ({
+                ...prev,
+                scene9: false,
+                scene10: true,
+              }));
+            }}
+          />
+        )}
+        {showScene.scene10 && (
+          <Scene10
+            ref={scene10Ref}
+            callback={() => {
+              router.push('/');
+            }}
+          />
+        )}
+      </div>
     </>
   );
 }
