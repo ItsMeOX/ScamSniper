@@ -1,181 +1,194 @@
 .container {
-    padding: 1.5rem;
-    width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap:1rem;
-    overflow: scroll;
-    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1), 4px 0 6px rgba(0, 0, 0, 0.1);
-  }
+  padding: 1.5rem;
+  width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: scroll;
+  box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1), 4px 0 6px rgba(0, 0, 0, 0.1);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
-  .colorInfo_container {
-    display: flex;
-    justify-content: row;
-    justify-content: start;
-    align-items: center;
-  }
+.container::-webkit-scrollbar {
+  display: none;
+}
 
-  .otherInfo_container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  .shareButton {
-    color: white;
-    background-color: var(--button-primary);
-    padding-inline: 40px;
-    padding-block: 8px;
-    border-radius: 30px;
-  }
-  
-  .shareButton:hover {
-    background-color: #125ffa;
-  }
+.colorInfo_container {
+  display: flex;
+  justify-content: row;
+  justify-content: start;
+  align-items: center;
+}
 
-  .returnButton {
-      color: white;
-      background-color: #FFA6A6;
-      padding-inline: 20px;
-      padding-block: 8px;
-      border-radius: 30px;
-    }
-    
-    .returnButton:hover {
-      background-color: #FF0909;
-    }
-  
-  
-  .title {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    border-bottom: solid 1px black ;
-    padding-bottom: 0.5rem;
-  }
+.otherInfo_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.shareButton {
+  color: white;
+  background-color: var(--button-primary);
+  padding-inline: 40px;
+  padding-block: 8px;
+  border-radius: 30px;
+}
 
-  .image_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
+.shareButton:hover {
+  background-color: #125ffa;
+}
 
+.returnButton {
+  color: white;
+  background-color: #ffa6a6;
+  padding-inline: 20px;
+  padding-block: 8px;
+  border-radius: 30px;
+}
 
-  .sectionTitle {
-    font-size: 1rem;
-    font-weight: 600;
-    box-shadow: 0 4px 2px -4px gray;
-    width: fit-content;
-  }
-  
-  .card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-  
-  .cardTitle {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    width: 20%;
-    padding-right: 1rem;
-  }
-  
-  .evidenceBox {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 0.5rem;
-    background-color: #e5e7eb; /* gray-200 */
-    padding: 0.75rem;
-    padding-bottom: 2rem;
-    border-radius: 0.5rem;
-    width:70%;
-  }
-  
-  .evidenceTag {
-    background-color: #d1d5db; /* gray-300 */
-    font-size: 0.875rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
-    /* white-space: nowrap; */
-    display: flex;  
-    flex-wrap: wrap;
-  }
-  
-  .noEvidence {
-    font-size: 0.875rem;
-    color: #6b7280; /* gray-500 */
-    font-style: italic;
-  }
-  
-  .chancesCircle {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 1.125rem;
-    color: white;
-    margin-left: 1rem;
-  }
-  
-  .green {
-    background-color: #34d399;
-  }
-  
-  .yellow {
-    background-color: #facc15;
-  }
-  
-  .red {
-    background-color: #f87171;
-  }
-  
-  .summaryBox {
-    background-color: white;
-    border-radius: 1rem;
-    padding: 1rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
+.returnButton:hover {
+  background-color: #ff0909;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-bottom: solid 1px black;
+  padding-bottom: 0.5rem;
+}
+
+.image_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  box-shadow: 0 4px 2px -4px gray;
+  width: fit-content;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  width: 20%;
+  padding-right: 1rem;
+}
+
+.evidenceBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background-color: #e5e7eb; /* gray-200 */
+  padding: 0.75rem;
+  padding-bottom: 2rem;
+  border-radius: 0.5rem;
+  width: 70%;
+}
+
+.evidenceTag {
+  background-color: #d1d5db; /* gray-300 */
+  font-size: 0.875rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  /* white-space: nowrap; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.noEvidence {
+  font-size: 0.875rem;
+  color: #6b7280; /* gray-500 */
+  font-style: italic;
+}
+
+.chancesCircle {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.125rem;
+  color: white;
+  margin-left: 1rem;
+}
+
+.green {
+  background-color: #34d399;
+}
+
+.yellow {
+  background-color: #facc15;
+}
+
+.red {
+  background-color: #f87171;
+}
+
+.summaryBox {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
 
 .loader_container {
-  width:100%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;;
+  align-items: center;
 }
 .loader {
   width: 40px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background:
-    radial-gradient(farthest-side,#ED303C 94%,#0000),
-    radial-gradient(farthest-side,#3B8183 94%,#0000),
-    radial-gradient(farthest-side,#FAD089 94%,#0000),
-    radial-gradient(farthest-side,#FF9C5B 94%,#0000),
-    #ED303C;
+  background: radial-gradient(farthest-side, #ed303c 94%, #0000),
+    radial-gradient(farthest-side, #3b8183 94%, #0000),
+    radial-gradient(farthest-side, #fad089 94%, #0000),
+    radial-gradient(farthest-side, #ff9c5b 94%, #0000), #ed303c;
   background-size: 105% 105%;
   background-repeat: no-repeat;
-  animation: l5 2s infinite; 
+  animation: l5 2s infinite;
 }
 @keyframes l5 {
-  0%  {background-position: 50% -50px,-40px 50%, 50% calc(100% + 50px),calc(100% + 50px) 50%}
+  0% {
+    background-position: 50% -50px, -40px 50%, 50% calc(100% + 50px),
+      calc(100% + 50px) 50%;
+  }
   20%,
-  25% {background-position: 50% -50px,-50px 50%, 50% calc(100% + 50px),50% 50%}
+  25% {
+    background-position: 50% -50px, -50px 50%, 50% calc(100% + 50px), 50% 50%;
+  }
   45%,
-  50% {background-position: 50% -50px,-50px 50%, 50% 50%              ,50% 50%}
+  50% {
+    background-position: 50% -50px, -50px 50%, 50% 50%, 50% 50%;
+  }
   75%,
-  75% {background-position: 50% -50px, 50%  50%, 50% 50%              ,50% 50%}
+  75% {
+    background-position: 50% -50px, 50% 50%, 50% 50%, 50% 50%;
+  }
   95%,
-  100%{background-position: 50%  50% , 50%  50%, 50% 50%              ,50% 50%}
+  100% {
+    background-position: 50% 50%, 50% 50%, 50% 50%, 50% 50%;
+  }
 }

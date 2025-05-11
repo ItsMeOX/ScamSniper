@@ -72,6 +72,7 @@
   height: 90%;
   overflow: scroll;
   background-color: white;
+  overflow-x: hidden;
 }
 
 .report_popup_close_button {
