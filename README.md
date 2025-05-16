@@ -8,23 +8,23 @@
 
 <h4 align="center">An AI-powered scam detection and awareness platform built with <a href="https://nextjs.org" target="_blank">Next.js</a>.</h4>
 
-<div align="center">
-  <a href="https://scam-sniper.vercel.app">
+<p align="center">
+  <a href="https://scam-sniper.vercel.app" style="text-decoration: none; color: inherit;">
     <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Now-green?style=flat-square" alt="Live Demo" />
   </a>
-  <a href="https://nextjs.org/">
+  <a href="https://nextjs.org/" style="text-decoration: none; color: inherit;">
     <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js" />
   </a>
-  <a href="https://www.prisma.io/">
+  <a href="https://www.prisma.io/" style="text-decoration: none; color: inherit;">
     <img src="https://img.shields.io/badge/Prisma-0C344B?style=flat-square&logo=prisma&logoColor=white" alt="Prisma" />
   </a>
-  <a href="https://supabase.com/">
+  <a href="https://supabase.com/" style="text-decoration: none; color: inherit;">
     <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" />
   </a>
-  <a href="https://greensock.com/gsap/">
+  <a href="https://greensock.com/gsap/" style="text-decoration: none; color: inherit;">
     <img src="https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=white" alt="GSAP" />
   </a>
-</div>
+</p>
 
 <p align="center">
 <a href="#🏆-recognition">Recognition</a> •
